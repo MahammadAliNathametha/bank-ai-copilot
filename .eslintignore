@@ -1,0 +1,6 @@
+.next
+node_modules
+next-env.d.ts
+scripts/*.js
+scripts/*.mjs
+.pnpm-store

@@ -36,3 +36,4 @@
 - Moved typed routes out of `experimental` in `next.config.ts` and re-ran the verification suite on Next.js 15.5.9.
 - Allowed `sharp` to run build scripts via `pnpm.onlyBuiltDependencies` and rebuilt it.
 - Expanded the Supabase schema check script to include the newly added feature tables.
+- Added a health endpoint, relaxed mock fallback for missing service role key outside production, and migrated linting to ESLint CLI with ignores.

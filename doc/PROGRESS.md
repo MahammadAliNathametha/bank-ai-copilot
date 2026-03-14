@@ -46,3 +46,4 @@
 [2026-03-14 22:17] codex — Re-ran lint, typecheck, tests, and build after enabling sharp build scripts.
 [2026-03-14 22:18] codex — Verified the live Supabase schema with `pnpm check:supabase`.
 [2026-03-14 22:19] codex — Extended the Supabase schema check to cover the new feature tables and re-ran it.
+[2026-03-14 22:27] codex — Added a health endpoint, updated linting to ESLint CLI with ignores, and re-ran lint/typecheck/tests/build.

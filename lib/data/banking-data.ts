@@ -7,7 +7,10 @@ function shouldUseMockBankStore() {
   }
 
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for live data access.");
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for live data access in production.");
+    }
+    return true;
   }
 
   return false;
