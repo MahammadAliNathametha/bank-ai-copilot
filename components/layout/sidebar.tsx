@@ -89,6 +89,7 @@ const navGroups: NavGroup[] = [
     label: "Admin & Tools",
     items: [
       { href: "/admin/analytics" as Route, icon: <Hexagon className="h-[18px] w-[18px]" />, tooltip: "Admin Analytics" },
+      { href: "/admin/metrics" as Route, icon: <Activity className="h-[18px] w-[18px]" />, tooltip: "Admin Metrics" },
       { href: "/admin/saas" as Route, icon: <Settings className="h-[18px] w-[18px]" />, tooltip: "SaaS Admin" },
       { href: "/marketing" as Route, icon: <Megaphone className="h-[18px] w-[18px]" />, tooltip: "Marketing" },
       { href: "/chatbot" as Route, icon: <Mic className="h-[18px] w-[18px]" />, tooltip: "AI Assistant" },
