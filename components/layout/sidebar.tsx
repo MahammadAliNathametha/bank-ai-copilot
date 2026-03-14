@@ -79,6 +79,7 @@ const navGroups: NavGroup[] = [
     label: "Services",
     items: [
       { href: "/business" as Route, icon: <Building className="h-[18px] w-[18px]" />, tooltip: "Business" },
+      { href: "/documents" as Route, icon: <FileText className="h-[18px] w-[18px]" />, tooltip: "Documents" },
       { href: "/checkdeposit" as Route, icon: <FileText className="h-[18px] w-[18px]" />, tooltip: "Check Deposit" },
       { href: "/locations" as Route, icon: <MapPin className="h-[18px] w-[18px]" />, tooltip: "Locations" },
       { href: "/appointments" as Route, icon: <Calendar className="h-[18px] w-[18px]" />, tooltip: "Appointments" },
