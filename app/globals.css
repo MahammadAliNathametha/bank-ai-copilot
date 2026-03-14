@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 6%;
+  --foreground: 0 0% 95%;
+  --primary: 36.3 100% 50.4%; /* This hex #FF9900 equivalent */
+  --secondary: 0 0% 12%;
+  --accent: 36.3 100% 50.4%;
+  --muted: 0 0% 18%;
+  --card: 0 0% 9%;
+  --border: 0 0% 14%;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  @apply bg-background text-foreground font-body;
+  background-image:
+    radial-gradient(
+      circle at 10% 20%,
+      hsl(var(--primary) / 0.05),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      hsl(var(--primary) / 0.03),
+      transparent 30%
+    ),
+    linear-gradient(135deg, hsl(0 0% 6%), hsl(0 0% 8%) 48%, hsl(0 0% 4%) 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.015) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at center, black, transparent 75%);
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 22% 22%,
+      hsl(var(--accent) / 0.03),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      hsl(var(--primary) / 0.03),
+      transparent 20%
+    );
+  mix-blend-mode: color-dodge;
+  z-index: 0;
+}
+
+a {
+  @apply text-inherit no-underline hover:text-primary transition-colors duration-200;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
