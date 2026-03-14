@@ -4,19 +4,36 @@ import type {
   AccountRecord,
   AuthSessionRecord,
   AdminMetricRecord,
+  AccountMemberRecord,
+  AppointmentRecord,
   BillRecord,
   CardRecord,
+  ChatbotMessageRecord,
   ComplianceRecord,
+  CreditScoreRecord,
+  CryptoAssetRecord,
+  CryptoHoldingRecord,
+  CryptoTradeRecord,
+  DeviceRecord,
   DocumentRecord,
+  FraudEventRecord,
   InsightRecord,
+  InvestmentAccountRecord,
   LoanRecord,
+  MarketingCampaignRecord,
   NotificationRecord,
   OpenConnectionRecord,
   PaymentRecord,
+  SavingsRuleRecord,
+  SupportMessageRecord,
   SupportTicketRecord,
   TransactionRecord,
   TransferRecord,
   UserProfile,
+  VoiceCommandRecord,
+  WalletActivityRecord,
+  WalletCardRecord,
+  WalletLoyaltyRecord,
   LocationRecord,
   WebhookEventRecord
 } from "@/lib/data/mock-bank-store";
@@ -60,6 +77,8 @@ type ProfileRow = {
   full_name: string | null;
   role: string;
   tenant_id: string;
+  two_factor_enabled?: boolean;
+  biometric_enabled?: boolean;
   created_at: string;
 };
 
@@ -200,6 +219,210 @@ type SessionRow = {
   created_at: string;
 };
 
+type DeviceRow = {
+  id: number;
+  fingerprint: string;
+  user_id: string | null;
+  name: string;
+  type: string;
+  os: string;
+  last_seen: string;
+  location: string;
+  trusted: boolean;
+  tenant_id: string;
+  created_at: string;
+};
+
+type FraudEventRow = {
+  id: number;
+  score: number | string;
+  tx_id: number | null;
+  user_id: string | null;
+  type: string;
+  severity: string;
+  description: string;
+  status: string;
+  location: string;
+  ip: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type MarketingCampaignRow = {
+  id: number;
+  name: string;
+  channel: string;
+  status: string;
+  audience: number | string;
+  sent: number | string;
+  opened: number | string;
+  clicked: number | string;
+  converted: number | string;
+  budget: number | string;
+  spent: number | string;
+  start_date: string | null;
+  end_date: string | null;
+  offers: unknown;
+  tenant_id: string;
+  created_at: string;
+};
+
+type AppointmentRow = {
+  id: number;
+  user_id: string | null;
+  location_id: number | null;
+  location_name: string;
+  time_slot: string;
+  agenda: string;
+  status: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type SupportMessageRow = {
+  id: number;
+  ticket_id: number | null;
+  sender: string;
+  message: string;
+  user_id: string | null;
+  tenant_id: string;
+  created_at: string;
+};
+
+type AccountMemberRow = {
+  id: number;
+  account_id: number;
+  user_id: string;
+  role: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type InvestmentAccountRow = {
+  id: number;
+  user_id: string | null;
+  provider: string;
+  account_name: string;
+  balance: number | string;
+  type: string;
+  status: string;
+  last_synced_at: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type CryptoAssetRow = {
+  id: number;
+  symbol: string;
+  name: string;
+  price: number | string;
+  change_24h: number | string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type CryptoHoldingRow = {
+  id: number;
+  asset_id: number;
+  user_id: string | null;
+  balance: number | string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type CryptoTradeRow = {
+  id: number;
+  asset_id: number;
+  user_id: string | null;
+  side: string;
+  amount: number | string;
+  price: number | string;
+  total: number | string;
+  status: string;
+  executed_at: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type WalletCardRow = {
+  id: number;
+  user_id: string | null;
+  wallet_type: string;
+  last4: string;
+  brand: string;
+  status: string;
+  added_at: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type WalletActivityRow = {
+  id: number;
+  user_id: string | null;
+  merchant: string;
+  method: string;
+  amount: number | string;
+  category: string;
+  occurred_at: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type WalletLoyaltyRow = {
+  id: number;
+  user_id: string | null;
+  program: string;
+  points: number | string;
+  tier: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type CreditScoreRow = {
+  id: number;
+  user_id: string | null;
+  score: number | string;
+  provider: string;
+  status: string;
+  reported_at: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type SavingsRuleRow = {
+  id: number;
+  user_id: string | null;
+  name: string;
+  cadence: string;
+  amount: number | string;
+  target: number | string;
+  status: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type VoiceCommandRow = {
+  id: number;
+  user_id: string | null;
+  command: string;
+  transcript: string;
+  response: string;
+  status: string;
+  channel: string;
+  tenant_id: string;
+  created_at: string;
+};
+
+type ChatbotMessageRow = {
+  id: number;
+  session_id: string;
+  user_id: string | null;
+  role: string;
+  message: string;
+  tenant_id: string;
+  created_at: string;
+};
+
 type InsightsSummary = {
   healthScore: number;
   savingsRate: number;
@@ -252,6 +475,8 @@ function mapProfile(row: ProfileRow): UserProfile {
     email: row.email,
     fullName: row.full_name ?? "Member",
     role: row.role === "admin" ? "admin" : "member",
+    twoFactorEnabled: row.two_factor_enabled ?? false,
+    biometricEnabled: row.biometric_enabled ?? false,
     tenantId: row.tenant_id,
     createdAt: row.created_at
   };
@@ -416,6 +641,237 @@ function mapSupportTicket(row: SupportTicketRow): SupportTicketRecord {
   };
 }
 
+function mapDevice(row: DeviceRow): DeviceRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    name: row.name,
+    type: row.type === "desktop" || row.type === "browser" ? row.type : "mobile",
+    os: row.os,
+    lastSeen: row.last_seen,
+    location: row.location,
+    trusted: row.trusted,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapFraudEvent(row: FraudEventRow): FraudEventRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    type: row.type,
+    severity: row.severity === "high" || row.severity === "low" ? row.severity : "medium",
+    description: row.description,
+    status: row.status === "blocked" || row.status === "cleared" ? row.status : "reviewed",
+    location: row.location,
+    ip: row.ip,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapMarketingCampaign(row: MarketingCampaignRow): MarketingCampaignRecord {
+  return {
+    id: row.id,
+    name: row.name,
+    channel: row.channel === "push" || row.channel === "sms" || row.channel === "in-app" ? row.channel : "email",
+    status: row.status === "paused" || row.status === "scheduled" || row.status === "completed" ? row.status : "active",
+    audience: toNumber(row.audience, "marketing_campaigns.audience"),
+    sent: toNumber(row.sent, "marketing_campaigns.sent"),
+    opened: toNumber(row.opened, "marketing_campaigns.opened"),
+    clicked: toNumber(row.clicked, "marketing_campaigns.clicked"),
+    converted: toNumber(row.converted, "marketing_campaigns.converted"),
+    budget: toNumber(row.budget, "marketing_campaigns.budget"),
+    spent: toNumber(row.spent, "marketing_campaigns.spent"),
+    startDate: row.start_date ?? "",
+    endDate: row.end_date ?? "",
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapAppointment(row: AppointmentRow): AppointmentRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    locationName: row.location_name,
+    timeSlot: row.time_slot,
+    agenda: row.agenda,
+    status: row.status === "confirmed" || row.status === "completed" || row.status === "cancelled" ? row.status : "requested",
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapSupportMessage(row: SupportMessageRow): SupportMessageRecord {
+  return {
+    id: row.id,
+    ticketId: row.ticket_id ?? 0,
+    sender: row.sender === "agent" || row.sender === "bot" ? row.sender : "user",
+    message: row.message,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapAccountMember(row: AccountMemberRow): AccountMemberRecord {
+  return {
+    id: row.id,
+    accountId: row.account_id,
+    userId: row.user_id,
+    role: row.role === "owner" || row.role === "editor" ? row.role : "viewer",
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapInvestmentAccount(row: InvestmentAccountRow): InvestmentAccountRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    provider: row.provider,
+    accountName: row.account_name,
+    balance: toNumber(row.balance, "investment_accounts.balance"),
+    type: row.type === "retirement" ? "retirement" : "brokerage",
+    status: row.status === "paused" ? "paused" : "active",
+    lastSyncedAt: row.last_synced_at,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapCryptoAsset(row: CryptoAssetRow): CryptoAssetRecord {
+  return {
+    id: row.id,
+    symbol: row.symbol,
+    name: row.name,
+    price: toNumber(row.price, "crypto_assets.price"),
+    change24h: toNumber(row.change_24h, "crypto_assets.change_24h"),
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapCryptoHolding(row: CryptoHoldingRow): CryptoHoldingRecord {
+  return {
+    id: row.id,
+    assetId: row.asset_id,
+    userId: row.user_id ?? "",
+    balance: toNumber(row.balance, "crypto_holdings.balance"),
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapCryptoTrade(row: CryptoTradeRow): CryptoTradeRecord {
+  return {
+    id: row.id,
+    assetId: row.asset_id,
+    userId: row.user_id ?? "",
+    side: row.side === "sell" ? "sell" : "buy",
+    amount: toNumber(row.amount, "crypto_trades.amount"),
+    price: toNumber(row.price, "crypto_trades.price"),
+    total: toNumber(row.total, "crypto_trades.total"),
+    status: row.status === "pending" || row.status === "cancelled" ? row.status : "completed",
+    executedAt: row.executed_at,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapWalletCard(row: WalletCardRow): WalletCardRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    walletType: row.wallet_type,
+    last4: row.last4,
+    brand: row.brand,
+    status: row.status === "suspended" ? "suspended" : "active",
+    addedAt: row.added_at,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapWalletActivity(row: WalletActivityRow): WalletActivityRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    merchant: row.merchant,
+    method: row.method,
+    amount: toNumber(row.amount, "wallet_activity.amount"),
+    category: row.category,
+    occurredAt: row.occurred_at,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapWalletLoyalty(row: WalletLoyaltyRow): WalletLoyaltyRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    program: row.program,
+    points: toNumber(row.points, "wallet_loyalty.points"),
+    tier: row.tier,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapCreditScore(row: CreditScoreRow): CreditScoreRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    score: Math.round(toNumber(row.score, "credit_scores.score")),
+    provider: row.provider,
+    status: row.status === "stale" ? "stale" : "current",
+    reportedAt: row.reported_at,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapSavingsRule(row: SavingsRuleRow): SavingsRuleRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    name: row.name,
+    cadence: row.cadence === "weekly" || row.cadence === "monthly" ? row.cadence : "daily",
+    amount: toNumber(row.amount, "savings_rules.amount"),
+    target: toNumber(row.target, "savings_rules.target"),
+    status: row.status === "paused" ? "paused" : "active",
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapVoiceCommand(row: VoiceCommandRow): VoiceCommandRecord {
+  return {
+    id: row.id,
+    userId: row.user_id ?? "",
+    command: row.command,
+    transcript: row.transcript,
+    response: row.response,
+    status: row.status === "failed" ? "failed" : "processed",
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+function mapChatbotMessage(row: ChatbotMessageRow): ChatbotMessageRecord {
+  return {
+    id: row.id,
+    sessionId: row.session_id,
+    userId: row.user_id ?? "",
+    role: row.role === "assistant" ? "assistant" : "user",
+    message: row.message,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
 function mapLocation(row: LocationRow): LocationRecord {
   return {
     id: row.id,
@@ -455,7 +911,7 @@ async function fetchProfilesByTenant(tenantId: string) {
   const supabase = getSupabaseAdminClient();
   const result = await supabase
     .from("profiles")
-    .select("id,email,full_name,role,tenant_id,created_at")
+    .select("id,email,full_name,role,two_factor_enabled,biometric_enabled,tenant_id,created_at")
     .eq("tenant_id", tenantId)
     .order("created_at", { ascending: true });
 
@@ -474,7 +930,7 @@ export async function getUserById(tenantId: string, id: string) {
   const supabase = getSupabaseAdminClient();
   const result = await supabase
     .from("profiles")
-    .select("id,email,full_name,role,tenant_id,created_at")
+    .select("id,email,full_name,role,two_factor_enabled,biometric_enabled,tenant_id,created_at")
     .eq("tenant_id", tenantId)
     .eq("id", id)
     .maybeSingle();
@@ -498,9 +954,11 @@ export async function createUser(
       email: payload.email,
       full_name: payload.fullName,
       role: payload.role ?? "member",
-      tenant_id: tenantId
+      tenant_id: tenantId,
+      two_factor_enabled: false,
+      biometric_enabled: false
     })
-    .select("id,email,full_name,role,tenant_id,created_at")
+    .select("id,email,full_name,role,two_factor_enabled,biometric_enabled,tenant_id,created_at")
     .single();
 
   if (result.error) {
@@ -513,7 +971,7 @@ export async function createUser(
 export async function updateUser(
   tenantId: string,
   id: string,
-  payload: Partial<Pick<UserProfile, "email" | "fullName" | "role">>
+  payload: Partial<Pick<UserProfile, "email" | "fullName" | "role" | "twoFactorEnabled" | "biometricEnabled">>
 ) {
   const supabase = getSupabaseAdminClient();
   const result = await supabase
@@ -521,11 +979,13 @@ export async function updateUser(
     .update({
       email: payload.email,
       full_name: payload.fullName,
-      role: payload.role
+      role: payload.role,
+      two_factor_enabled: payload.twoFactorEnabled,
+      biometric_enabled: payload.biometricEnabled
     })
     .eq("tenant_id", tenantId)
     .eq("id", id)
-    .select("id,email,full_name,role,tenant_id,created_at")
+    .select("id,email,full_name,role,two_factor_enabled,biometric_enabled,tenant_id,created_at")
     .maybeSingle();
 
   if (result.error) {
@@ -883,6 +1343,16 @@ export async function runTransfer(tenantId: string, payload: Pick<TransferRecord
     status: "posted"
   });
 
+  if (payload.method === "fednow" || payload.method === "rtp" || payload.amount >= 1000) {
+    await createComplianceRecord(tenantId, {
+      userId: fromAccount.userId,
+      reg: payload.method.toUpperCase(),
+      status: payload.amount >= 5000 ? "review" : "clear",
+      note: `Automated compliance check for ${payload.method} transfer of ${payload.amount}.`,
+      createdAt
+    });
+  }
+
   return transfer;
 }
 
@@ -952,6 +1422,17 @@ export async function createPayment(
 
   if (result.error) {
     throw new ApiError(500, result.error.message);
+  }
+
+  if (payload.channel === "wire" || payload.amount >= 1000) {
+    const userId = await findPrimaryUserId(tenantId);
+    await createComplianceRecord(tenantId, {
+      userId,
+      reg: "WIRE",
+      status: payload.amount >= 5000 ? "review" : "clear",
+      note: `Automated compliance check for wire payment of ${payload.amount}.`,
+      createdAt: payload.createdAt
+    });
   }
 
   return mapPayment(result.data as PaymentRow);
@@ -2226,4 +2707,674 @@ export async function signOutSession(tenantId: string, sessionId: string) {
     ...current,
     status: "signed_out" as const
   };
+}
+
+export async function listDevices(tenantId: string): Promise<DeviceRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("devices")
+    .select("id,user_id,fingerprint,name,type,os,last_seen,location,trusted,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: false });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as DeviceRow[]).map(mapDevice);
+}
+
+export async function updateDevice(
+  tenantId: string,
+  id: number,
+  payload: Partial<Pick<DeviceRecord, "trusted" | "name" | "type" | "os" | "lastSeen" | "location">>
+): Promise<DeviceRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("devices")
+    .update({
+      trusted: payload.trusted,
+      name: payload.name,
+      type: payload.type,
+      os: payload.os,
+      last_seen: payload.lastSeen,
+      location: payload.location
+    })
+    .eq("tenant_id", tenantId)
+    .eq("id", id)
+    .select("id,user_id,fingerprint,name,type,os,last_seen,location,trusted,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapDevice(result.data as DeviceRow);
+}
+
+export async function deleteDevice(tenantId: string, id: number): Promise<DeviceRecord> {
+  const existing = await listDevices(tenantId);
+  const target = existing.find((device) => device.id === id);
+
+  if (!target) {
+    throw new ApiError(404, "device record not found");
+  }
+
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase.from("devices").delete().eq("tenant_id", tenantId).eq("id", id);
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return target;
+}
+
+export async function listFraudEvents(tenantId: string): Promise<FraudEventRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("fraud_events")
+    .select("id,score,tx_id,user_id,type,severity,description,status,location,ip,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: false });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as FraudEventRow[]).map(mapFraudEvent);
+}
+
+export async function updateFraudEvent(
+  tenantId: string,
+  id: number,
+  payload: Partial<Pick<FraudEventRecord, "status" | "severity" | "description">>
+): Promise<FraudEventRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("fraud_events")
+    .update({
+      status: payload.status,
+      severity: payload.severity,
+      description: payload.description
+    })
+    .eq("tenant_id", tenantId)
+    .eq("id", id)
+    .select("id,score,tx_id,user_id,type,severity,description,status,location,ip,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapFraudEvent(result.data as FraudEventRow);
+}
+
+export async function listMarketingCampaigns(tenantId: string): Promise<MarketingCampaignRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("marketing_campaigns")
+    .select("id,name,channel,status,audience,sent,opened,clicked,converted,budget,spent,start_date,end_date,offers,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: false });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as MarketingCampaignRow[]).map(mapMarketingCampaign);
+}
+
+export async function createMarketingCampaign(
+  tenantId: string,
+  payload: Pick<MarketingCampaignRecord, "name" | "channel" | "status" | "audience" | "sent" | "opened" | "clicked" | "converted" | "budget" | "spent" | "startDate" | "endDate">
+): Promise<MarketingCampaignRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("marketing_campaigns")
+    .insert({
+      name: payload.name,
+      channel: payload.channel,
+      status: payload.status,
+      audience: payload.audience,
+      sent: payload.sent,
+      opened: payload.opened,
+      clicked: payload.clicked,
+      converted: payload.converted,
+      budget: payload.budget,
+      spent: payload.spent,
+      start_date: payload.startDate || null,
+      end_date: payload.endDate || null,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,name,channel,status,audience,sent,opened,clicked,converted,budget,spent,start_date,end_date,offers,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapMarketingCampaign(result.data as MarketingCampaignRow);
+}
+
+export async function updateMarketingCampaign(
+  tenantId: string,
+  id: number,
+  payload: Partial<Pick<MarketingCampaignRecord, "status" | "audience" | "sent" | "opened" | "clicked" | "converted" | "budget" | "spent">>
+): Promise<MarketingCampaignRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("marketing_campaigns")
+    .update({
+      status: payload.status,
+      audience: payload.audience,
+      sent: payload.sent,
+      opened: payload.opened,
+      clicked: payload.clicked,
+      converted: payload.converted,
+      budget: payload.budget,
+      spent: payload.spent
+    })
+    .eq("tenant_id", tenantId)
+    .eq("id", id)
+    .select("id,name,channel,status,audience,sent,opened,clicked,converted,budget,spent,start_date,end_date,offers,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapMarketingCampaign(result.data as MarketingCampaignRow);
+}
+
+export async function listAppointments(tenantId: string): Promise<AppointmentRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("appointments")
+    .select("id,user_id,location_id,location_name,time_slot,agenda,status,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("time_slot", { ascending: true });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as AppointmentRow[]).map(mapAppointment);
+}
+
+export async function createAppointment(
+  tenantId: string,
+  payload: Pick<AppointmentRecord, "userId" | "locationName" | "timeSlot" | "agenda" | "status">
+): Promise<AppointmentRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("appointments")
+    .insert({
+      user_id: payload.userId,
+      location_name: payload.locationName,
+      time_slot: payload.timeSlot,
+      agenda: payload.agenda,
+      status: payload.status,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,location_id,location_name,time_slot,agenda,status,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapAppointment(result.data as AppointmentRow);
+}
+
+export async function listSupportMessages(tenantId: string, ticketId?: number): Promise<SupportMessageRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("support_messages")
+    .select("id,ticket_id,sender,message,user_id,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: true });
+
+  const result = ticketId ? await query.eq("ticket_id", ticketId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as SupportMessageRow[]).map(mapSupportMessage);
+}
+
+export async function createSupportMessage(
+  tenantId: string,
+  payload: Pick<SupportMessageRecord, "ticketId" | "sender" | "message">
+): Promise<SupportMessageRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("support_messages")
+    .insert({
+      ticket_id: payload.ticketId,
+      sender: payload.sender,
+      message: payload.message,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,ticket_id,sender,message,user_id,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapSupportMessage(result.data as SupportMessageRow);
+}
+
+export async function listAccountMembers(tenantId: string, accountId?: number): Promise<AccountMemberRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("account_members")
+    .select("id,account_id,user_id,role,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: true });
+
+  const result = accountId ? await query.eq("account_id", accountId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as AccountMemberRow[]).map(mapAccountMember);
+}
+
+export async function createAccountMember(
+  tenantId: string,
+  payload: Pick<AccountMemberRecord, "accountId" | "userId" | "role">
+): Promise<AccountMemberRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("account_members")
+    .insert({
+      account_id: payload.accountId,
+      user_id: payload.userId,
+      role: payload.role,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,account_id,user_id,role,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapAccountMember(result.data as AccountMemberRow);
+}
+
+export async function listInvestmentAccounts(tenantId: string): Promise<InvestmentAccountRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("investment_accounts")
+    .select("id,user_id,provider,account_name,balance,type,status,last_synced_at,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: false });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as InvestmentAccountRow[]).map(mapInvestmentAccount);
+}
+
+export async function createInvestmentAccount(
+  tenantId: string,
+  payload: Pick<InvestmentAccountRecord, "userId" | "provider" | "accountName" | "balance" | "type" | "status">
+): Promise<InvestmentAccountRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("investment_accounts")
+    .insert({
+      user_id: payload.userId,
+      provider: payload.provider,
+      account_name: payload.accountName,
+      balance: payload.balance,
+      type: payload.type,
+      status: payload.status,
+      last_synced_at: new Date().toISOString(),
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,provider,account_name,balance,type,status,last_synced_at,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapInvestmentAccount(result.data as InvestmentAccountRow);
+}
+
+export async function listCryptoAssets(tenantId: string): Promise<CryptoAssetRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("crypto_assets")
+    .select("id,symbol,name,price,change_24h,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("symbol", { ascending: true });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as CryptoAssetRow[]).map(mapCryptoAsset);
+}
+
+export async function listCryptoHoldings(tenantId: string, userId?: string): Promise<CryptoHoldingRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("crypto_holdings")
+    .select("id,asset_id,user_id,balance,tenant_id,created_at")
+    .eq("tenant_id", tenantId);
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as CryptoHoldingRow[]).map(mapCryptoHolding);
+}
+
+export async function listCryptoTrades(tenantId: string, userId?: string): Promise<CryptoTradeRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("crypto_trades")
+    .select("id,asset_id,user_id,side,amount,price,total,status,executed_at,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("executed_at", { ascending: false });
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as CryptoTradeRow[]).map(mapCryptoTrade);
+}
+
+export async function createCryptoTrade(
+  tenantId: string,
+  payload: Pick<CryptoTradeRecord, "assetId" | "userId" | "side" | "amount" | "price" | "total" | "status" | "executedAt">
+): Promise<CryptoTradeRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("crypto_trades")
+    .insert({
+      asset_id: payload.assetId,
+      user_id: payload.userId,
+      side: payload.side,
+      amount: payload.amount,
+      price: payload.price,
+      total: payload.total,
+      status: payload.status,
+      executed_at: payload.executedAt,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,asset_id,user_id,side,amount,price,total,status,executed_at,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapCryptoTrade(result.data as CryptoTradeRow);
+}
+
+export async function listWalletCards(tenantId: string, userId?: string): Promise<WalletCardRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("wallet_cards")
+    .select("id,user_id,wallet_type,last4,brand,status,added_at,tenant_id,created_at")
+    .eq("tenant_id", tenantId);
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as WalletCardRow[]).map(mapWalletCard);
+}
+
+export async function createWalletCard(
+  tenantId: string,
+  payload: Pick<WalletCardRecord, "userId" | "walletType" | "last4" | "brand" | "status" | "addedAt">
+): Promise<WalletCardRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("wallet_cards")
+    .insert({
+      user_id: payload.userId,
+      wallet_type: payload.walletType,
+      last4: payload.last4,
+      brand: payload.brand,
+      status: payload.status,
+      added_at: payload.addedAt,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,wallet_type,last4,brand,status,added_at,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapWalletCard(result.data as WalletCardRow);
+}
+
+export async function listWalletActivity(tenantId: string, userId?: string): Promise<WalletActivityRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("wallet_activity")
+    .select("id,user_id,merchant,method,amount,category,occurred_at,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("occurred_at", { ascending: false });
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as WalletActivityRow[]).map(mapWalletActivity);
+}
+
+export async function listWalletLoyalty(tenantId: string, userId?: string): Promise<WalletLoyaltyRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("wallet_loyalty")
+    .select("id,user_id,program,points,tier,tenant_id,created_at")
+    .eq("tenant_id", tenantId);
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as WalletLoyaltyRow[]).map(mapWalletLoyalty);
+}
+
+export async function listCreditScores(tenantId: string, userId?: string): Promise<CreditScoreRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("credit_scores")
+    .select("id,user_id,score,provider,status,reported_at,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("reported_at", { ascending: false });
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as CreditScoreRow[]).map(mapCreditScore);
+}
+
+export async function createCreditScore(
+  tenantId: string,
+  payload: Pick<CreditScoreRecord, "userId" | "score" | "provider" | "status" | "reportedAt">
+): Promise<CreditScoreRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("credit_scores")
+    .insert({
+      user_id: payload.userId,
+      score: payload.score,
+      provider: payload.provider,
+      status: payload.status,
+      reported_at: payload.reportedAt,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,score,provider,status,reported_at,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapCreditScore(result.data as CreditScoreRow);
+}
+
+export async function listSavingsRules(tenantId: string, userId?: string): Promise<SavingsRuleRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("savings_rules")
+    .select("id,user_id,name,cadence,amount,target,status,tenant_id,created_at")
+    .eq("tenant_id", tenantId);
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as SavingsRuleRow[]).map(mapSavingsRule);
+}
+
+export async function createSavingsRule(
+  tenantId: string,
+  payload: Pick<SavingsRuleRecord, "userId" | "name" | "cadence" | "amount" | "target" | "status">
+): Promise<SavingsRuleRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("savings_rules")
+    .insert({
+      user_id: payload.userId,
+      name: payload.name,
+      cadence: payload.cadence,
+      amount: payload.amount,
+      target: payload.target,
+      status: payload.status,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,name,cadence,amount,target,status,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapSavingsRule(result.data as SavingsRuleRow);
+}
+
+export async function listVoiceCommands(tenantId: string, userId?: string): Promise<VoiceCommandRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("voice_commands")
+    .select("id,user_id,command,transcript,response,status,channel,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: false });
+
+  const result = userId ? await query.eq("user_id", userId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as VoiceCommandRow[]).map(mapVoiceCommand);
+}
+
+export async function createVoiceCommand(
+  tenantId: string,
+  payload: Pick<VoiceCommandRecord, "userId" | "command" | "transcript" | "response" | "status">
+): Promise<VoiceCommandRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("voice_commands")
+    .insert({
+      user_id: payload.userId,
+      command: payload.command,
+      transcript: payload.transcript,
+      response: payload.response,
+      status: payload.status,
+      channel: "voice",
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,user_id,command,transcript,response,status,channel,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapVoiceCommand(result.data as VoiceCommandRow);
+}
+
+export async function listChatbotMessages(tenantId: string, sessionId?: string): Promise<ChatbotMessageRecord[]> {
+  const supabase = getSupabaseAdminClient();
+  const query = supabase
+    .from("chatbot_messages")
+    .select("id,session_id,user_id,role,message,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("created_at", { ascending: true });
+
+  const result = sessionId ? await query.eq("session_id", sessionId) : await query;
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return ((result.data ?? []) as ChatbotMessageRow[]).map(mapChatbotMessage);
+}
+
+export async function createChatbotMessage(
+  tenantId: string,
+  payload: Pick<ChatbotMessageRecord, "sessionId" | "userId" | "role" | "message">
+): Promise<ChatbotMessageRecord> {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("chatbot_messages")
+    .insert({
+      session_id: payload.sessionId,
+      user_id: payload.userId,
+      role: payload.role,
+      message: payload.message,
+      tenant_id: tenantId,
+      created_at: new Date().toISOString()
+    })
+    .select("id,session_id,user_id,role,message,tenant_id,created_at")
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return mapChatbotMessage(result.data as ChatbotMessageRow);
 }

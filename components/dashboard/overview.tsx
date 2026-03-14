@@ -6,6 +6,8 @@ import { useSupabaseRealtime } from "@/hooks/use-supabase-realtime";
 import { apiRequest } from "@/lib/services/http";
 import type { AccountRecord } from "@/lib/data/mock-bank-store";
 
+import { MarketingBanners } from "@/components/marketing/banners";
+
 export function DashboardOverview() {
   useSupabaseRealtime(["accounts"]);
 
@@ -15,7 +17,9 @@ export function DashboardOverview() {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[calc(100vh-8rem)]">
+    <div className="flex flex-col gap-6">
+      <MarketingBanners />
+      <div className="flex flex-col lg:flex-row gap-6 h-full min-h-[calc(100vh-14rem)]">
       {/* Left Column: Chart Area */}
       <div className="flex-1 flex flex-col gap-4 rounded-3xl border border-white/10 bg-[#111] p-6 shadow-2xl relative overflow-hidden">
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -229,6 +233,7 @@ export function DashboardOverview() {
         <button className="w-full rounded-2xl bg-[linear-gradient(135deg,hsl(var(--primary)),hsl(var(--primary))_65%,hsl(var(--accent)))] py-4 text-sm font-bold text-black shadow-[0_10px_30px_rgba(255,153,0,0.25)] transition-transform active:scale-[0.98] hover:brightness-[1.05] mt-auto">
           Place Order
         </button>
+      </div>
       </div>
     </div>
   );

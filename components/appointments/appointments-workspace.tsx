@@ -10,16 +10,10 @@ import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { apiRequest } from "@/lib/services/http";
-import type { LocationRecord, SupportTicketRecord } from "@/lib/data/mock-bank-store";
+import { appointmentCreateSchema } from "@/lib/validations/banking";
+import type { AppointmentRecord, LocationRecord } from "@/lib/data/mock-bank-store";
 
-const appointmentSchema = z.object({
-  userId: z.string().min(1),
-  locationName: z.string().min(2),
-  timeSlot: z.string().min(2),
-  agenda: z.string().min(2)
-});
-
-type AppointmentFormValues = z.infer<typeof appointmentSchema>;
+type AppointmentFormValues = z.infer<typeof appointmentCreateSchema>;
 
 export function AppointmentsWorkspace() {
   const queryClient = useQueryClient();
@@ -27,41 +21,37 @@ export function AppointmentsWorkspace() {
     queryKey: ["locations", "appointments"],
     queryFn: () => apiRequest<LocationRecord[]>("/api/locations")
   });
-  const { data: tickets } = useSuspenseQuery({
-    queryKey: ["support", "appointments"],
-    queryFn: () => apiRequest<SupportTicketRecord[]>("/api/support")
+  const { data: appointments } = useSuspenseQuery({
+    queryKey: ["appointments"],
+    queryFn: () => apiRequest<AppointmentRecord[]>("/api/appointments")
   });
 
   const form = useForm<AppointmentFormValues>({
-    resolver: zodResolver(appointmentSchema),
+    resolver: zodResolver(appointmentCreateSchema),
     defaultValues: {
       userId: "11111111-1111-1111-1111-111111111112",
       locationName: locations[0]?.name ?? "Downtown Branch",
       timeSlot: "2026-03-20 11:00",
-      agenda: "Discuss account options and service upgrades"
+      agenda: "Discuss account options and service upgrades",
+      status: "requested"
     }
   });
 
   const mutation = useMutation({
     mutationFn: (values: AppointmentFormValues) =>
-      apiRequest<SupportTicketRecord>("/api/support", {
+      apiRequest<AppointmentRecord>("/api/appointments", {
         method: "POST",
-        body: JSON.stringify({
-          userId: values.userId,
-          subject: `Appointment request at ${values.locationName}`,
-          message: `${values.timeSlot} — ${values.agenda}`,
-          status: "open"
-        })
+        body: JSON.stringify(values)
       }),
     onSuccess: () => {
       startTransition(() => {
-        void queryClient.invalidateQueries({ queryKey: ["support"] });
+        void queryClient.invalidateQueries({ queryKey: ["appointments"] });
       });
       form.reset();
     }
   });
 
-  const appointmentRequests = tickets.filter((ticket) => ticket.subject.toLowerCase().includes("appointment"));
+  const appointmentRequests = appointments;
 
   return (
     <SectionShell
@@ -71,8 +61,8 @@ export function AppointmentsWorkspace() {
     >
       <div className="grid gap-4 md:grid-cols-4">
         <MetricCard label="Locations" value={String(locations.length)} note="Available service sites." />
-        <MetricCard label="Requests" value={String(appointmentRequests.length)} note="Appointment tickets already captured." />
-        <MetricCard label="Open items" value={String(appointmentRequests.filter((ticket) => ticket.status !== "closed").length)} note="Requests waiting for follow-up." />
+        <MetricCard label="Requests" value={String(appointmentRequests.length)} note="Appointment requests captured." />
+        <MetricCard label="Open items" value={String(appointmentRequests.filter((ticket) => ticket.status !== "completed").length)} note="Requests waiting for follow-up." />
         <MetricCard label="Branches" value={String(locations.filter((location) => location.kind === "branch").length)} note="Full-service booking destinations." />
       </div>
       <div className="grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
@@ -99,10 +89,10 @@ export function AppointmentsWorkspace() {
           {appointmentRequests.map((ticket) => (
             <div key={ticket.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
               <div className="flex items-center justify-between gap-4">
-                <p className="font-medium">{ticket.subject}</p>
+                <p className="font-medium">{ticket.locationName}</p>
                 <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{ticket.status}</span>
               </div>
-              <p className="mt-2 text-sm text-slate-400">{ticket.message}</p>
+              <p className="mt-2 text-sm text-slate-400">{ticket.timeSlot} — {ticket.agenda}</p>
             </div>
           ))}
         </Card>

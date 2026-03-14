@@ -6,7 +6,7 @@ import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
 import { apiRequest } from "@/lib/services/http";
 import { formatCurrency } from "@/lib/utils";
-import type { AccountRecord, InsightRecord } from "@/lib/data/mock-bank-store";
+import type { AccountRecord, InsightRecord, SavingsRuleRecord } from "@/lib/data/mock-bank-store";
 
 type InsightsPayload = {
   healthScore: number;
@@ -17,6 +17,7 @@ type InsightsPayload = {
 };
 
 import { SavingsLeaderboard } from "./leaderboard";
+import { SavingsChallenges } from "./challenges";
 
 export function SavingsWorkspace() {
   const { data: accounts } = useSuspenseQuery({
@@ -26,6 +27,10 @@ export function SavingsWorkspace() {
   const { data: insights } = useSuspenseQuery({
     queryKey: ["insights", "savings"],
     queryFn: () => apiRequest<InsightsPayload>("/api/insights")
+  });
+  const { data: rules } = useSuspenseQuery({
+    queryKey: ["savings-rules"],
+    queryFn: () => apiRequest<SavingsRuleRecord[]>("/api/savings")
   });
 
   const savingsAccounts = accounts.filter((account) => account.type.toLowerCase().includes("savings"));
@@ -47,10 +52,11 @@ export function SavingsWorkspace() {
       </div>
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="space-y-4">
-              <h2 className="font-display text-3xl">Savings products</h2>
-              {savingsAccounts.map((account) => (
+          <SavingsChallenges />
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card className="space-y-4">
+            <h2 className="font-display text-3xl">Savings products</h2>
+            {savingsAccounts.map((account) => (
                 <div key={account.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
                   <div className="flex items-center justify-between gap-4">
                     <p className="font-medium">{account.name}</p>
@@ -59,12 +65,21 @@ export function SavingsWorkspace() {
                   <p className="mt-2 text-sm text-slate-400">{formatCurrency(account.balance)} currently allocated toward savings.</p>
                 </div>
               ))}
-            </Card>
-            <Card className="space-y-4">
-              <h2 className="font-display text-3xl">Momentum</h2>
-              <div className="overflow-hidden rounded-full bg-white/10">
-                <div className="h-4 rounded-full bg-primary" style={{ width: `${Math.max(8, progress * 100)}%` }} />
+          </Card>
+          <Card className="space-y-4">
+            <h2 className="font-display text-3xl">Automation rules</h2>
+            {rules.map((rule) => (
+              <div key={rule.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="font-medium">{rule.name}</p>
+                  <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{rule.status}</span>
+                </div>
+                <p className="mt-2 text-sm text-slate-400">{rule.cadence} · {formatCurrency(rule.amount)} toward {formatCurrency(rule.target)}</p>
               </div>
+            ))}
+            <div className="overflow-hidden rounded-full bg-white/10">
+              <div className="h-4 rounded-full bg-primary" style={{ width: `${Math.max(8, progress * 100)}%` }} />
+            </div>
               <p className="text-sm text-slate-400">
                 {insights.insights[0]?.summary ?? "No insight available yet."}
               </p>
@@ -75,7 +90,9 @@ export function SavingsWorkspace() {
             </Card>
           </div>
         </div>
-        <SavingsLeaderboard />
+        <div className="space-y-6">
+          <SavingsLeaderboard />
+        </div>ï¿½
       </div>
     </SectionShell>
   );

@@ -28,3 +28,11 @@
 - Redesigned the shared dashboard shell, sidebar, hero sections, cards, and overview panels with a more intentional editorial/private-bank visual language while preserving the existing Tailwind-based architecture.
 - Added `OPENAI_API_KEY` to the local environment scaffold and typings, without persisting any user-pasted secret into versioned files.
 - Changed the global Codex CLI default model in `/home/bacancy/.codex/config.toml` from `gpt-5.4` back to `gpt-5.3-codex` at the user's request.
+- Added `20260314170000_feature_completion.sql` and wired new live data adapters plus API routes for appointments, support messages, account members, investments, marketing, crypto, wallet, credit scores, savings rules, voice commands, and chatbot messages.
+- Updated accounts, business, appointments, support, security, invest, marketing, credit, savings, wallet, crypto, and chatbot workspaces to consume the new APIs and reflect the completed feature set.
+- Refreshed `docs/feature-coverage-report.md` to mark all core and advanced features implemented with new evidence references.
+- Fixed instant payments to use selected beneficiaries via the payments API, hardened live data access to fail fast without the service role key, and backfilled mock-created records with required timestamps.
+- Bumped Next.js and eslint-config-next to 15.5.9 and re-verified lint, typecheck, test, and build on the updated toolchain.
+- Moved typed routes out of `experimental` in `next.config.ts` and re-ran the verification suite on Next.js 15.5.9.
+- Allowed `sharp` to run build scripts via `pnpm.onlyBuiltDependencies` and rebuilt it.
+- Expanded the Supabase schema check script to include the newly added feature tables.

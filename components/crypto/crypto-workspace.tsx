@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight,
   RefreshCw, Plus, Minus, Clock, Star
@@ -9,9 +10,11 @@ import {
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { apiRequest } from "@/lib/services/http";
+import type { CryptoAssetRecord, CryptoHoldingRecord, CryptoTradeRecord } from "@/lib/data/mock-bank-store";
 
 /* ── mock crypto data ──────────────────────────────────────────────── */
-const cryptoAssets = [
+const fallbackCryptoAssets = [
   { id: 1, symbol: "BTC", name: "Bitcoin", price: 91302.47, change24h: 6.71, balance: 0.4821, value: 44013.82, color: "#F7931A", icon: "₿" },
   { id: 2, symbol: "ETH", name: "Ethereum", price: 3412.85, change24h: 4.23, balance: 8.25, value: 28156.01, color: "#627EEA", icon: "Ξ" },
   { id: 3, symbol: "SOL", name: "Solana", price: 187.32, change24h: -2.14, balance: 125, value: 23415, color: "#9945FF", icon: "◎" },
@@ -19,14 +22,14 @@ const cryptoAssets = [
   { id: 5, symbol: "DOT", name: "Polkadot", price: 9.45, change24h: -0.52, balance: 520, value: 4914, color: "#E6007A", icon: "●" },
 ];
 
-const recentTrades = [
+const fallbackTrades = [
   { id: 1, type: "buy" as const, asset: "BTC", amount: 0.05, price: 89100, total: 4455, time: "2 hours ago" },
   { id: 2, type: "sell" as const, asset: "ETH", amount: 2.5, price: 3380, total: 8450, time: "5 hours ago" },
   { id: 3, type: "buy" as const, asset: "SOL", amount: 25, price: 192.1, total: 4802.5, time: "1 day ago" },
   { id: 4, type: "buy" as const, asset: "ADA", amount: 5000, price: 0.79, total: 3950, time: "2 days ago" },
 ];
 
-const marketTrending = [
+const fallbackMarketTrending = [
   { symbol: "AVAX", name: "Avalanche", price: 42.18, change: 12.4 },
   { symbol: "LINK", name: "Chainlink", price: 18.92, change: 8.7 },
   { symbol: "MATIC", name: "Polygon", price: 1.24, change: -3.2 },
@@ -50,13 +53,96 @@ function orderBarColor(i: number) {
 }
 
 export function CryptoWorkspace() {
+  const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<"portfolio" | "trade" | "market">("portfolio");
   const [tradeType, setTradeType] = useState<"buy" | "sell">("buy");
   const [selectedAsset, setSelectedAsset] = useState("BTC");
   const [tradeAmount, setTradeAmount] = useState("");
 
-  const totalPortfolioValue = cryptoAssets.reduce((sum, a) => sum + a.value, 0);
-  const totalChange = ((cryptoAssets.reduce((sum, a) => sum + a.value * a.change24h / 100, 0) / totalPortfolioValue) * 100);
+  const { data } = useSuspenseQuery({
+    queryKey: ["crypto"],
+    queryFn: () => apiRequest<{ assets: CryptoAssetRecord[]; holdings: CryptoHoldingRecord[]; trades: CryptoTradeRecord[] }>("/api/crypto")
+  });
+
+  const assets = data.assets.length ? data.assets : fallbackCryptoAssets.map((asset) => ({
+    id: asset.id,
+    symbol: asset.symbol,
+    name: asset.name,
+    price: asset.price,
+    change24h: asset.change24h,
+    tenantId: "fallback",
+    createdAt: ""
+  }));
+
+  const holdings = data.holdings.length ? data.holdings : fallbackCryptoAssets.map((asset) => ({
+    id: asset.id,
+    assetId: asset.id,
+    userId: "fallback",
+    balance: asset.balance ?? 0,
+    tenantId: "fallback",
+    createdAt: ""
+  }));
+
+  const trades = data.trades.length ? data.trades : fallbackTrades.map((trade) => ({
+    id: trade.id,
+    assetId: assets.find((asset) => asset.symbol === trade.asset)?.id ?? assets[0]?.id ?? 0,
+    userId: "fallback",
+    side: trade.type,
+    amount: trade.amount,
+    price: trade.price,
+    total: trade.total,
+    status: "completed",
+    executedAt: new Date().toISOString(),
+    tenantId: "fallback",
+    createdAt: ""
+  }));
+
+  const portfolioAssets = assets.map((asset) => {
+    const holding = holdings.find((item) => item.assetId === asset.id);
+    const balance = holding?.balance ?? 0;
+    return {
+      ...asset,
+      balance,
+      value: balance * asset.price,
+      color: fallbackCryptoAssets.find((item) => item.symbol === asset.symbol)?.color ?? "#F7931A",
+      icon: fallbackCryptoAssets.find((item) => item.symbol === asset.symbol)?.icon ?? "¤"
+    };
+  });
+
+  const totalPortfolioValue = portfolioAssets.reduce((sum, a) => sum + a.value, 0);
+  const totalChange = totalPortfolioValue > 0
+    ? ((portfolioAssets.reduce((sum, a) => sum + a.value * a.change24h / 100, 0) / totalPortfolioValue) * 100)
+    : 0;
+
+  const tradeMutation = useMutation({
+    mutationFn: () =>
+      apiRequest<CryptoTradeRecord>("/api/crypto", {
+        method: "POST",
+        body: JSON.stringify({
+          assetId: assets.find((asset) => asset.symbol === selectedAsset)?.id ?? assets[0]?.id ?? 0,
+          userId: holdings[0]?.userId ?? "11111111-1111-1111-1111-111111111112",
+          side: tradeType,
+          amount: Number(tradeAmount),
+          price: assets.find((asset) => asset.symbol === selectedAsset)?.price ?? 0,
+          total: Number(tradeAmount) * (assets.find((asset) => asset.symbol === selectedAsset)?.price ?? 0),
+          status: "completed",
+          executedAt: new Date().toISOString()
+        })
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["crypto"] });
+      setTradeAmount("");
+    }
+  });
+
+  const marketTrending = assets.length
+    ? assets.slice(0, 4).map((asset) => ({
+        symbol: asset.symbol,
+        name: asset.name,
+        price: asset.price,
+        change: asset.change24h
+      }))
+    : fallbackMarketTrending;
 
   const tabs = [
     { key: "portfolio" as const, label: "Portfolio" },
@@ -93,7 +179,7 @@ export function CryptoWorkspace() {
           <div className="grid gap-4 md:grid-cols-4">
             <MetricCard label="Portfolio Value" value={formatCrypto(totalPortfolioValue)} note="Total holdings across all assets" />
             <MetricCard label="24h Change" value={`${totalChange > 0 ? "+" : ""}${totalChange.toFixed(2)}%`} note={totalChange > 0 ? "Portfolio is up" : "Portfolio is down"} />
-            <MetricCard label="Assets Held" value={String(cryptoAssets.length)} note="Diversified digital portfolio" />
+            <MetricCard label="Assets Held" value={String(portfolioAssets.length)} note="Diversified digital portfolio" />
             <MetricCard label="Best Performer" value="BTC +6.71%" note="Highest 24h gain" />
           </div>
 
@@ -108,7 +194,7 @@ export function CryptoWorkspace() {
 
             {/* Allocation bar */}
             <div className="flex h-3 w-full overflow-hidden rounded-full">
-              {cryptoAssets.map((asset) => (
+              {portfolioAssets.map((asset) => (
                 <div
                   key={asset.id}
                   className="h-full transition-all duration-500 first:rounded-l-full last:rounded-r-full"
@@ -118,7 +204,7 @@ export function CryptoWorkspace() {
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              {cryptoAssets.map((asset) => (
+              {portfolioAssets.map((asset) => (
                 <div key={asset.id} className="flex items-center gap-1.5 text-xs text-slate-400">
                   <div className="h-2 w-2 rounded-full" style={{ backgroundColor: asset.color }} />
                   {asset.symbol} {((asset.value / totalPortfolioValue) * 100).toFixed(1)}%
@@ -128,7 +214,7 @@ export function CryptoWorkspace() {
 
             {/* Asset list */}
             <div className="space-y-2 mt-4">
-              {cryptoAssets.map((asset) => (
+              {portfolioAssets.map((asset) => (
                 <div key={asset.id} className="flex items-center justify-between rounded-2xl bg-white/5 border border-white/10 px-5 py-4 hover:border-white/20 transition-colors group cursor-pointer">
                   <div className="flex items-center gap-4">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl text-lg font-bold" style={{ backgroundColor: `${asset.color}20`, color: asset.color }}>
@@ -155,25 +241,27 @@ export function CryptoWorkspace() {
           <Card className="space-y-4">
             <h2 className="font-display text-2xl">Recent Trades</h2>
             <div className="space-y-2">
-              {recentTrades.map((trade) => (
+              {trades.map((trade) => {
+                const asset = assets.find((item) => item.id === trade.assetId);
+                return (
                 <div key={trade.id} className="flex items-center justify-between rounded-xl bg-white/5 border border-white/10 px-5 py-3.5">
                   <div className="flex items-center gap-3">
-                    <div className={`rounded-lg p-2 ${trade.type === "buy" ? "bg-emerald-500/15 text-emerald-400" : "bg-red-500/15 text-red-400"}`}>
-                      {trade.type === "buy" ? <Plus className="h-3.5 w-3.5" /> : <Minus className="h-3.5 w-3.5" />}
+                    <div className={`rounded-lg p-2 ${trade.side === "buy" ? "bg-emerald-500/15 text-emerald-400" : "bg-red-500/15 text-red-400"}`}>
+                      {trade.side === "buy" ? <Plus className="h-3.5 w-3.5" /> : <Minus className="h-3.5 w-3.5" />}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-white">{trade.type === "buy" ? "Bought" : "Sold"} {trade.amount} {trade.asset}</p>
+                      <p className="text-sm font-medium text-white">{trade.side === "buy" ? "Bought" : "Sold"} {trade.amount} {asset?.symbol ?? ""}</p>
                       <p className="text-xs text-slate-500">@ {formatCrypto(trade.price)} per unit</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className={`text-sm font-semibold ${trade.type === "buy" ? "text-emerald-400" : "text-red-400"}`}>
-                      {trade.type === "buy" ? "-" : "+"}{formatCrypto(trade.total)}
+                    <p className={`text-sm font-semibold ${trade.side === "buy" ? "text-emerald-400" : "text-red-400"}`}>
+                      {trade.side === "buy" ? "-" : "+"}{formatCrypto(trade.total)}
                     </p>
-                    <p className="text-xs text-slate-500 flex items-center gap-1 justify-end"><Clock className="h-3 w-3" />{trade.time}</p>
+                    <p className="text-xs text-slate-500 flex items-center gap-1 justify-end"><Clock className="h-3 w-3" />{trade.executedAt}</p>
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           </Card>
         </>
@@ -210,8 +298,8 @@ export function CryptoWorkspace() {
                   onChange={(e) => setSelectedAsset(e.target.value)}
                   className="mt-1 w-full rounded-xl border border-white/10 bg-[#0a0a0a] px-4 py-3 text-sm text-white focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
                 >
-                  {cryptoAssets.map((a) => (
-                    <option key={a.symbol} value={a.symbol}>{a.name} ({a.symbol}) — {formatCrypto(a.price)}</option>
+                  {assets.map((asset) => (
+                    <option key={asset.symbol} value={asset.symbol}>{asset.name} ({asset.symbol}) — {formatCrypto(asset.price)}</option>
                   ))}
                 </select>
               </div>
@@ -240,7 +328,7 @@ export function CryptoWorkspace() {
                 <div className="rounded-xl bg-white/5 border border-white/10 p-4 space-y-2">
                   <div className="flex justify-between text-xs text-slate-400">
                     <span>You {tradeType === "buy" ? "receive" : "sell"}</span>
-                    <span>{(Number.parseFloat(tradeAmount) / (cryptoAssets.find(a => a.symbol === selectedAsset)?.price || 1)).toFixed(6)} {selectedAsset}</span>
+                    <span>{(Number.parseFloat(tradeAmount) / (assets.find((a) => a.symbol === selectedAsset)?.price || 1)).toFixed(6)} {selectedAsset}</span>
                   </div>
                   <div className="flex justify-between text-xs text-slate-400">
                     <span>Network fee</span>
@@ -248,7 +336,11 @@ export function CryptoWorkspace() {
                   </div>
                 </div>
               )}
-              <Button className={`w-full ${tradeType === "sell" ? "bg-red-500 hover:bg-red-600" : ""}`}>
+              <Button
+                className={`w-full ${tradeType === "sell" ? "bg-red-500 hover:bg-red-600" : ""}`}
+                onClick={() => tradeMutation.mutate()}
+                disabled={!tradeAmount}
+              >
                 {tradeType === "buy" ? <Plus className="h-4 w-4 mr-1" /> : <Minus className="h-4 w-4 mr-1" />}
                 {tradeType === "buy" ? "Buy" : "Sell"} {selectedAsset}
               </Button>

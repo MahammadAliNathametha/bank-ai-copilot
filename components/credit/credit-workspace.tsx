@@ -6,7 +6,7 @@ import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
 import { apiRequest } from "@/lib/services/http";
 import { formatCurrency } from "@/lib/utils";
-import type { CardRecord, InsightRecord, LoanRecord } from "@/lib/data/mock-bank-store";
+import type { CardRecord, CreditScoreRecord, InsightRecord, LoanRecord } from "@/lib/data/mock-bank-store";
 
 type InsightsPayload = {
   healthScore: number;
@@ -29,10 +29,14 @@ export function CreditWorkspace() {
     queryKey: ["insights", "credit"],
     queryFn: () => apiRequest<InsightsPayload>("/api/insights")
   });
+  const { data: scores } = useSuspenseQuery({
+    queryKey: ["credit-scores"],
+    queryFn: () => apiRequest<CreditScoreRecord[]>("/api/credit-scores")
+  });
 
   const totalDebt = loans.reduce((sum, loan) => sum + loan.balance, 0);
   const activeCards = cards.filter((card) => card.status === "active").length;
-  const derivedScore = Math.max(620, Math.min(820, 680 + Math.round(insights.healthScore / 2) - loans.length * 8 + activeCards * 5));
+  const latestScore = scores[0]?.score ?? Math.max(620, Math.min(820, 680 + Math.round(insights.healthScore / 2) - loans.length * 8 + activeCards * 5));
 
   return (
     <SectionShell
@@ -41,7 +45,7 @@ export function CreditWorkspace() {
       description="This page turns the credit shell into a live-backed scorecard using the data already present in the tenant ledger."
     >
       <div className="grid gap-4 md:grid-cols-4">
-        <MetricCard label="Derived score" value={String(derivedScore)} note="A simple score proxy from current product state." />
+        <MetricCard label="Credit score" value={String(latestScore)} note="Latest bureau pull or derived signal." />
         <MetricCard label="Loan exposure" value={formatCurrency(totalDebt)} note="Total outstanding balance across loans." />
         <MetricCard label="Active cards" value={String(activeCards)} note="Cards contributing to available revolving capacity." />
         <MetricCard label="Health score" value={String(insights.healthScore)} note="Financial behavior input from insights." />

@@ -21,3 +21,5 @@
 - [x] [2026-03-14 15:33] Redesign the shared dashboard shell and overview UI with a stronger visual system
 - [x] [2026-03-14 15:35] Add `OPENAI_API_KEY` to local environment scaffolding without storing a pasted secret
 - [x] [2026-03-14 15:41] Switch the global Codex CLI default model back to `gpt-5.3-codex`
+- [x] [2026-03-14 21:24] Complete remaining partial features and refresh the feature coverage report
+- [x] [2026-03-14 22:12] Upgrade Next.js to a patched release and rerun lint/typecheck/tests/build

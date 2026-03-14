@@ -19,6 +19,8 @@ type InsightsPayload = {
 
 const palette = ["hsl(var(--primary))", "#0f172a", "#1d4ed8", "#f97316", "#14b8a6"];
 
+import { CarbonImpact } from "./carbon-impact";
+
 export function InsightsWorkspace() {
   const { data: insights } = useSuspenseQuery({
     queryKey: ["insights"],
@@ -72,21 +74,21 @@ export function InsightsWorkspace() {
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Highlights</p>
-          {insights.insights.map((insight) => (
-            <div key={insight.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="font-semibold">{insight.title}</h3>
-                <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{insight.score}/100</span>
+        <div className="space-y-4">
+          <Card className="space-y-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Highlights</p>
+            {insights.insights.map((insight) => (
+              <div key={insight.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="font-semibold">{insight.title}</h3>
+                  <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{insight.score}/100</span>
+                </div>
+                <p className="mt-2 text-sm text-slate-400">{insight.summary}</p>
               </div>
-              <p className="mt-2 text-sm text-slate-400">{insight.summary}</p>
-            </div>
-          ))}
-          <div className="rounded-2xl bg-white/10 px-4 py-4 text-sm text-white">
-            Innovative idea mock: based on the current spend profile, the tenant nudges the user toward a “wedding savings” milestone and a lower carbon footprint.
-          </div>
-        </Card>
+            ))}
+          </Card>
+          <CarbonImpact />
+        </div>
       </div>
     </SectionShell>
   );

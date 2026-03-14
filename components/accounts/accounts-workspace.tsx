@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useSupabaseRealtime } from "@/hooks/use-supabase-realtime";
 import { apiRequest } from "@/lib/services/http";
 import { formatCurrency } from "@/lib/utils";
-import type { AccountRecord } from "@/lib/data/mock-bank-store";
+import type { AccountRecord, DeviceRecord } from "@/lib/data/mock-bank-store";
 
 export function AccountsWorkspace() {
   useSupabaseRealtime(["accounts"]);
@@ -16,8 +16,13 @@ export function AccountsWorkspace() {
     queryKey: ["accounts"],
     queryFn: () => apiRequest<AccountRecord[]>("/api/accounts")
   });
+  const { data: devices } = useSuspenseQuery({
+    queryKey: ["devices", "accounts"],
+    queryFn: () => apiRequest<DeviceRecord[]>("/api/devices")
+  });
 
   const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
+  const channelCount = new Set(devices.map((device) => device.type)).size;
 
   return (
     <SectionShell
@@ -28,7 +33,7 @@ export function AccountsWorkspace() {
       <div className="grid gap-4 md:grid-cols-3">
         <MetricCard label="Total balance" value={formatCurrency(totalBalance)} note="Across checking and savings products." />
         <MetricCard label="Products" value={String(accounts.length)} note="Tenant catalog currently provisioned." />
-        <MetricCard label="Primary mix" value="64%" note="Deposit share in liquid accounts." />
+        <MetricCard label="Channels" value={String(channelCount)} note="Distinct access channels in use." />
       </div>
       <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="grid gap-4 md:grid-cols-2">
@@ -51,13 +56,21 @@ export function AccountsWorkspace() {
           ))}
         </div>
         <Card className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Portfolio direction</p>
-          <h2 className="font-display text-3xl">Deposit confidence is high.</h2>
-          <ul className="space-y-3 text-sm text-slate-400">
-            <li>Checking remains the operational hub for bills and transfers.</li>
-            <li>Savings balance supports the AI “wedding” savings storyline from the blueprint.</li>
-            <li>Tenant branding can shift this page without changing the underlying data contract.</li>
-          </ul>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Channel coverage</p>
+          <h2 className="font-display text-3xl">Multi-channel access is live.</h2>
+          <div className="space-y-3 text-sm text-slate-400">
+            {devices.map((device) => (
+              <div key={device.id} className="flex items-center justify-between rounded-2xl bg-white/5 border border-white/10 px-4 py-3">
+                <div>
+                  <p className="font-medium text-white">{device.name}</p>
+                  <p className="text-xs text-slate-500">{device.type.toUpperCase()} · {device.os}</p>
+                </div>
+                <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold text-slate-300">
+                  {device.trusted ? "Trusted" : "Unverified"}
+                </span>
+              </div>
+            ))}
+          </div>
         </Card>
       </div>
     </SectionShell>

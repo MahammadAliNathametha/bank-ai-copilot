@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   Megaphone, Users, Target, Mail,
   Smartphone, Bell, Calendar, CheckCircle2, Clock, PauseCircle, Play,
@@ -10,70 +11,10 @@ import {
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { apiRequest } from "@/lib/services/http";
+import type { MarketingCampaignRecord } from "@/lib/data/mock-bank-store";
 
-/* ── mock campaign data ────────────────────────────────────────────── */
-const campaigns = [
-  {
-    id: 1,
-    name: "Spring Savings Promo",
-    type: "push" as const,
-    status: "active" as const,
-    audience: 12450,
-    sent: 11800,
-    opened: 4720,
-    clicked: 1890,
-    converted: 378,
-    startDate: "Mar 1, 2026",
-    endDate: "Mar 31, 2026",
-    budget: 5000,
-    spent: 3200,
-  },
-  {
-    id: 2,
-    name: "Credit Card Upgrade",
-    type: "email" as const,
-    status: "active" as const,
-    audience: 8300,
-    sent: 8300,
-    opened: 3320,
-    clicked: 1162,
-    converted: 245,
-    startDate: "Mar 5, 2026",
-    endDate: "Apr 5, 2026",
-    budget: 3000,
-    spent: 1500,
-  },
-  {
-    id: 3,
-    name: "Mortgage Rate Lock",
-    type: "sms" as const,
-    status: "paused" as const,
-    audience: 5200,
-    sent: 2600,
-    opened: 1820,
-    clicked: 728,
-    converted: 94,
-    startDate: "Feb 15, 2026",
-    endDate: "Mar 15, 2026",
-    budget: 2000,
-    spent: 980,
-  },
-  {
-    id: 4,
-    name: "Refer a Friend Bonus",
-    type: "push" as const,
-    status: "scheduled" as const,
-    audience: 20000,
-    sent: 0,
-    opened: 0,
-    clicked: 0,
-    converted: 0,
-    startDate: "Mar 20, 2026",
-    endDate: "Apr 20, 2026",
-    budget: 8000,
-    spent: 0,
-  },
-];
+/* ── campaign data via API ─────────────────────────────────────────── */
 
 const channelPerformance = [
   { channel: "Push Notification", icon: <Bell className="h-4 w-4" />, openRate: 38.2, ctr: 15.4, convRate: 3.1, color: "text-purple-400", bg: "bg-purple-500/15" },
@@ -90,11 +31,42 @@ const statusConfig = {
 };
 
 export function MarketingWorkspace() {
+  const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<"campaigns" | "analytics" | "segments">("campaigns");
+
+  const { data: campaigns } = useSuspenseQuery({
+    queryKey: ["marketing"],
+    queryFn: () => apiRequest<MarketingCampaignRecord[]>("/api/marketing")
+  });
 
   const totalAudience = campaigns.reduce((s, c) => s + c.audience, 0);
   const totalConverted = campaigns.reduce((s, c) => s + c.converted, 0);
-  const avgOpenRate = campaigns.filter(c => c.sent > 0).reduce((s, c) => s + (c.opened / c.sent) * 100, 0) / campaigns.filter(c => c.sent > 0).length;
+  const openRateBase = campaigns.filter((c) => c.sent > 0);
+  const avgOpenRate = openRateBase.length ? openRateBase.reduce((s, c) => s + (c.opened / c.sent) * 100, 0) / openRateBase.length : 0;
+
+  const createMutation = useMutation({
+    mutationFn: () =>
+      apiRequest<MarketingCampaignRecord>("/api/marketing", {
+        method: "POST",
+        body: JSON.stringify({
+          name: "New Cross-Sell Campaign",
+          channel: "email",
+          status: "scheduled",
+          audience: 2500,
+          sent: 0,
+          opened: 0,
+          clicked: 0,
+          converted: 0,
+          budget: 1200,
+          spent: 0,
+          startDate: "2026-03-25",
+          endDate: "2026-04-10"
+        })
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["marketing"] });
+    }
+  });
 
   const tabs = [
     { key: "campaigns" as const, label: "Campaigns" },
@@ -136,7 +108,7 @@ export function MarketingWorkspace() {
 
           <div className="flex items-center justify-between">
             <h2 className="font-display text-2xl text-white">Campaign Dashboard</h2>
-            <Button>
+            <Button onClick={() => createMutation.mutate()}>
               <Megaphone className="h-4 w-4 mr-1.5" />
               New Campaign
             </Button>
@@ -158,7 +130,7 @@ export function MarketingWorkspace() {
                       <div>
                         <p className="font-semibold text-white group-hover:text-primary transition-colors">{campaign.name}</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-slate-500 uppercase">{campaign.type}</span>
+                          <span className="text-xs text-slate-500 uppercase">{campaign.channel}</span>
                           <span className="text-slate-600">·</span>
                           <span className="flex items-center gap-1 text-xs text-slate-500">
                             <Calendar className="h-3 w-3" />

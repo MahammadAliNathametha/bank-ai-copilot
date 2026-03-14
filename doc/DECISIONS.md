@@ -24,3 +24,4 @@
 - Keep the UI redesign inside the repo’s Tailwind system instead of introducing Stitches, because the existing app is already structured around shared Tailwind primitives and the fastest path to a better result is upgrading those primitives rather than splitting the styling stack.
 - Never persist a secret copied into chat back into the repository or shared command history; only add the env surface and require the user to place a rotated key locally.
 - When the user explicitly asks to use Codex instead of the default GPT-5.4 migration target, pin the global Codex CLI model back to `gpt-5.3-codex` in `/home/bacancy/.codex/config.toml` rather than changing app code.
+- Complete the remaining partial features by introducing explicit tables and API routes, keeping the mock store as the test fallback to preserve existing contracts.

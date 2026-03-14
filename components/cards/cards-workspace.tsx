@@ -85,12 +85,43 @@ export function CardsWorkspace() {
         <Card className="space-y-3">
           <h2 className="font-display text-3xl">Card controls</h2>
           {cards.map((card) => (
-            <div key={card.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
+            <div key={card.id} className="rounded-2xl bg-white/5 border border-white/10 px-5 py-5 group hover:border-white/20 transition-all">
               <div className="flex items-center justify-between gap-4">
-                <p className="font-medium">Card ending in {card.last4}</p>
-                <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{card.status}</span>
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-14 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 border border-white/10 flex items-center justify-center font-bold text-[10px] text-white/50 tracking-tighter">
+                    VISA
+                  </div>
+                  <div>
+                    <p className="font-bold text-white uppercase tracking-wider">•••• {card.last4}</p>
+                    <p className="text-[10px] text-slate-500 font-semibold uppercase">{card.status}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button className="rounded-lg bg-white/10 px-3 py-1.5 text-[10px] font-bold text-white hover:bg-white/20 transition-colors uppercase tracking-widest">
+                    Freeze
+                  </button>
+                  <button className="rounded-lg bg-white/10 px-3 py-1.5 text-[10px] font-bold text-white hover:bg-white/20 transition-colors uppercase tracking-widest">
+                    Limits
+                  </button>
+                </div>
               </div>
-              <p className="mt-2 text-sm text-slate-400">Alerts {card.alertsEnabled ? "enabled" : "disabled"} for this card.</p>
+              
+              <div className="mt-5 grid grid-cols-2 gap-2">
+                <button className="flex items-center justify-center gap-2 rounded-xl bg-black border border-white/10 py-2.5 hover:bg-white/5 transition-all group/wallet">
+                  <div className="h-4 w-4 rounded-full bg-white flex items-center justify-center">
+                    <div className="h-2 w-2 rounded-full bg-black" />
+                  </div>
+                  <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Add to Apple Wallet</span>
+                </button>
+                <button className="flex items-center justify-center gap-2 rounded-xl bg-[#1a73e810] border border-[#1a73e830] py-2.5 hover:bg-[#1a73e820] transition-all group/google">
+                  <div className="flex gap-px">
+                     <div className="h-1 w-1 bg-red-500" />
+                     <div className="h-1 w-1 bg-blue-500" />
+                     <div className="h-1 w-1 bg-yellow-500" />
+                  </div>
+                  <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Add to GPay</span>
+                </button>
+              </div>
             </div>
           ))}
         </Card>

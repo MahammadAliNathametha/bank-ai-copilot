@@ -2,7 +2,15 @@ import * as mock from "@/lib/data/mock-bank-store";
 import * as live from "@/lib/data/live-bank-store";
 
 function shouldUseMockBankStore() {
-  return process.env.BANK_DATA_BACKEND === "mock" || process.env.NODE_ENV === "test" || !process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (process.env.BANK_DATA_BACKEND === "mock" || process.env.NODE_ENV === "test") {
+    return true;
+  }
+
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for live data access.");
+  }
+
+  return false;
 }
 
 export async function listUsers(tenantId: string) {
@@ -20,6 +28,8 @@ export async function createUser(tenantId: string, payload: Parameters<typeof li
         email: payload.email,
         fullName: payload.fullName,
         role: payload.role ?? "member",
+        twoFactorEnabled: false,
+        biometricEnabled: false,
         createdAt: new Date().toISOString()
       })
     : live.createUser(tenantId, payload);
@@ -401,4 +411,212 @@ export async function createAuthSession(tenantId: string, email: string, userId?
 
 export async function signOutSession(tenantId: string, sessionId: string) {
   return shouldUseMockBankStore() ? mock.signOutSession(tenantId, sessionId) : live.signOutSession(tenantId, sessionId);
+}
+
+export async function listDevices(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "devices") : live.listDevices(tenantId);
+}
+
+export async function updateDevice(tenantId: string, id: number, payload: Parameters<typeof live.updateDevice>[2]) {
+  return shouldUseMockBankStore() ? mock.updateRecord(tenantId, "devices", id, payload) : live.updateDevice(tenantId, id, payload);
+}
+
+export async function deleteDevice(tenantId: string, id: number) {
+  return shouldUseMockBankStore() ? mock.deleteRecord(tenantId, "devices", id) : live.deleteDevice(tenantId, id);
+}
+
+export async function listFraudEvents(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "fraudEvents") : live.listFraudEvents(tenantId);
+}
+
+export async function updateFraudEvent(tenantId: string, id: number, payload: Parameters<typeof live.updateFraudEvent>[2]) {
+  return shouldUseMockBankStore() ? mock.updateRecord(tenantId, "fraudEvents", id, payload) : live.updateFraudEvent(tenantId, id, payload);
+}
+
+export async function listMarketingCampaigns(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "marketingCampaigns") : live.listMarketingCampaigns(tenantId);
+}
+
+export async function createMarketingCampaign(tenantId: string, payload: Parameters<typeof live.createMarketingCampaign>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "marketingCampaigns", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createMarketingCampaign(tenantId, payload);
+}
+
+export async function updateMarketingCampaign(tenantId: string, id: number, payload: Parameters<typeof live.updateMarketingCampaign>[2]) {
+  return shouldUseMockBankStore()
+    ? mock.updateRecord(tenantId, "marketingCampaigns", id, payload)
+    : live.updateMarketingCampaign(tenantId, id, payload);
+}
+
+export async function listAppointments(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "appointments") : live.listAppointments(tenantId);
+}
+
+export async function createAppointment(tenantId: string, payload: Parameters<typeof live.createAppointment>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "appointments", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createAppointment(tenantId, payload);
+}
+
+export async function listSupportMessages(tenantId: string, ticketId?: number) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "supportMessages").filter((message) => (ticketId ? message.ticketId === ticketId : true))
+    : live.listSupportMessages(tenantId, ticketId);
+}
+
+export async function createSupportMessage(tenantId: string, payload: Parameters<typeof live.createSupportMessage>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "supportMessages", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createSupportMessage(tenantId, payload);
+}
+
+export async function listAccountMembers(tenantId: string, accountId?: number) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "accountMembers").filter((member) => (accountId ? member.accountId === accountId : true))
+    : live.listAccountMembers(tenantId, accountId);
+}
+
+export async function createAccountMember(tenantId: string, payload: Parameters<typeof live.createAccountMember>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "accountMembers", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createAccountMember(tenantId, payload);
+}
+
+export async function listInvestmentAccounts(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "investmentAccounts") : live.listInvestmentAccounts(tenantId);
+}
+
+export async function createInvestmentAccount(tenantId: string, payload: Parameters<typeof live.createInvestmentAccount>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "investmentAccounts", {
+        ...payload,
+        lastSyncedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString()
+      })
+    : live.createInvestmentAccount(tenantId, payload);
+}
+
+export async function listCryptoAssets(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "cryptoAssets") : live.listCryptoAssets(tenantId);
+}
+
+export async function listCryptoHoldings(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "cryptoHoldings").filter((holding) => (userId ? holding.userId === userId : true))
+    : live.listCryptoHoldings(tenantId, userId);
+}
+
+export async function listCryptoTrades(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "cryptoTrades").filter((trade) => (userId ? trade.userId === userId : true))
+    : live.listCryptoTrades(tenantId, userId);
+}
+
+export async function createCryptoTrade(tenantId: string, payload: Parameters<typeof live.createCryptoTrade>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "cryptoTrades", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createCryptoTrade(tenantId, payload);
+}
+
+export async function listWalletCards(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "walletCards").filter((card) => (userId ? card.userId === userId : true))
+    : live.listWalletCards(tenantId, userId);
+}
+
+export async function createWalletCard(tenantId: string, payload: Parameters<typeof live.createWalletCard>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "walletCards", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createWalletCard(tenantId, payload);
+}
+
+export async function listWalletActivity(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "walletActivity").filter((activity) => (userId ? activity.userId === userId : true))
+    : live.listWalletActivity(tenantId, userId);
+}
+
+export async function listWalletLoyalty(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "walletLoyalty").filter((reward) => (userId ? reward.userId === userId : true))
+    : live.listWalletLoyalty(tenantId, userId);
+}
+
+export async function listCreditScores(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "creditScores").filter((score) => (userId ? score.userId === userId : true))
+    : live.listCreditScores(tenantId, userId);
+}
+
+export async function createCreditScore(tenantId: string, payload: Parameters<typeof live.createCreditScore>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "creditScores", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createCreditScore(tenantId, payload);
+}
+
+export async function listSavingsRules(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "savingsRules").filter((rule) => (userId ? rule.userId === userId : true))
+    : live.listSavingsRules(tenantId, userId);
+}
+
+export async function createSavingsRule(tenantId: string, payload: Parameters<typeof live.createSavingsRule>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "savingsRules", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createSavingsRule(tenantId, payload);
+}
+
+export async function listVoiceCommands(tenantId: string, userId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "voiceCommands").filter((command) => (userId ? command.userId === userId : true))
+    : live.listVoiceCommands(tenantId, userId);
+}
+
+export async function createVoiceCommand(tenantId: string, payload: Parameters<typeof live.createVoiceCommand>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "voiceCommands", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createVoiceCommand(tenantId, payload);
+}
+
+export async function listChatbotMessages(tenantId: string, sessionId?: string) {
+  return shouldUseMockBankStore()
+    ? mock.listRecords(tenantId, "chatbotMessages").filter((message) => (sessionId ? message.sessionId === sessionId : true))
+    : live.listChatbotMessages(tenantId, sessionId);
+}
+
+export async function createChatbotMessage(tenantId: string, payload: Parameters<typeof live.createChatbotMessage>[1]) {
+  return shouldUseMockBankStore()
+    ? mock.createRecord(tenantId, "chatbotMessages", {
+        ...payload,
+        createdAt: new Date().toISOString()
+      })
+    : live.createChatbotMessage(tenantId, payload);
 }

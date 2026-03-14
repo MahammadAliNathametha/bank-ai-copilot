@@ -2,17 +2,33 @@
 
 import { Mic, Square, Volume2 } from "lucide-react";
 import { useState, useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/services/http";
 
 export function SupportVoiceInput() {
   const [isRecording, setIsRecording] = useState(false);
   const [waveform, setWaveform] = useState<number[]>(Array(24).fill(20));
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const mutation = useMutation({
+    mutationFn: () =>
+      apiRequest("/api/voice", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: "11111111-1111-1111-1111-111111111112",
+          command: "Check my balance",
+          transcript: "Check my balance",
+          response: "Your total balance is $17,740.65.",
+          status: "processed"
+        })
+      })
+  });
 
   const toggleRecording = () => {
     if (isRecording) {
       setIsRecording(false);
       if (intervalRef.current) clearInterval(intervalRef.current);
       setWaveform(Array(24).fill(20));
+      mutation.mutate();
     } else {
       setIsRecording(true);
       intervalRef.current = setInterval(() => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   CreditCard, Plus, Smartphone, Eye, EyeOff,
   Send, ArrowDownToLine, QrCode, Shield,
@@ -9,15 +10,17 @@ import {
 
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
+import { apiRequest } from "@/lib/services/http";
+import type { WalletActivityRecord, WalletCardRecord, WalletLoyaltyRecord } from "@/lib/data/mock-bank-store";
 
 /* ── mock wallet data ──────────────────────────────────────────────── */
-const walletCards = [
+const fallbackWalletCards = [
   { id: 1, type: "Apple Pay" as const, last4: "4829", brand: "Visa", status: "active" as const, addedAt: "Jan 2024", color: "from-[#1a1a2e] to-[#16213e]" },
   { id: 2, type: "Google Pay" as const, last4: "7391", brand: "Mastercard", status: "active" as const, addedAt: "Mar 2024", color: "from-[#1a2e1a] to-[#162e21]" },
   { id: 3, type: "Samsung Pay" as const, last4: "2156", brand: "Visa", status: "suspended" as const, addedAt: "Jun 2024", color: "from-[#2e1a1a] to-[#2e1621]" },
 ];
 
-const recentActivity = [
+const fallbackRecentActivity = [
   { id: 1, merchant: "Starbucks", method: "Apple Pay", amount: -5.75, time: "Today, 8:32 AM", category: "Food & Drink" },
   { id: 2, merchant: "Uber", method: "Google Pay", amount: -23.40, time: "Today, 7:15 AM", category: "Transport" },
   { id: 3, merchant: "Amazon", method: "Apple Pay", amount: -89.99, time: "Yesterday", category: "Shopping" },
@@ -25,7 +28,7 @@ const recentActivity = [
   { id: 5, merchant: "Whole Foods", method: "Apple Pay", amount: -67.23, time: "2 days ago", category: "Groceries" },
 ];
 
-const loyaltyCards = [
+const fallbackLoyaltyCards = [
   { id: 1, name: "Delta SkyMiles", points: 42850, tier: "Gold", color: "#8B2252" },
   { id: 2, name: "Marriott Bonvoy", points: 128400, tier: "Platinum", color: "#1C1C1C" },
   { id: 3, name: "Chase Rewards", points: 34200, tier: "Preferred", color: "#003DA5" },
@@ -42,11 +45,92 @@ const PayTypeIcon = ({ type }: { type: string }) => {
 };
 
 export function WalletWorkspace() {
+  const queryClient = useQueryClient();
   const [showBalances, setShowBalances] = useState(true);
   const [activeTab, setActiveTab] = useState<"cards" | "activity" | "loyalty">("cards");
   const [showAddCard, setShowAddCard] = useState(false);
 
+  const { data } = useSuspenseQuery({
+    queryKey: ["wallet"],
+    queryFn: () => apiRequest<{ cards: WalletCardRecord[]; activity: WalletActivityRecord[]; loyalty: WalletLoyaltyRecord[] }>("/api/wallet")
+  });
+
+  const walletCards = (data.cards.length ? data.cards : fallbackWalletCards.map((card) => ({
+    id: card.id,
+    userId: "fallback",
+    walletType: card.type,
+    last4: card.last4,
+    brand: card.brand,
+    status: card.status,
+    addedAt: card.addedAt,
+    tenantId: "fallback",
+    createdAt: "",
+    color: card.color
+  }))).map((card) => ({
+    id: card.id,
+    userId: card.userId,
+    type: card.walletType,
+    last4: card.last4,
+    brand: card.brand,
+    status: card.status,
+    addedAt: card.addedAt,
+    color: "color" in card ? card.color : "from-[#1a1a2e] to-[#16213e]"
+  }));
+
+  const recentActivity = (data.activity.length ? data.activity : fallbackRecentActivity.map((activity) => ({
+    id: activity.id,
+    userId: "fallback",
+    merchant: activity.merchant,
+    method: activity.method,
+    amount: activity.amount,
+    category: activity.category,
+    occurredAt: activity.time,
+    tenantId: "fallback",
+    createdAt: ""
+  }))).map((activity) => ({
+    id: activity.id,
+    merchant: activity.merchant,
+    method: activity.method,
+    amount: activity.amount,
+    time: activity.occurredAt,
+    category: activity.category
+  }));
+
+  const loyaltyCards = (data.loyalty.length ? data.loyalty : fallbackLoyaltyCards.map((card) => ({
+    id: card.id,
+    userId: "fallback",
+    program: card.name,
+    points: card.points,
+    tier: card.tier,
+    tenantId: "fallback",
+    createdAt: ""
+  }))).map((card) => ({
+    id: card.id,
+    name: card.program,
+    points: card.points,
+    tier: card.tier,
+    color: "#1C1C1C"
+  }));
+
   const totalSpent = recentActivity.reduce((sum, a) => sum + Math.abs(a.amount), 0);
+
+  const addCardMutation = useMutation({
+    mutationFn: () =>
+      apiRequest<WalletCardRecord>("/api/wallet", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: walletCards[0]?.userId ?? "11111111-1111-1111-1111-111111111112",
+          walletType: "Apple Pay",
+          last4: "4829",
+          brand: "Visa",
+          status: "active",
+          addedAt: new Date().toISOString()
+        })
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ["wallet"] });
+    }
+  });
 
   const tabs = [
     { key: "cards" as const, label: "Digital Cards" },
@@ -133,7 +217,10 @@ export function WalletWorkspace() {
 
             {/* Add new card */}
             <button
-              onClick={() => setShowAddCard(!showAddCard)}
+              onClick={() => {
+                setShowAddCard(!showAddCard);
+                addCardMutation.mutate();
+              }}
               className="flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-white/10 p-6 text-slate-500 hover:border-primary/30 hover:text-primary transition-all duration-300 min-h-[200px]"
             >
               <div className="rounded-xl bg-white/5 p-3">

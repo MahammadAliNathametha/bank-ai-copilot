@@ -7,14 +7,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Mic, MicOff, Volume2, Send, Bot, User,
-  Sparkles, MessageSquare, AudioLines
+  Sparkles, MessageSquare, AudioLines, Smartphone
 } from "lucide-react";
 
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { apiRequest } from "@/lib/services/http";
-import type { InsightRecord, SupportTicketRecord } from "@/lib/data/mock-bank-store";
+import type { ChatbotMessageRecord, InsightRecord, SupportTicketRecord, VoiceCommandRecord } from "@/lib/data/mock-bank-store";
 
 type InsightsPayload = {
   healthScore: number;
@@ -32,7 +32,7 @@ const chatbotSchema = z.object({
 type ChatbotFormValues = z.infer<typeof chatbotSchema>;
 
 /* ── voice command definitions ─────────────────────────────────────── */
-const voiceCommands = [
+const voiceCommandLibrary = [
   { command: "Check my balance", response: "Your total balance across all accounts is $47,250.00. Your checking account has $12,450 and savings has $34,800.", category: "balance" },
   { command: "Transfer $500 to savings", response: "I'll transfer $500 from your checking to savings. Shall I proceed?", category: "transfer" },
   { command: "Show recent transactions", response: "Your last 5 transactions: Netflix $15.99, Whole Foods $67.23, Uber $23.40, Starbucks $5.75, Amazon $89.99.", category: "transactions" },
@@ -41,18 +41,14 @@ const voiceCommands = [
   { command: "Lock my debit card", response: "Your debit card ending in 4829 has been temporarily locked. You can unlock it anytime.", category: "security" },
 ];
 
-const chatHistory: { role: "bot" | "user"; message: string; time: string }[] = [
-  { role: "bot", message: "Welcome back! I'm your AI banking assistant. You can type or use voice commands. Try saying 'Check my balance' or 'Show recent transactions'.", time: "Now" },
-];
-
 export function ChatbotWorkspace() {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<"chat" | "voice">("chat");
   const [voiceState, setVoiceState] = useState<"idle" | "listening" | "processing" | "speaking">("idle");
-  const [messages, setMessages] = useState(chatHistory);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [voiceResponse, setVoiceResponse] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const sessionIdRef = useRef<string>("tenant-chat-1");
 
   const { data: insights } = useSuspenseQuery({
     queryKey: ["insights", "chatbot"],
@@ -61,6 +57,14 @@ export function ChatbotWorkspace() {
   const { data: tickets } = useSuspenseQuery({
     queryKey: ["support", "chatbot"],
     queryFn: () => apiRequest<SupportTicketRecord[]>("/api/support")
+  });
+  const { data: voiceCommands } = useSuspenseQuery({
+    queryKey: ["voice-commands", "chatbot"],
+    queryFn: () => apiRequest<VoiceCommandRecord[]>("/api/voice")
+  });
+  const { data: messages } = useSuspenseQuery({
+    queryKey: ["chatbot", sessionIdRef.current],
+    queryFn: () => apiRequest<ChatbotMessageRecord[]>(`/api/chatbot?sessionId=${sessionIdRef.current}`)
   });
 
   const form = useForm<ChatbotFormValues>({
@@ -92,28 +96,46 @@ export function ChatbotWorkspace() {
   const handleSendMessage = useCallback((text: string) => {
     if (!text.trim()) return;
 
-    const userMsg = { role: "user" as const, message: text, time: "Just now" };
-    setMessages(prev => [...prev, userMsg]);
-
     // Simulate AI response
-    const matched = voiceCommands.find(vc =>
+    const matched = voiceCommandLibrary.find(vc =>
       text.toLowerCase().includes(vc.command.toLowerCase().split(" ").slice(0, 2).join(" "))
     );
 
     setTimeout(() => {
-      const botMsg = {
-        role: "bot" as const,
-        message: matched?.response || `I understand you're asking about "${text}". Based on your financial health score of ${insights.healthScore}, here's my suggestion: ${insights.insights[0]?.summary || "Please check back later for personalized insights."}`,
-        time: "Just now"
-      };
-      setMessages(prev => [...prev, botMsg]);
+      const response = matched?.response || `I understand you're asking about "${text}". Based on your financial health score of ${insights.healthScore}, here's my suggestion: ${insights.insights[0]?.summary || "Please check back later for personalized insights."}`;
+      void apiRequest<ChatbotMessageRecord>("/api/chatbot", {
+        method: "POST",
+        body: JSON.stringify({
+          sessionId: sessionIdRef.current,
+          userId: "11111111-1111-1111-1111-111111111112",
+          role: "assistant",
+          message: response
+        })
+      }).then(() => {
+        void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionIdRef.current] });
+      });
     }, 800);
 
+    void apiRequest<ChatbotMessageRecord>("/api/chatbot", {
+      method: "POST",
+      body: JSON.stringify({
+        sessionId: sessionIdRef.current,
+        userId: "11111111-1111-1111-1111-111111111112",
+        role: "user",
+        message: text
+      })
+    }).then(() => {
+      void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionIdRef.current] });
+    });
+
     form.setValue("question", "");
-  }, [form, insights]);
+  }, [form, insights, queryClient]);
 
   const handleVoiceCommand = useCallback(() => {
     if (voiceState === "idle") {
+      if (!voiceCommands.length) {
+        return;
+      }
       setVoiceState("listening");
       setVoiceTranscript("");
       setVoiceResponse("");
@@ -121,12 +143,28 @@ export function ChatbotWorkspace() {
       // Simulate voice recognition
       setTimeout(() => {
         const randomCmd = voiceCommands[Math.floor(Math.random() * voiceCommands.length)];
+        if (!randomCmd) {
+          setVoiceState("idle");
+          return;
+        }
         setVoiceTranscript(randomCmd.command);
         setVoiceState("processing");
 
         setTimeout(() => {
           setVoiceResponse(randomCmd.response);
           setVoiceState("speaking");
+          void apiRequest("/api/voice", {
+            method: "POST",
+            body: JSON.stringify({
+              userId: "11111111-1111-1111-1111-111111111112",
+              command: randomCmd.command,
+              transcript: randomCmd.command,
+              response: randomCmd.response,
+              status: "processed"
+            })
+          }).then(() => {
+            void queryClient.invalidateQueries({ queryKey: ["voice-commands", "chatbot"] });
+          });
 
           setTimeout(() => {
             setVoiceState("idle");
@@ -136,7 +174,7 @@ export function ChatbotWorkspace() {
     } else {
       setVoiceState("idle");
     }
-  }, [voiceState]);
+  }, [queryClient, voiceCommands, voiceState]);
 
   const tabs = [
     { key: "chat" as const, label: "Chat Assistant", icon: <MessageSquare className="h-3.5 w-3.5" /> },
@@ -170,7 +208,7 @@ export function ChatbotWorkspace() {
         <MetricCard label="Health Score" value={String(insights.healthScore)} note="AI context for guidance" />
         <MetricCard label="Insights" value={String(insights.insights.length)} note="Available prompts" />
         <MetricCard label="Escalations" value={String(tickets.filter((t) => t.subject.includes("Chatbot")).length)} note="Tickets from assistant" />
-        <MetricCard label="Voice Commands" value={String(voiceCommands.length)} note="Recognized patterns" />
+        <MetricCard label="Voice Commands" value={String(voiceCommands.length)} note="Processed commands" />
       </div>
 
       {/* ── Chat Tab ─────────────────────────────────────────────────── */}
@@ -179,22 +217,22 @@ export function ChatbotWorkspace() {
           <Card className="flex flex-col h-[500px]">
             {/* Chat messages */}
             <div className="flex-1 overflow-y-auto space-y-4 p-1 mb-4">
-              {messages.map((msg, i) => (
-                <div key={i} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+              {messages.map((msg) => (
+                <div key={msg.id} className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                   <div className={`shrink-0 rounded-xl p-2 h-fit ${
-                    msg.role === "bot"
+                    msg.role === "assistant"
                       ? "bg-primary/15 text-primary"
                       : "bg-white/10 text-white"
                   }`}>
-                    {msg.role === "bot" ? <Bot className="h-4 w-4" /> : <User className="h-4 w-4" />}
+                    {msg.role === "assistant" ? <Bot className="h-4 w-4" /> : <User className="h-4 w-4" />}
                   </div>
                   <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm ${
-                    msg.role === "bot"
+                    msg.role === "assistant"
                       ? "bg-white/5 border border-white/10 text-slate-300"
                       : "bg-primary/15 border border-primary/20 text-white"
                   }`}>
                     <p>{msg.message}</p>
-                    <p className="mt-1 text-[10px] text-slate-500">{msg.time}</p>
+                    <p className="mt-1 text-[10px] text-slate-500">{msg.createdAt}</p>
                   </div>
                 </div>
               ))}
@@ -312,62 +350,90 @@ export function ChatbotWorkspace() {
                 {voiceState === "speaking" && "Responding..."}
               </p>
               {voiceTranscript && (
-                <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 max-w-sm">
+                <div className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 max-w-sm mx-auto">
                   <p className="text-[10px] font-bold uppercase text-slate-500 mb-1">You said</p>
                   <p className="text-sm text-white">&ldquo;{voiceTranscript}&rdquo;</p>
                 </div>
               )}
               {voiceResponse && (
-                <div className="rounded-xl bg-primary/5 border border-primary/20 px-4 py-3 max-w-sm mt-3">
+                <div className="rounded-xl bg-primary/5 border border-primary/20 px-4 py-3 max-w-sm mx-auto mt-3">
                   <p className="text-[10px] font-bold uppercase text-primary/60 mb-1">Response</p>
                   <p className="text-sm text-slate-300">{voiceResponse}</p>
                 </div>
               )}
             </div>
 
-            <Button
-              onClick={handleVoiceCommand}
-              className={`px-8 py-3 text-sm font-bold ${
-                voiceState === "listening" ? "bg-red-500 hover:bg-red-600" : ""
-              }`}
-            >
-              {voiceState === "idle" ? (
-                <><Mic className="h-4 w-4 mr-2" />Start Voice Command</>
-              ) : voiceState === "listening" ? (
-                <><MicOff className="h-4 w-4 mr-2" />Stop Listening</>
-              ) : (
-                <><AudioLines className="h-4 w-4 mr-2" />Processing...</>
-              )}
-            </Button>
-          </Card>
-
-          <Card className="space-y-4">
-            <h2 className="font-display text-2xl">Available Voice Commands</h2>
-            <p className="text-sm text-slate-400">Try any of these commands by tapping the microphone or saying them aloud.</p>
-            <div className="space-y-2">
-              {voiceCommands.map((vc) => (
-                <button
-                  key={vc.command}
-                  onClick={() => {
-                    setVoiceTranscript(vc.command);
-                    setVoiceState("processing");
-                    setTimeout(() => {
-                      setVoiceResponse(vc.response);
-                      setVoiceState("speaking");
-                      setTimeout(() => setVoiceState("idle"), 3000);
-                    }, 1000);
-                  }}
-                  className="w-full flex items-center justify-between rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:border-primary/30 hover:bg-primary/5 transition-all group text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <Volume2 className="h-4 w-4 text-slate-500 group-hover:text-primary transition-colors" />
-                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">&ldquo;{vc.command}&rdquo;</span>
-                  </div>
-                  <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-slate-500 uppercase">{vc.category}</span>
-                </button>
-              ))}
+            <div className="flex gap-4">
+              <Button
+                onClick={handleVoiceCommand}
+                className={`px-8 py-3 text-sm font-bold ${
+                  voiceState === "listening" ? "bg-red-500 hover:bg-red-600" : ""
+                }`}
+              >
+                {voiceState === "idle" ? (
+                  <><Mic className="h-4 w-4 mr-2" />Start Voice Command</>
+                ) : voiceState === "listening" ? (
+                  <><MicOff className="h-4 w-4 mr-2" />Stop Listening</>
+                ) : (
+                  <><AudioLines className="h-4 w-4 mr-2" />Processing...</>
+                )}
+              </Button>
             </div>
           </Card>
+
+          <div className="space-y-4">
+            <Card className="space-y-4 border-l-4 border-l-primary">
+              <h3 className="font-display text-xl flex items-center gap-2">
+                <Smartphone className="h-5 w-5 text-primary" />
+                Smart Speaker Integration
+              </h3>
+              <p className="text-sm text-slate-400">Link your Alexa, Google Home, or HomePod to enable voice-activated banking from anywhere.</p>
+              
+              <div className="grid grid-cols-3 gap-2 py-2">
+                <button className="flex flex-col items-center gap-2 rounded-xl bg-white/5 p-3 grayscale hover:grayscale-0 hover:bg-white/10 transition-all border border-white/5">
+                  <span className="text-[10px] font-bold text-slate-500">ALEXA</span>
+                  <div className="h-4 w-12 bg-blue-400/20 rounded-full" />
+                </button>
+                <button className="flex flex-col items-center gap-2 rounded-xl bg-white/5 p-3 grayscale hover:grayscale-0 hover:bg-white/10 transition-all border border-white/5">
+                  <span className="text-[10px] font-bold text-slate-500">GOOGLE</span>
+                  <div className="h-4 w-12 bg-emerald-400/20 rounded-full" />
+                </button>
+                <button className="flex flex-col items-center gap-2 rounded-xl bg-white/5 p-3 grayscale hover:grayscale-0 hover:bg-white/10 transition-all border border-white/5">
+                  <span className="text-[10px] font-bold text-slate-500">SIRI</span>
+                  <div className="h-4 w-12 bg-purple-400/20 rounded-full" />
+                </button>
+              </div>
+              
+              <Button variant="ghost" className="w-full text-xs">Manage Connected Speakers (2)</Button>
+            </Card>
+
+            <Card className="space-y-4">
+              <h2 className="font-display text-2xl">Voice Skills</h2>
+              <div className="space-y-2">
+                {voiceCommands.map((vc) => (
+                  <button
+                    key={vc.command}
+                    onClick={() => {
+                      setVoiceTranscript(vc.command);
+                      setVoiceState("processing");
+                      setTimeout(() => {
+                        setVoiceResponse(vc.response);
+                        setVoiceState("speaking");
+                        setTimeout(() => setVoiceState("idle"), 3000);
+                      }, 1000);
+                    }}
+                    className="w-full flex items-center justify-between rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:border-primary/30 hover:bg-primary/5 transition-all group text-left"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Volume2 className="h-4 w-4 text-slate-500 group-hover:text-primary transition-colors" />
+                      <span className="text-sm text-slate-300 group-hover:text-white transition-colors">&ldquo;{vc.command}&rdquo;</span>
+                    </div>
+                    <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-slate-500 uppercase">{vc.status}</span>
+                  </button>
+                ))}
+              </div>
+            </Card>
+          </div>
         </div>
       )}
     </SectionShell>

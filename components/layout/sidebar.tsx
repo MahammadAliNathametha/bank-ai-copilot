@@ -40,6 +40,8 @@ const navGroups: NavGroup[] = [
       { href: "/p2p" as Route, icon: <Users className="h-[18px] w-[18px]" />, tooltip: "P2P Send" },
       { href: "/wire" as Route, icon: <Zap className="h-[18px] w-[18px]" />, tooltip: "Wire" },
       { href: "/bills" as Route, icon: <Receipt className="h-[18px] w-[18px]" />, tooltip: "Bills" },
+      { href: "/beneficiaries" as Route, icon: <Users className="h-[18px] w-[18px]" />, tooltip: "Beneficiaries" },
+      { href: "/instant-payments" as Route, icon: <Zap className="h-[18px] w-[18px]" />, tooltip: "Instant Pay" },
     ],
   },
   {

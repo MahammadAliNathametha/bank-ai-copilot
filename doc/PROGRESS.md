@@ -37,3 +37,12 @@
 [2026-03-14 15:33] codex — Refreshed the shared dashboard visual system with a warmer editorial theme, new hero/metric treatment, and a redesigned sidebar/header shell; verified `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build`.
 [2026-03-14 15:35] codex — Added `OPENAI_API_KEY` to `.env.example` and environment typings so a rotated key can be supplied locally without storing the pasted secret in the repo.
 [2026-03-14 15:41] codex — Changed the global Codex CLI default model in `/home/bacancy/.codex/config.toml` from `gpt-5.4` to `gpt-5.3-codex` and verified the update.
+[2026-03-14 21:24] codex — Completed the remaining partial features by adding new schema, APIs, and workspace wiring, then refreshed the feature coverage report.
+[2026-03-14 21:36] codex — Fixed instant payments routing, tightened live data guards, cleaned up type errors, and re-ran lint/typecheck/tests/build.
+[2026-03-14 21:42] codex — Applied `20260314170000_feature_completion.sql` to the live Supabase project via psql.
+[2026-03-14 22:12] codex — Upgraded Next.js tooling to 15.5.9 and re-ran lint/typecheck/tests/build successfully.
+[2026-03-14 22:14] codex — Updated `next.config.ts` to use `typedRoutes` directly and re-ran lint/typecheck/tests/build.
+[2026-03-14 22:15] codex — Added `sharp` to pnpm’s allowed build scripts and rebuilt it.
+[2026-03-14 22:17] codex — Re-ran lint, typecheck, tests, and build after enabling sharp build scripts.
+[2026-03-14 22:18] codex — Verified the live Supabase schema with `pnpm check:supabase`.
+[2026-03-14 22:19] codex — Extended the Supabase schema check to cover the new feature tables and re-ran it.

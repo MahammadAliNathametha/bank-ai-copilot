@@ -16,7 +16,31 @@ const requiredTables = [
   "bills",
   "support_tickets",
   "notifications",
-  "documents"
+  "documents",
+  "appointments",
+  "support_messages",
+  "account_members",
+  "investment_accounts",
+  "crypto_assets",
+  "crypto_holdings",
+  "crypto_trades",
+  "wallet_cards",
+  "wallet_activity",
+  "wallet_loyalty",
+  "credit_scores",
+  "savings_rules",
+  "voice_commands",
+  "chatbot_messages",
+  "marketing_campaigns",
+  "devices",
+  "sessions",
+  "fraud_events",
+  "compliance_records",
+  "payments",
+  "admin_metrics",
+  "locations",
+  "open_connections",
+  "webhooks"
 ];
 
 const results = await Promise.all(

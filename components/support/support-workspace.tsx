@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { startTransition } from "react";
+import { startTransition, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { apiRequest } from "@/lib/services/http";
 import { supportTicketCreateSchema } from "@/lib/validations/banking";
-import type { SupportTicketRecord } from "@/lib/data/mock-bank-store";
+import type { SupportMessageRecord, SupportTicketRecord } from "@/lib/data/mock-bank-store";
 import type { z } from "zod";
 
 type SupportFormValues = z.infer<typeof supportTicketCreateSchema>;
@@ -23,6 +23,13 @@ export function SupportWorkspace() {
     queryKey: ["support"],
     queryFn: () => apiRequest<SupportTicketRecord[]>("/api/support")
   });
+  const [activeTicketId, setActiveTicketId] = useState<number | null>(null);
+  const ticketId = activeTicketId ?? tickets[0]?.id ?? null;
+  const { data: messages } = useSuspenseQuery({
+    queryKey: ["support", "messages", ticketId],
+    queryFn: () => apiRequest<SupportMessageRecord[]>(`/api/support/messages${ticketId ? `?ticketId=${ticketId}` : ""}`)
+  });
+  const [newMessage, setNewMessage] = useState("");
 
   const form = useForm<SupportFormValues>({
     resolver: zodResolver(supportTicketCreateSchema),
@@ -47,6 +54,29 @@ export function SupportWorkspace() {
       form.reset();
     }
   });
+
+  const messageMutation = useMutation({
+    mutationFn: (message: string) =>
+      apiRequest<SupportMessageRecord>("/api/support/messages", {
+        method: "POST",
+        body: JSON.stringify({
+          ticketId: ticketId ?? tickets[0]?.id ?? 0,
+          sender: "user",
+          message
+        })
+      }),
+    onSuccess: () => {
+      startTransition(() => {
+        void queryClient.invalidateQueries({ queryKey: ["support", "messages"] });
+      });
+      setNewMessage("");
+    }
+  });
+
+  const activeTicket = useMemo(
+    () => tickets.find((ticket) => ticket.id === (ticketId ?? 0)),
+    [tickets, ticketId]
+  );
 
   return (
     <SectionShell
@@ -83,10 +113,46 @@ export function SupportWorkspace() {
                 <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{ticket.status}</span>
               </div>
               <p className="mt-2 text-sm text-slate-400">{ticket.message}</p>
+              <button
+                type="button"
+                className="mt-3 text-xs font-semibold uppercase tracking-wider text-primary"
+                onClick={() => setActiveTicketId(ticket.id)}
+              >
+                Open chat
+              </button>
             </div>
           ))}
         </Card>
       </div>
+      <Card className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-3xl">Live chat</h2>
+          <span className="text-xs text-slate-400">{activeTicket ? `Ticket #${activeTicket.id}` : "No active ticket"}</span>
+        </div>
+        <div className="space-y-3">
+          {messages.map((message) => (
+            <div key={message.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-3">
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{message.sender}</p>
+              <p className="mt-2 text-sm text-white">{message.message}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3">
+          <input
+            className="flex-1 rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
+            placeholder="Type a reply"
+            value={newMessage}
+            onChange={(event) => setNewMessage(event.target.value)}
+          />
+          <Button
+            type="button"
+            onClick={() => messageMutation.mutate(newMessage)}
+            disabled={messageMutation.isPending || !newMessage.trim() || !ticketId}
+          >
+            Send
+          </Button>
+        </div>
+      </Card>
     </SectionShell>
   );
 }

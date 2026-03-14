@@ -207,4 +207,134 @@ export const openConnectionUpdateSchema = openConnectionCreateSchema.partial().r
   message: "At least one field is required"
 });
 
+export const appointmentCreateSchema = z.object({
+  userId: z.string().min(1),
+  locationName: z.string().min(2),
+  timeSlot: z.string().min(2),
+  agenda: z.string().min(2),
+  status: z.enum(["requested", "confirmed", "completed", "cancelled"]).default("requested")
+});
+
+export const appointmentUpdateSchema = appointmentCreateSchema.partial().refine((value) => Object.keys(value).length > 0, {
+  message: "At least one field is required"
+});
+
+export const supportMessageCreateSchema = z.object({
+  ticketId: z.number().int().positive(),
+  sender: z.enum(["user", "agent", "bot"]),
+  message: z.string().min(2)
+});
+
+export const accountMemberCreateSchema = z.object({
+  accountId: z.number().int().positive(),
+  userId: z.string().min(1),
+  role: z.enum(["owner", "editor", "viewer"]).default("viewer")
+});
+
+export const investmentAccountCreateSchema = z.object({
+  userId: z.string().min(1),
+  provider: z.string().min(2),
+  accountName: z.string().min(2),
+  balance: z.number(),
+  type: z.enum(["brokerage", "retirement"]).default("brokerage"),
+  status: z.enum(["active", "paused"]).default("active")
+});
+
+export const marketingCampaignCreateSchema = z.object({
+  name: z.string().min(2),
+  channel: z.enum(["push", "email", "sms", "in-app"]),
+  status: z.enum(["active", "paused", "scheduled", "completed"]).default("scheduled"),
+  audience: z.number().int().nonnegative(),
+  sent: z.number().int().nonnegative(),
+  opened: z.number().int().nonnegative(),
+  clicked: z.number().int().nonnegative(),
+  converted: z.number().int().nonnegative(),
+  budget: z.number().nonnegative(),
+  spent: z.number().nonnegative(),
+  startDate: z.string().min(2),
+  endDate: z.string().min(2)
+});
+
+export const marketingCampaignUpdateSchema = marketingCampaignCreateSchema.partial().refine((value) => Object.keys(value).length > 0, {
+  message: "At least one field is required"
+});
+
+export const creditScoreCreateSchema = z.object({
+  userId: z.string().min(1),
+  score: z.number().min(300).max(850),
+  provider: z.string().min(2),
+  status: z.enum(["current", "stale"]).default("current"),
+  reportedAt: z.string().min(2)
+});
+
+export const savingsRuleCreateSchema = z.object({
+  userId: z.string().min(1),
+  name: z.string().min(2),
+  cadence: z.enum(["daily", "weekly", "monthly"]),
+  amount: z.number().positive(),
+  target: z.number().nonnegative(),
+  status: z.enum(["active", "paused"]).default("active")
+});
+
+export const voiceCommandCreateSchema = z.object({
+  userId: z.string().min(1),
+  command: z.string().min(2),
+  transcript: z.string().min(2),
+  response: z.string().min(2),
+  status: z.enum(["processed", "failed"]).default("processed")
+});
+
+export const chatbotMessageCreateSchema = z.object({
+  sessionId: z.string().min(1),
+  userId: z.string().min(1),
+  role: z.enum(["user", "assistant"]),
+  message: z.string().min(2)
+});
+
+export const walletCardCreateSchema = z.object({
+  userId: z.string().min(1),
+  walletType: z.string().min(2),
+  last4: z.string().min(2),
+  brand: z.string().min(2),
+  status: z.enum(["active", "suspended"]).default("active"),
+  addedAt: z.string().min(2)
+});
+
+export const cryptoTradeCreateSchema = z.object({
+  assetId: z.number().int().positive(),
+  userId: z.string().min(1),
+  side: z.enum(["buy", "sell"]),
+  amount: z.number().positive(),
+  price: z.number().positive(),
+  total: z.number().positive(),
+  status: z.enum(["completed", "pending", "cancelled"]).default("completed"),
+  executedAt: z.string().min(2)
+});
+
+export const deviceUpdateSchema = z.object({
+  trusted: z.boolean().optional(),
+  name: z.string().min(2).optional(),
+  type: z.enum(["mobile", "desktop", "browser"]).optional(),
+  os: z.string().min(2).optional(),
+  lastSeen: z.string().min(2).optional(),
+  location: z.string().min(2).optional()
+}).refine((value) => Object.keys(value).length > 0, {
+  message: "At least one field is required"
+});
+
+export const fraudUpdateSchema = z.object({
+  status: z.enum(["blocked", "reviewed", "cleared"]).optional(),
+  severity: z.enum(["high", "medium", "low"]).optional(),
+  description: z.string().min(2).optional()
+}).refine((value) => Object.keys(value).length > 0, {
+  message: "At least one field is required"
+});
+
+export const securitySettingsSchema = z.object({
+  twoFactorEnabled: z.boolean().optional(),
+  biometricEnabled: z.boolean().optional()
+}).refine((value) => Object.keys(value).length > 0, {
+  message: "At least one field is required"
+});
+
 export type TransferInput = z.infer<typeof transferSchema>;

@@ -28,6 +28,20 @@ Every business entity includes `tenant_id UUID NOT NULL`. RLS policies scope dat
 | support_tickets | id, status, user_id, tenant_id |
 | audit_logs | id, action, user_id, tenant_id |
 | financial_goals | id, target, progress, user_id, tenant_id |
+| appointments | id, user_id, location_name, time_slot, agenda, status, tenant_id |
+| support_messages | id, ticket_id, sender, message, tenant_id |
+| account_members | id, account_id, user_id, role, tenant_id |
+| investment_accounts | id, user_id, provider, account_name, balance, type, status, tenant_id |
+| crypto_assets | id, symbol, name, price, change_24h, tenant_id |
+| crypto_holdings | id, asset_id, user_id, balance, tenant_id |
+| crypto_trades | id, asset_id, user_id, side, amount, price, total, status, tenant_id |
+| wallet_cards | id, user_id, wallet_type, last4, brand, status, added_at, tenant_id |
+| wallet_activity | id, user_id, merchant, method, amount, category, occurred_at, tenant_id |
+| wallet_loyalty | id, user_id, program, points, tier, tenant_id |
+| credit_scores | id, user_id, score, provider, status, reported_at, tenant_id |
+| savings_rules | id, user_id, name, cadence, amount, target, status, tenant_id |
+| voice_commands | id, user_id, command, transcript, response, status, tenant_id |
+| chatbot_messages | id, session_id, user_id, role, message, tenant_id |
 
 ## Indexes
 
@@ -46,6 +60,8 @@ Every business entity includes `tenant_id UUID NOT NULL`. RLS policies scope dat
 - [2026-03-14 15:19] Wired frontend realtime subscriptions for `accounts`, `transactions`, `transfers`, and `insights` so Supabase `postgres_changes` events invalidate React Query caches in the primary balance and ledger views.
 - [2026-03-14 15:23] Wired the documents API to upload files into the Supabase Storage bucket `bank-documents` by default, using tenant-scoped object paths before persisting the resulting document URL in the `documents` table.
 - [2026-03-14 15:27] Added a server-side check-deposit analysis flow that persists uploaded check images to storage, writes a `documents` row, writes a `transactions` row with `pending` or `posted` status based on scan confidence, and only updates `accounts.balance` automatically when the simulated OCR result clears review.
+- [2026-03-14 21:24] Added `20260314170000_feature_completion.sql` to expand the schema with marketing, appointments, multi-user access, investments, crypto, wallet, credit score, savings automation, voice banking, and chatbot messaging tables plus security and fraud fields.
+- [2026-03-14 21:42] Applied `20260314170000_feature_completion.sql` to the live Supabase project.
 
 ## Follow-up Contract Fields
 
@@ -60,6 +76,10 @@ Every business entity includes `tenant_id UUID NOT NULL`. RLS policies scope dat
 - `customer_insights.title`, `customer_insights.score`, `customer_insights.summary`, `customer_insights.created_at`
 - `support_tickets.subject`, `support_tickets.message`, `support_tickets.created_at`
 - `sessions.status`, `sessions.created_at`
+- `profiles.two_factor_enabled`, `profiles.biometric_enabled`
+- `devices.name`, `devices.type`, `devices.os`, `devices.last_seen`, `devices.location`, `devices.trusted`, `devices.created_at`
+- `fraud_events.user_id`, `fraud_events.type`, `fraud_events.severity`, `fraud_events.description`, `fraud_events.status`, `fraud_events.location`, `fraud_events.ip`, `fraud_events.created_at`
+- `marketing_campaigns.name`, `marketing_campaigns.channel`, `marketing_campaigns.status`, `marketing_campaigns.audience`, `marketing_campaigns.sent`, `marketing_campaigns.opened`, `marketing_campaigns.clicked`, `marketing_campaigns.converted`, `marketing_campaigns.budget`, `marketing_campaigns.spent`, `marketing_campaigns.start_date`, `marketing_campaigns.end_date`, `marketing_campaigns.created_at`
 
 ## Long-tail Live Tables
 
@@ -68,3 +88,17 @@ Every business entity includes `tenant_id UUID NOT NULL`. RLS policies scope dat
 - `locations`
 - `open_connections`
 - `webhooks`
+- `appointments`
+- `support_messages`
+- `account_members`
+- `investment_accounts`
+- `crypto_assets`
+- `crypto_holdings`
+- `crypto_trades`
+- `wallet_cards`
+- `wallet_activity`
+- `wallet_loyalty`
+- `credit_scores`
+- `savings_rules`
+- `voice_commands`
+- `chatbot_messages`
