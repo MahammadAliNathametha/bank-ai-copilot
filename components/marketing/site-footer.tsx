@@ -47,7 +47,7 @@ export function SiteFooter() {
                 <ul className="space-y-2 text-sm font-semibold text-slate-300">
                   {col.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="transition hover:text-white">
+                      <Link href={link.href as never} className="transition hover:text-white">
                         {link.label}
                       </Link>
                     </li>

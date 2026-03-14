@@ -2,10 +2,10 @@
 
 import { useTenant } from "@/components/providers/tenant-provider";
 import { Sidebar } from "@/components/layout/sidebar";
-import { Bell, ChevronDown, CheckCircle2 } from "lucide-react";
+import { ChevronDown, CheckCircle2 } from "lucide-react";
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
-  const { tenant, isLoading } = useTenant();
+  const { isLoading } = useTenant();
 
   if (isLoading) {
     return (

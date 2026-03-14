@@ -35,7 +35,7 @@ export const transferSchema = z.object({
   fromId: z.number().int().positive(),
   toId: z.number().int().positive(),
   amount: z.number().positive(),
-  method: z.enum(["internal", "external", "ach"])
+  method: z.enum(["internal", "external", "ach", "fednow", "rtp"])
 });
 
 export const transactionFilterSchema = z.object({

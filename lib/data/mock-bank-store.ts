@@ -37,7 +37,7 @@ export type TransferRecord = {
   fromId: number;
   toId: number;
   amount: number;
-  method: "internal" | "external" | "ach";
+  method: "internal" | "external" | "ach" | "fednow" | "rtp";
   status: "queued" | "completed" | "cancelled";
   tenantId: string;
   createdAt: string;

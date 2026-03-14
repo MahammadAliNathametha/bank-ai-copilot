@@ -27,7 +27,7 @@ export function SiteHeader() {
           {navLinks.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={item.href as never}
               className="rounded-full px-4 py-2 text-sm font-bold tracking-tight text-slate-400 transition hover:bg-white/5 hover:text-white"
             >
               {item.label}

@@ -75,7 +75,7 @@ export function SupportVoiceInput() {
       </div>
 
       <p className="mt-4 text-[11px] text-slate-500 text-center font-medium leading-relaxed">
-        Say "Transfer $500 to Savings" or "Check my balance". 
+        Say &ldquo;Transfer $500 to Savings&rdquo; or &ldquo;Check my balance&rdquo;. 
         <br />
         <span className="text-primary/50">Mock logic parses intent via LLM stub.</span>
       </p>

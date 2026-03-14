@@ -1,7 +1,7 @@
 "use client";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ChevronDown, ArrowUp, ArrowDown, Activity, Box, Settings, SlidersHorizontal, Settings2 } from "lucide-react";
+import { Activity, Box, Settings, SlidersHorizontal, Settings2 } from "lucide-react";
 import { useSupabaseRealtime } from "@/hooks/use-supabase-realtime";
 import { apiRequest } from "@/lib/services/http";
 import type { AccountRecord } from "@/lib/data/mock-bank-store";
@@ -9,7 +9,7 @@ import type { AccountRecord } from "@/lib/data/mock-bank-store";
 export function DashboardOverview() {
   useSupabaseRealtime(["accounts"]);
 
-  const { data: accounts } = useSuspenseQuery({
+  useSuspenseQuery({
     queryKey: ["accounts"],
     queryFn: () => apiRequest<AccountRecord[]>("/api/accounts")
   });

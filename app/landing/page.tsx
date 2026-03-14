@@ -13,7 +13,7 @@ export const metadata = {
 export default function MarketingLandingPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader variant="dark" />
+      <SiteHeader />
       <section className="relative overflow-hidden bg-[linear-gradient(120deg,hsl(221_82%_18%),hsl(214_88%_32%)_50%,hsl(198_88%_34%))]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(56,189,248,0.35),transparent_38%),radial-gradient(circle_at_84%_28%,rgba(34,211,238,0.18),transparent_44%),radial-gradient(circle_at_50%_100%,rgba(2,132,199,0.25),transparent_55%)]" />
         <div className="pointer-events-none absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(circle_at_top,black,transparent_70%)]" />

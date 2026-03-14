@@ -77,7 +77,7 @@ export function TransfersWorkspace() {
         <Card className="space-y-5">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Initiate transfer</p>
-            <h2 className="mt-2 font-display text-3xl">Internal and ACH-ready form</h2>
+            <h2 className="mt-2 font-display text-3xl">Send via Internal, ACH, FedNow or RTP</h2>
           </div>
           <form className="space-y-4" onSubmit={form.handleSubmit((values) => mutation.mutate(values))}>
             <label className="block space-y-2">
@@ -109,9 +109,21 @@ export function TransfersWorkspace() {
               <select className="w-full rounded-2xl border border-white/10 bg-[#0a0a0a] px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all" {...form.register("method")}>
                 <option value="internal">Internal</option>
                 <option value="external">External</option>
-                <option value="ach">ACH</option>
+                <option value="ach">ACH (1-3 business days)</option>
+                <option value="fednow">⚡ FedNow — Instant (24/7)</option>
+                <option value="rtp">⚡ RTP — Real-Time Payments</option>
               </select>
             </label>
+            {(form.watch("method") === "fednow" || form.watch("method") === "rtp") && (
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-xs text-emerald-400 space-y-1">
+                <p className="font-semibold">⚡ Real-Time Payment Rail</p>
+                <p className="text-emerald-400/70">
+                  {form.watch("method") === "fednow"
+                    ? "FedNow settles in seconds, operates 24/7/365. Supported by the Federal Reserve."
+                    : "RTP by The Clearing House settles in seconds. Available to 60%+ of US DDAs."}
+                </p>
+              </div>
+            )}
             <Button className="w-full" type="submit" disabled={mutation.isPending}>
               {mutation.isPending ? "Submitting..." : "Submit transfer"}
             </Button>

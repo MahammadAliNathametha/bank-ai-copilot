@@ -26,7 +26,7 @@ export function SavingsLeaderboard() {
       </div>
 
       <div className="p-4 space-y-3">
-        {LEADERBOARD_DATA.map((item, i) => (
+        {LEADERBOARD_DATA.map((item) => (
           <div 
             key={item.name} 
             className={`flex items-center gap-4 p-4 rounded-2xl border transition-all ${
