@@ -52,9 +52,9 @@ test.describe("blink / flash detection", () => {
 
     // Within 8s we should see either the loading skeleton or the tenant header
     const tenantHeader = page.getByRole("heading", { level: 1 });
-    const skeleton = page.locator("[class*='animate-pulse']").first();
+    const skeleton = page.locator("main .animate-pulse").first();
 
-    await expect(tenantHeader.or(skeleton)).toBeVisible({ timeout: 8000 });
+    await expect(tenantHeader.or(skeleton).first()).toBeVisible({ timeout: 8000 });
 
     // Eventually the real header (tenant name) should appear
     await expect(tenantHeader).toContainText(/\w+/, { timeout: 10000 });

@@ -1,10 +1,16 @@
+import { z } from "zod";
+
 import { createChatbotMessage, listChatbotMessages } from "@/lib/data/banking-data";
-import { parseJson, withTenantRoute } from "@/lib/services/api";
+import { ApiError, parseJson, withTenantRoute } from "@/lib/services/api";
 import { chatbotMessageCreateSchema } from "@/lib/validations/banking";
 
 export async function GET(request: Request) {
   return withTenantRoute(request, async ({ tenantId, searchParams }) => {
-    const sessionId = searchParams.get("sessionId") ?? undefined;
+    const rawSessionId = searchParams.get("sessionId");
+    const sessionId = rawSessionId?.trim() ? rawSessionId.trim() : undefined;
+    if (sessionId && !z.string().uuid().safeParse(sessionId).success) {
+      throw new ApiError(400, "Invalid sessionId");
+    }
     return { data: await listChatbotMessages(tenantId, sessionId) };
   });
 }

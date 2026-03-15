@@ -1,9 +1,8 @@
 import { Suspense } from "react";
-
-import { BudgetWorkspace } from "@/components/budget/budget-workspace";
+import { BudgetWorkspace } from "@/components/finance/budget-workspace";
 import { PageFallback } from "@/components/dashboard/page-fallback";
 
-export const metadata = { title: "Budget" };
+export const metadata = { title: "Budgets & Spending" };
 
 export default function BudgetPage() {
   return (

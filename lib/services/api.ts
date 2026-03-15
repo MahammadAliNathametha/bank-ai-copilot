@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { ZodError, type ZodSchema } from "zod";
 
 import { resolveTenantFromHeaders, type ResolvedTenant } from "@/lib/services/tenant";
+import { logAuditEvent } from "@/lib/services/audit";
 
 export class ApiError extends Error {
   status: number;
@@ -28,9 +29,21 @@ export async function withTenantRoute(
   request: Request,
   handler: (context: TenantRouteContext) => Promise<RouteResult | unknown>
 ) {
-  const tenant = await resolveTenantFromHeaders(request.headers);
+  const url = new URL(request.url);
+  const action = `${request.method} ${url.pathname}`;
+  const details = {
+    method: request.method,
+    path: url.pathname,
+    query: url.searchParams.toString()
+  };
+  const userId = request.headers.get("x-user-id");
 
   try {
+    const tenant = await resolveTenantFromHeaders(request.headers);
+    if (!tenant) {
+      throw new ApiError(400, "Tenant context missing");
+    }
+
     const result = await handler({
       request,
       tenant,
@@ -38,7 +51,17 @@ export async function withTenantRoute(
       searchParams: new URL(request.url).searchParams
     });
 
+    if (result instanceof NextResponse) {
+      return result;
+    }
+
     const normalized = normalizeRouteResult(result);
+    await logAuditEvent({
+      tenantId: tenant.id,
+      action,
+      userId,
+      details
+    });
     return NextResponse.json(
       {
         success: true,
@@ -48,7 +71,18 @@ export async function withTenantRoute(
       { status: normalized.status }
     );
   } catch (error) {
-    return handleRouteError(error, tenant.id);
+    // We try to log the audit event if we can resolve the tenant
+    const fallbackTenant = await resolveTenantFromHeaders(request.headers).catch(() => null);
+    if (fallbackTenant) {
+      await logAuditEvent({
+        tenantId: fallbackTenant.id,
+        action: `error:${action}`,
+        userId,
+        details: { ...details, message: error instanceof Error ? error.message : String(error) }
+      }).catch(() => {});
+    }
+    
+    return handleRouteError(error, fallbackTenant?.id ?? "unknown");
   }
 }
 

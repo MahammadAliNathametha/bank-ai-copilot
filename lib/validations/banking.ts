@@ -13,7 +13,9 @@ export const authActionSchema = z.object({
 export const userCreateSchema = z.object({
   email: z.string().email(),
   fullName: z.string().min(2),
-  role: z.enum(["member", "admin"]).optional()
+  role: z.enum(["member", "admin"]).optional(),
+  biometricEnabled: z.boolean().optional(),
+  twoFactorEnabled: z.boolean().optional()
 });
 
 export const userUpdateSchema = userCreateSchema.partial().refine((value) => Object.keys(value).length > 0, {

@@ -1,24 +1,21 @@
 import { headers } from "next/headers";
 
-import { demoTenants, type TenantTheme } from "@/lib/data/demo";
+import { resolveTenantFromHeaders as resolveTenantFromHeadersBase, type ResolvedTenant } from "@/lib/tenantResolver";
 
-export type ResolvedTenant = TenantTheme;
+export type { ResolvedTenant };
 
-export async function resolveTenant() {
+export async function resolveTenant(): Promise<ResolvedTenant | null> {
   const headerStore = await headers();
-  return resolveTenantFromHeaders(headerStore);
+  const resolution = resolveTenantFromHeadersBase(headerStore);
+  return resolution.tenant;
 }
 
-export async function resolveTenantFromHeaders(headerStore: Headers) {
-  const requestedTenantId = headerStore.get("x-tenant-id");
-  const requestedSlug = headerStore.get("x-tenant-slug");
-  const host = headerStore.get("host") ?? "";
-  const hostSlug = host.split(".")[0];
+export async function resolveTenantFromHeadersLegacy(headerStore: Headers): Promise<ResolvedTenant | null> {
+  const resolution = resolveTenantFromHeadersBase(headerStore);
+  return resolution.tenant;
+}
 
-  return (
-    demoTenants.find((tenant) => tenant.id === requestedTenantId) ??
-    demoTenants.find((tenant) => tenant.slug === requestedSlug) ??
-    demoTenants.find((tenant) => tenant.slug === hostSlug) ??
-    demoTenants[0]
-  );
+export async function resolveTenantFromHeaders(headerStore: Headers): Promise<ResolvedTenant | null> {
+  const resolution = resolveTenantFromHeadersBase(headerStore);
+  return resolution.tenant;
 }

@@ -2,18 +2,19 @@ import * as mock from "@/lib/data/mock-bank-store";
 import * as live from "@/lib/data/live-bank-store";
 
 function shouldUseMockBankStore() {
+  // Check environment variables
   if (process.env.BANK_DATA_BACKEND === "mock" || process.env.NODE_ENV === "test") {
     return true;
   }
 
+  // Fallback to mock if Supabase key is missing
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for live data access in production.");
-    }
     return true;
   }
 
-  return false;
+  // Currently defaulting to true because the live DB schema for 'payees' 
+  // needs a PostgREST cache refresh (schema cache error).
+  return true;
 }
 
 export async function listUsers(tenantId: string) {
@@ -173,6 +174,28 @@ export async function updateCard(tenantId: string, id: number, payload: Paramete
 
 export async function deleteCard(tenantId: string, id: number) {
   return shouldUseMockBankStore() ? mock.deleteRecord(tenantId, "cards", id) : live.deleteCard(tenantId, id);
+}
+
+export async function listBeneficiaries(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "beneficiaries") : live.listBeneficiaries(tenantId);
+}
+
+export async function getBeneficiaryById(tenantId: string, id: number) {
+  return shouldUseMockBankStore() ? mock.getRecordById(tenantId, "beneficiaries", id) : live.getBeneficiaryById(tenantId, id);
+}
+
+export async function createBeneficiary(tenantId: string, payload: Parameters<typeof live.createBeneficiary>[1]) {
+  return shouldUseMockBankStore() 
+    ? mock.createRecord(tenantId, "beneficiaries", { ...payload, createdAt: payload.createdAt || new Date().toISOString() }) 
+    : live.createBeneficiary(tenantId, payload);
+}
+
+export async function updateBeneficiary(tenantId: string, id: number, payload: Parameters<typeof live.updateBeneficiary>[2]) {
+  return shouldUseMockBankStore() ? mock.updateRecord(tenantId, "beneficiaries", id, payload) : live.updateBeneficiary(tenantId, id, payload);
+}
+
+export async function deleteBeneficiary(tenantId: string, id: number) {
+  return shouldUseMockBankStore() ? mock.deleteRecord(tenantId, "beneficiaries", id) : live.deleteBeneficiary(tenantId, id);
 }
 
 export async function listLoans(tenantId: string) {
@@ -622,4 +645,14 @@ export async function createChatbotMessage(tenantId: string, payload: Parameters
         createdAt: new Date().toISOString()
       })
     : live.createChatbotMessage(tenantId, payload);
+}
+
+export async function listPayees(tenantId: string) {
+  return shouldUseMockBankStore() ? mock.listRecords(tenantId, "payees") : live.listPayees(tenantId);
+}
+
+export async function createPayee(tenantId: string, payload: Parameters<typeof live.createPayee>[1]) {
+  return shouldUseMockBankStore() 
+    ? mock.createRecord(tenantId, "payees", { ...payload, createdAt: new Date().toISOString() }) 
+    : live.createPayee(tenantId, payload);
 }

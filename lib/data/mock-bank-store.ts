@@ -135,6 +135,16 @@ export type AdminMetricRecord = {
   createdAt: string;
 };
 
+export type PayeeRecord = {
+  id: number;
+  name: string;
+  accountNumber?: string;
+  routingNumber?: string;
+  userId: string;
+  tenantId: string;
+  createdAt: string;
+};
+
 export type SupportTicketRecord = {
   id: number;
   userId: string;
@@ -209,6 +219,15 @@ export type FraudEventRecord = {
   ip: string;
   tenantId: string;
   createdAt: string;
+};
+
+export type AuditLogRecord = {
+  id: number;
+  action: string;
+  userId: string | null;
+  tenantId: string;
+  createdAt: string;
+  details?: Record<string, unknown> | null;
 };
 
 export type MarketingCampaignRecord = {
@@ -413,6 +432,7 @@ export type TenantStore = {
   beneficiaries: BeneficiaryRecord[];
   devices: DeviceRecord[];
   fraudEvents: FraudEventRecord[];
+  auditLogs: AuditLogRecord[];
   marketingCampaigns: MarketingCampaignRecord[];
   appointments: AppointmentRecord[];
   supportMessages: SupportMessageRecord[];
@@ -428,6 +448,7 @@ export type TenantStore = {
   savingsRules: SavingsRuleRecord[];
   voiceCommands: VoiceCommandRecord[];
   chatbotMessages: ChatbotMessageRecord[];
+  payees: PayeeRecord[];
   counters: Record<string, number>;
 };
 
@@ -521,6 +542,7 @@ function createTenantStore(tenantId: string, tenantName: string): TenantStore {
     fraudEvents: [
       { id: 1, userId: primaryUserId, type: "Unusual login attempt", severity: "high", description: "Login attempt from London, UK blocked — location mismatch.", status: "blocked", location: "London, UK", ip: "85.14.***", tenantId, createdAt: now() }
     ],
+    auditLogs: [],
     marketingCampaigns: [
       { id: 1, name: "Spring Savings Promo", channel: "push", status: "active", audience: 12450, sent: 11800, opened: 4720, clicked: 1890, converted: 378, budget: 5000, spent: 3200, startDate: "2026-03-01", endDate: "2026-03-31", tenantId, createdAt: now() },
       { id: 2, name: "Credit Card Upgrade", channel: "email", status: "active", audience: 8300, sent: 8300, opened: 3320, clicked: 1162, converted: 245, budget: 3000, spent: 1500, startDate: "2026-03-05", endDate: "2026-04-05", tenantId, createdAt: now() }
@@ -554,7 +576,7 @@ function createTenantStore(tenantId: string, tenantName: string): TenantStore {
     ],
     walletActivity: [
       { id: 1, userId: primaryUserId, merchant: "Starbucks", method: "Apple Pay", amount: -5.75, category: "Food & Drink", occurredAt: "2026-03-14T08:32:00.000Z", tenantId, createdAt: now() },
-      { id: 2, userId: primaryUserId, merchant: "Uber", method: "Google Pay", amount: -23.40, category: "Transport", occurredAt: "2026-03-14T07:15:00.000Z", tenantId, createdAt: now() }
+      { id: 2, userId: primaryUserId, merchant: "Uber", method: "Google Pay", amount: -23.4, category: "Transport", occurredAt: "2026-03-14T07:15:00.000Z", tenantId, createdAt: now() }
     ],
     walletLoyalty: [
       { id: 1, userId: primaryUserId, program: "Delta SkyMiles", points: 42850, tier: "Gold", tenantId, createdAt: now() },
@@ -572,6 +594,7 @@ function createTenantStore(tenantId: string, tenantName: string): TenantStore {
     chatbotMessages: [
       { id: 1, sessionId: `${tenantId}-chat-1`, userId: primaryUserId, role: "assistant", message: "Welcome back! How can I help?", tenantId, createdAt: now() }
     ],
+    payees: [],
     counters: {
       accounts: 2,
       transactions: 5,
@@ -592,6 +615,7 @@ function createTenantStore(tenantId: string, tenantName: string): TenantStore {
       beneficiaries: 1,
       devices: 2,
       fraudEvents: 1,
+      auditLogs: 0,
       marketingCampaigns: 2,
       appointments: 1,
       supportMessages: 2,
@@ -606,7 +630,8 @@ function createTenantStore(tenantId: string, tenantName: string): TenantStore {
       creditScores: 1,
       savingsRules: 1,
       voiceCommands: 1,
-      chatbotMessages: 1
+      chatbotMessages: 1,
+      payees: 0
     }
   };
 }
@@ -738,6 +763,10 @@ export function findPrimaryUserId(tenantId: string) {
 
 export function runTransfer(tenantId: string, input: Omit<TransferRecord, "id" | "tenantId" | "status" | "createdAt">) {
   const store = getTenantStore(tenantId);
+  if (input.fromId === input.toId) {
+    throw new ApiError(400, "Cannot transfer to the same account");
+  }
+
   const fromAccount = store.accounts.find((account) => account.id === input.fromId);
   const toAccount = store.accounts.find((account) => account.id === input.toId);
 

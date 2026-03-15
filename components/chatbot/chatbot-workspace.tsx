@@ -48,7 +48,21 @@ export function ChatbotWorkspace() {
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [voiceResponse, setVoiceResponse] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const sessionIdRef = useRef<string>("tenant-chat-1");
+  const [sessionId] = useState(() => {
+    if (typeof window === "undefined") {
+      return "00000000-0000-0000-0000-000000000001";
+    }
+    const cached = window.sessionStorage.getItem("chatbot-session-id");
+    if (cached) {
+      return cached;
+    }
+    const nextId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : "00000000-0000-0000-0000-000000000001";
+    window.sessionStorage.setItem("chatbot-session-id", nextId);
+    return nextId;
+  });
 
   const { data: insights } = useSuspenseQuery({
     queryKey: ["insights", "chatbot"],
@@ -63,8 +77,8 @@ export function ChatbotWorkspace() {
     queryFn: () => apiRequest<VoiceCommandRecord[]>("/api/voice")
   });
   const { data: messages } = useSuspenseQuery({
-    queryKey: ["chatbot", sessionIdRef.current],
-    queryFn: () => apiRequest<ChatbotMessageRecord[]>(`/api/chatbot?sessionId=${sessionIdRef.current}`)
+    queryKey: ["chatbot", sessionId],
+    queryFn: () => apiRequest<ChatbotMessageRecord[]>(`/api/chatbot?sessionId=${sessionId}`)
   });
 
   const form = useForm<ChatbotFormValues>({
@@ -106,30 +120,30 @@ export function ChatbotWorkspace() {
       void apiRequest<ChatbotMessageRecord>("/api/chatbot", {
         method: "POST",
         body: JSON.stringify({
-          sessionId: sessionIdRef.current,
+          sessionId,
           userId: "11111111-1111-1111-1111-111111111112",
           role: "assistant",
           message: response
         })
       }).then(() => {
-        void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionIdRef.current] });
+        void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionId] });
       });
     }, 800);
 
     void apiRequest<ChatbotMessageRecord>("/api/chatbot", {
       method: "POST",
       body: JSON.stringify({
-        sessionId: sessionIdRef.current,
+        sessionId,
         userId: "11111111-1111-1111-1111-111111111112",
         role: "user",
         message: text
       })
     }).then(() => {
-      void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionIdRef.current] });
+      void queryClient.invalidateQueries({ queryKey: ["chatbot", sessionId] });
     });
 
     form.setValue("question", "");
-  }, [form, insights, queryClient]);
+  }, [form, insights, queryClient, sessionId]);
 
   const handleVoiceCommand = useCallback(() => {
     if (voiceState === "idle") {

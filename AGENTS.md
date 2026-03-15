@@ -1,4 +1,5 @@
 # AGENTS.md
+
 > Living instruction file for Codex and all sub-agents in this repository.
 > Read this file fully before starting any task. Update `/doc` files as you work.
 > Last section: Escalation rules — read before stopping on any blocker.
@@ -9,17 +10,18 @@
 
 Before starting any task, read the following files in `/doc/` to understand current project state:
 
-| File | Purpose |
-|---|---|
-| `/doc/PRD.md` | Product requirements and feature specs |
-| `/doc/TASKS.md` | Master task list with status (`[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked) |
-| `/doc/PROGRESS.md` | Timestamped log of completions per session |
-| `/doc/BLOCKERS.md` | Open blockers requiring human input — check before starting |
-| `/doc/CHANGELOG.md` | All significant code or schema changes per session |
-| `/doc/DECISIONS.md` | Architecture and design decisions + reasoning |
-| `/doc/SCHEMA.md` | Supabase table schemas, RLS policies, migration history |
+| File                | Purpose                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `/doc/PRD.md`       | Product requirements and feature specs                                                  |
+| `/doc/TASKS.md`     | Master task list with status (`[ ]` todo, `[x]` done, `[~]` in-progress, `[!]` blocked) |
+| `/doc/PROGRESS.md`  | Timestamped log of completions per session                                              |
+| `/doc/BLOCKERS.md`  | Open blockers requiring human input — check before starting                             |
+| `/doc/CHANGELOG.md` | All significant code or schema changes per session                                      |
+| `/doc/DECISIONS.md` | Architecture and design decisions + reasoning                                           |
+| `/doc/SCHEMA.md`    | Supabase table schemas, RLS policies, migration history                                 |
 
 **After completing any task:**
+
 1. Mark it `[x]` in `TASKS.md` with timestamp
 2. Append a one-line entry to `PROGRESS.md`: `[YYYY-MM-DD HH:MM] <agent> — <what was done>`
 3. Update `CHANGELOG.md` if code or schema changed
@@ -28,6 +30,7 @@ Before starting any task, read the following files in `/doc/` to understand curr
 **If `/doc` does not exist**, create the folder and stub all files above before writing any code.
 
 **New session start prompt** (paste this at the start of every new Codex session):
+
 ```
 Read /doc/TASKS.md, /doc/PROGRESS.md, and /doc/BLOCKERS.md.
 Summarise where we left off, what is in progress, and what is blocked.
@@ -43,6 +46,7 @@ This project uses a **coordinator + specialist subagent** model. The root Codex 
 ### Enabling Multi-Agent in Codex
 
 Add to `~/.codex/config.toml`:
+
 ```toml
 [experimental]
 multi_agent = true
@@ -129,6 +133,7 @@ allow_implicit_invocation: true
 [Full step-by-step instructions — only loaded into context when this skill is triggered]
 
 ## When to load references/
+
 Only load `references/component-patterns.md` when creating a new reusable component.
 Only load `references/tailwind-conventions.md` when the user asks about spacing or tokens.
 ```
@@ -139,7 +144,7 @@ Only load `references/tailwind-conventions.md` when the user asks about spacing 
 name: frontend-design
 description: Specialist for Next.js UI, Tailwind CSS, and shadcn/ui component work.
 invocation:
-  policy: implicit        # auto-triggered when task matches description
+  policy: implicit # auto-triggered when task matches description
 tools:
   - type: file_read
   - type: file_write
@@ -156,14 +161,16 @@ Set `policy: explicit` for skills that should only run when `$skill-name` is typ
 **Implicit invocation**: Codex auto-selects the skill when the task matches its description
 **List available skills**: run `/skills` in the Codex CLI
 
-| Skill | Invoke With | Auto-triggers On | Writes To |
-|---|---|---|---|
-| `$frontend-design` | `$frontend-design build the dashboard` | Any UI, page, component, or styling task | `app/`, `components/` |
-| `$db-migration` | `$db-migration add user_profiles table` | New tables, schema changes, RLS policies | `supabase/migrations/`, `/doc/SCHEMA.md` |
-| `$api-endpoint` | `$api-endpoint create POST /api/invite` | New API route, Server Action, data mutation | `app/api/`, `app/actions/` |
-| `$agent-browser` | `$agent-browser test the login flow` | After any frontend change | `tests/e2e/` |
-| `$pr-review` | `$pr-review` | Explicit only — when work is ready to commit | `/doc/CHANGELOG.md` review entry |
-| `$new-session` | `$new-session` | Start of every new Codex session | Reads `/doc`, outputs state summary |
+| Skill                     | Invoke With                                | Auto-triggers On                              | Writes To                               |
+| ------------------------- | ------------------------------------------ | --------------------------------------------- | --------------------------------------- |
+| `$frontend-design`        | `$frontend-design build the dashboard`     | Any UI, page, component, or styling task      | `app/`, `components/`                   |
+| `$fintech-dashboard`      | `$fintech-dashboard create savings chart`  | Banking components, financial data            | `components/`, `app/`                   |
+| `$agent-browser`          | `$agent-browser test the login flow`       | After any frontend change                     | `tests/e2e/`                            |
+| `$tailwind-design-system` | `$tailwind-design-system add color token`  | CSS variables, design tokens, Tailwind config | `tailwind.config.ts`, `app/globals.css` |
+| `$react-best-practices`   | `$react-best-practices optimize hydration` | React performance, Next.js optimization       | `app/`, `components/`                   |
+| `$writing-clearly`        | `$writing-clearly fix PR description`      | Documentation, commit messages, PRs           | `/doc/`, `README.md`                    |
+| `$problem-solving`        | `$problem-solving decompose task`          | Complex planning, logic hurdles               | `task.md`, `implementation_plan.md`     |
+| `$debugging`              | `$debugging trace RLS issue`               | Debugging sessions, troubleshooting           | `dev.log`, `BLOCKERS.md`                |
 
 ---
 
@@ -220,6 +227,7 @@ Every subagent must write a **handoff record** to `/doc/PROGRESS.md` before retu
 ### Handoff Verification Script
 
 The coordinator runs this before each handoff gate:
+
 ```bash
 # Verify handoff deliverables exist
 for file in "$@"; do
@@ -232,21 +240,21 @@ echo "All deliverables verified."
 
 ## 🏗️ Tech Stack (Canonical — Do Not Deviate)
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 15 (App Router, Turbopack) |
-| Language | TypeScript 5 — strict mode, no `any` |
-| Database + Auth | Supabase (Postgres, RLS, SSR auth) |
-| Styling | Tailwind CSS v3 — mobile-first |
-| Components | shadcn/ui + Radix UI primitives |
-| Forms | React Hook Form + Zod |
-| Server state | TanStack Query v5 |
-| URL state | `nuqs` |
-| Package manager | `pnpm` — never npm or yarn |
-| Deployment | Vercel (Edge middleware, Node runtime for heavy routes) |
-| Testing (unit) | Vitest |
-| Testing (E2E) | Playwright via `$agent-browser` |
-| Schema validation | Zod — define first, infer TS types with `z.infer<>` |
+| Layer             | Technology                                              |
+| ----------------- | ------------------------------------------------------- |
+| Framework         | Next.js 15 (App Router, Turbopack)                      |
+| Language          | TypeScript 5 — strict mode, no `any`                    |
+| Database + Auth   | Supabase (Postgres, RLS, SSR auth)                      |
+| Styling           | Tailwind CSS v3 — mobile-first                          |
+| Components        | shadcn/ui + Radix UI primitives                         |
+| Forms             | React Hook Form + Zod                                   |
+| Server state      | TanStack Query v5                                       |
+| URL state         | `nuqs`                                                  |
+| Package manager   | `pnpm` — never npm or yarn                              |
+| Deployment        | Vercel (Edge middleware, Node runtime for heavy routes) |
+| Testing (unit)    | Vitest                                                  |
+| Testing (E2E)     | Playwright via `$agent-browser`                         |
+| Schema validation | Zod — define first, infer TS types with `z.infer<>`     |
 
 ---
 
@@ -352,6 +360,7 @@ echo "All deliverables verified."
 ## ✅ Testing Standards
 
 ### Unit Tests (Vitest) — `$tester`
+
 - Co-locate: `[name].test.ts`
 - Run: `pnpm test`
 - Cover: utilities, Zod schemas, Server Actions, API handlers
@@ -359,12 +368,14 @@ echo "All deliverables verified."
 - Use local Supabase — not manual mocks
 
 ### E2E Tests (Playwright) — `$agent-browser`
+
 - Specs in `tests/e2e/`
 - Run: `pnpm test:e2e`
 - Cover: auth flows, critical journeys, form submissions
 - Requires `supabase start` (Docker) before running
 
 ### Pre-commit Checks (all must pass)
+
 ```bash
 pnpm lint        # ESLint
 pnpm typecheck   # tsc --noEmit
@@ -376,6 +387,7 @@ pnpm test        # Vitest
 ## 🌿 Git Conventions
 
 ### Conventional Commits
+
 ```
 <type>(<scope>): <description>
 
@@ -390,6 +402,7 @@ docs(doc): update TASKS.md — milestone 2 complete
 ```
 
 ### Branch Naming
+
 ```
 feat/<short-description>
 fix/<short-description>
@@ -410,29 +423,29 @@ chore/<short-description>
 
 ## ⚙️ State Management
 
-| State type | Solution |
-|---|---|
-| Server / async data | TanStack Query v5 |
-| URL / filter params | `nuqs` |
-| Local UI state | `useState` / `useReducer` |
-| Global client state | Zustand (use sparingly) |
-| Form state | React Hook Form |
+| State type          | Solution                  |
+| ------------------- | ------------------------- |
+| Server / async data | TanStack Query v5         |
+| URL / filter params | `nuqs`                    |
+| Local UI state      | `useState` / `useReducer` |
+| Global client state | Zustand (use sparingly)   |
+| Form state          | React Hook Form           |
 
 ---
 
 ## 🚫 Anti-Patterns
 
-| Never | Instead |
-|---|---|
-| Use `any` | `unknown` + Zod narrowing |
-| Fetch in `useEffect` for initial data | RSC or TanStack Query |
-| Service role key in client code | Server Actions / API routes only |
-| Skip RLS on any table | Enable RLS everywhere |
-| Use `npm` or `yarn` | Always `pnpm` |
-| Leave TODO comments in code | Create a task in `TASKS.md` |
-| Coordinator writes UI code directly | Spawn `$frontend-design` |
-| Skip handoff record | Write to `/doc/PROGRESS.md` first |
-| Guess past a blocker | Log to `BLOCKERS.md`, stop, surface to human |
+| Never                                  | Instead                                             |
+| -------------------------------------- | --------------------------------------------------- |
+| Use `any`                              | `unknown` + Zod narrowing                           |
+| Fetch in `useEffect` for initial data  | RSC or TanStack Query                               |
+| Service role key in client code        | Server Actions / API routes only                    |
+| Skip RLS on any table                  | Enable RLS everywhere                               |
+| Use `npm` or `yarn`                    | Always `pnpm`                                       |
+| Leave TODO comments in code            | Create a task in `TASKS.md`                         |
+| Coordinator writes UI code directly    | Spawn `$frontend-design`                            |
+| Skip handoff record                    | Write to `/doc/PROGRESS.md` first                   |
+| Guess past a blocker                   | Log to `BLOCKERS.md`, stop, surface to human        |
 | Proceed without verifying deliverables | Run handoff verification before spawning next agent |
 
 ---
@@ -440,6 +453,7 @@ chore/<short-description>
 ## 🆘 Escalation Rules
 
 Stop and log to `/doc/BLOCKERS.md` when:
+
 - Requirements in `PRD.md` are ambiguous
 - A test failure cannot be resolved within the current task
 - A migration would conflict with existing schema
@@ -447,6 +461,7 @@ Stop and log to `/doc/BLOCKERS.md` when:
 - A subagent deliverable is absent after expected completion
 
 ### Blocker Entry Format
+
 ```
 [YYYY-MM-DD] BLOCKER — <agent that hit it>
 Problem:   <what failed or is unclear>

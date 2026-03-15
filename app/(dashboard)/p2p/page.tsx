@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-
-import { PageFallback } from "@/components/dashboard/page-fallback";
 import { P2PWorkspace } from "@/components/payments/p2p-workspace";
+import { PageFallback } from "@/components/dashboard/page-fallback";
 
 export const metadata = { title: "P2P Payments" };
 

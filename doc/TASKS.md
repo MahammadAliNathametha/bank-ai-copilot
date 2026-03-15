@@ -1,25 +1,41 @@
-# TASKS
+# Bank AI Copilot Tasks
 
-- [x] [2026-03-14 00:00] Bootstrap `/doc` context files from AGENTS.md requirements
-- [x] [2026-03-14 00:00] Generate Next.js white-label banking SaaS project structure from `banking-blueprint.task.md`
-- [x] [2026-03-14 12:40] Implement tenant-safe CRUD routes for all 16 API groups
-- [x] [2026-03-14 12:52] Finalize all dashboard and feature pages against MVP scope
-- [x] [2026-03-14 13:53] Wire Supabase auth, storage, realtime, and RLS in a live environment
-- [x] [2026-03-14 12:40] Reach green `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build`
-- [x] [2026-03-14 14:09] Replace core dashboard banking APIs with live Supabase-backed persistence and seed data
-- [x] [2026-03-14 14:32] Replace the remaining mock-backed API routes with live Supabase resources
-- [x] [2026-03-14 14:38] Replace placeholder pages for documents, alerts, loans, and locations with live workspaces
-- [x] [2026-03-14 14:41] Replace placeholder pages for cards, statements, p2p, and admin analytics/metrics with live workspaces
-- [x] [2026-03-14 14:44] Replace placeholder pages for tax, credit, savings, and appointments with live workspaces
-- [x] [2026-03-14 14:48] Replace placeholder pages for budget, onboard, and check deposit with live workspaces
-- [x] [2026-03-14 14:51] Replace the remaining lower-priority shell pages with live workspaces
-- [x] [2026-03-14 15:10] Replace the last route-level shell pages for finance, AI insights, signup, and setup-bank with working workspaces
-- [x] [2026-03-14 15:16] Replace the stubbed admin migration route with a real migration-status endpoint and admin readiness UI
-- [x] [2026-03-14 15:19] Add Supabase realtime invalidation for balance and ledger-heavy dashboard views
-- [x] [2026-03-14 15:23] Add Supabase Storage-backed document uploads for documents and check deposit flows
-- [x] [2026-03-14 15:27] Add OCR-style check review analysis and move check deposit orchestration behind a dedicated API route
-- [x] [2026-03-14 15:33] Redesign the shared dashboard shell and overview UI with a stronger visual system
-- [x] [2026-03-14 15:35] Add `OPENAI_API_KEY` to local environment scaffolding without storing a pasted secret
-- [x] [2026-03-14 15:41] Switch the global Codex CLI default model back to `gpt-5.3-codex`
-- [x] [2026-03-14 21:24] Complete remaining partial features and refresh the feature coverage report
-- [x] [2026-03-14 22:12] Upgrade Next.js to a patched release and rerun lint/typecheck/tests/build
+## Phase 1: Core SaaS Infrastructure (Done)
+
+- [x] Next.js + Tailwind + Supabase initialization
+- [x] Multi-tenant middleware & tenant resolution
+- [x] Database Schema with RLS and 20+ entities
+- [x] Authentication & Profile auto-assignment
+
+## Phase 2: Retail Banking Workspaces (Done)
+
+- [x] Dashboard with real-time balance
+- [x] Transfers (Internal/External/ACH)
+- [x] Bill Pay & Payee management
+- [x] Transactions search/filter/CSV export
+- [x] Mobile Check Deposit with OCR Mock
+- [x] Security & Device Management
+- [x] Statements center & PDF generation (jsPDF)
+
+## Phase 3: Advanced & Innovative Features (Done)
+
+- [x] Personal Finance (Insights, Goals, Health Score)
+- [x] P2P Payments (BlinkPay™ instant rails)
+- [x] Business Banking Suite
+- [x] Tax Center (1099 projections)
+- [x] Investment & Crypto view
+- [x] Innovative Idea: Carbon Footprint Tracking
+- [x] Innovative Idea: Gamified Savings Challenges
+- [x] Innovative Idea: AI Financial Health Scoring
+
+## Phase 4: Admin & Platform (Done)
+
+- [x] Admin SaaS Dashboard (MAU, MRR, Churn)
+- [x] Bank Setup console (White-label branding)
+- [x] Platform Migration API
+
+## Phase 5: Verification (Done)
+
+- [x] Playwright E2E Suite
+- [x] Linting & Strict TypeScript compliance
+- [x] verify.sh full system check

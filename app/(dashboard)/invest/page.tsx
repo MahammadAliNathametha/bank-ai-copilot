@@ -1,14 +1,7 @@
 import { Suspense } from "react";
-
+import { InvestWorkspace } from "@/components/finance/invest-workspace";
 import { PageFallback } from "@/components/dashboard/page-fallback";
-import { InvestWorkspace } from "@/components/invest/invest-workspace";
-
-export const metadata = { title: "Invest" };
-
+export const metadata = { title: "Investments" };
 export default function InvestPage() {
-  return (
-    <Suspense fallback={<PageFallback />}>
-      <InvestWorkspace />
-    </Suspense>
-  );
+  return <Suspense fallback={<PageFallback />}><InvestWorkspace /></Suspense>;
 }

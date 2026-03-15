@@ -1,4 +1,4 @@
-import { getTenantStore, createRecord, deleteRecord } from "@/lib/data/mock-bank-store";
+import { listBeneficiaries, createBeneficiary, deleteBeneficiary, listUsers } from "@/lib/data/banking-data";
 import { parseJson, withTenantRoute } from "@/lib/services/api";
 import { z } from "zod";
 
@@ -11,17 +11,18 @@ const beneficiarySchema = z.object({
 
 export async function GET(request: Request) {
   return withTenantRoute(request, async ({ tenantId }) => {
-    const store = getTenantStore(tenantId);
-    return { data: store.beneficiaries };
+    const data = await listBeneficiaries(tenantId);
+    return { data };
   });
 }
 
 export async function POST(request: Request) {
   return withTenantRoute(request, async ({ tenantId }) => {
     const input = await parseJson(request, beneficiarySchema);
-    const userId = getTenantStore(tenantId).users[0]?.id; // Default to first user
+    const users = await listUsers(tenantId);
+    const userId = users[0]?.id;
 
-    const beneficiary = createRecord(tenantId, "beneficiaries", {
+    const beneficiary = await createBeneficiary(tenantId, {
       ...input,
       userId,
       createdAt: new Date().toISOString()
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   return withTenantRoute(request, async ({ tenantId, searchParams }) => {
     const id = parseInt(searchParams.get("id") || "0");
-    const result = deleteRecord(tenantId, "beneficiaries", id);
+    const result = await deleteBeneficiary(tenantId, id);
     return { data: result };
   });
 }

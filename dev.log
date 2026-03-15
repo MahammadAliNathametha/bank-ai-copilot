@@ -1,0 +1,2753 @@
+
+> bank-ai-copilot@1.0.0 dev /home/bacancy/Desktop/projects/bank-ai-copilot
+> next dev
+
+   ▲ Next.js 15.5.9
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.10:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.3s
+ ✓ Compiled /middleware in 315ms (117 modules)
+ ○ Compiling / ...
+ ✓ Compiled / in 5.1s (739 modules)
+ GET / 200 in 6533ms
+ ○ Compiling /api/observability/metrics ...
+ ✓ Compiled /api/observability/metrics in 2.9s (808 modules)
+ GET /api/tenant 200 in 3574ms
+ GET / 200 in 476ms
+ POST /api/observability/metrics 200 in 6329ms
+ ○ Compiling /signup ...
+ ✓ Compiled /signup in 3.3s (846 modules)
+ GET /signup 200 in 5124ms
+ GET /api/tenant 200 in 258ms
+ POST /api/observability/metrics 200 in 2832ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 1490ms (851 modules)
+ GET /login 200 in 3181ms
+ GET /api/tenant 200 in 256ms
+ POST /api/observability/metrics 200 in 1965ms
+ GET / 200 in 555ms
+ GET /api/tenant 200 in 124ms
+ POST /api/observability/metrics 200 in 2201ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 3.7s (1080 modules)
+ GET /dashboard 200 in 4506ms
+ ○ Compiling /api/accounts ...
+ ✓ Compiled /api/accounts in 2.3s (1085 modules)
+ GET /api/accounts 200 in 3951ms
+ POST /api/observability/metrics 200 in 3888ms
+ GET / 200 in 924ms
+ ○ Compiling /transfers ...
+ ✓ Compiled /transfers in 2.8s (1097 modules)
+ GET /transfers 200 in 4097ms
+ GET /api/tenant 200 in 297ms
+ GET /api/accounts 200 in 977ms
+ POST /api/observability/metrics 200 in 1668ms
+ ○ Compiling /api/transfers ...
+ ✓ Compiled /api/transfers in 1638ms (1099 modules)
+ GET /api/transfers 200 in 2986ms
+ ○ Compiling /accounts ...
+ ✓ Compiled /accounts in 2.4s (1107 modules)
+ GET /accounts 200 in 5119ms
+ GET /api/tenant 200 in 172ms
+ GET /api/accounts 200 in 1354ms
+ POST /api/observability/metrics 200 in 2062ms
+ ○ Compiling /api/devices ...
+ ✓ Compiled /api/devices in 4s (1109 modules)
+ GET /api/devices 200 in 5591ms
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 3.3s (1105 modules)
+ GET /admin 200 in 5999ms
+ GET /api/tenant 200 in 194ms
+ ○ Compiling /admin/saas ...
+ POST /api/observability/metrics 200 in 1581ms
+ ✓ Compiled /admin/saas in 5.2s (1117 modules)
+ GET /admin/saas 200 in 5991ms
+ GET /admin/saas 200 in 248ms
+ ○ Compiling /api/users ...
+ ✓ Compiled /api/users in 3.9s (1119 modules)
+ GET /api/users 200 in 5354ms
+ POST /api/observability/metrics 200 in 5815ms
+ GET /api/accounts 200 in 754ms
+ ○ Compiling /admin/setup-bank ...
+ ✓ Compiled /admin/setup-bank in 4.6s (1133 modules)
+ GET /admin/setup-bank 200 in 6537ms
+ GET /api/tenant 200 in 140ms
+ POST /api/observability/metrics 200 in 1984ms
+ GET /dashboard 200 in 285ms
+ GET /api/tenant 200 in 103ms
+ POST /api/observability/metrics 200 in 1383ms
+ GET /api/accounts 200 in 1262ms
+ GET /accounts 200 in 109ms
+ GET /api/tenant 200 in 56ms
+ POST /api/observability/metrics 200 in 1167ms
+ GET /api/accounts 200 in 1058ms
+ GET /api/devices 200 in 688ms
+ GET /admin 200 in 221ms
+ GET /api/tenant 200 in 70ms
+ GET /admin/saas 200 in 166ms
+ GET /admin/saas 200 in 70ms
+ POST /api/observability/metrics 200 in 906ms
+ GET /api/users 200 in 821ms
+ POST /api/observability/metrics 200 in 894ms
+ GET /api/accounts 200 in 562ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 978ms (1032 modules)
+ GET /customer 404 in 1357ms
+ ✓ Compiled /api/observability/metrics in 234ms (610 modules)
+ ✓ Compiled (677 modules)
+ GET /api/tenant 200 in 749ms
+ POST /api/observability/metrics 200 in 4363ms
+ GET /customers 404 in 248ms
+ GET /api/tenant 200 in 28ms
+ POST /api/observability/metrics 200 in 700ms
+ GET /saas/admin 404 in 44ms
+ GET /api/tenant 200 in 28ms
+ POST /api/observability/metrics 200 in 896ms
+ GET /admin/saas 200 in 155ms
+ GET /api/tenant 200 in 28ms
+ ✓ Compiled /api/users in 282ms (682 modules)
+ POST /api/observability/metrics 200 in 1350ms
+ GET /api/users 200 in 1502ms
+ ✓ Compiled /api/accounts in 441ms (684 modules)
+ GET /api/accounts 200 in 1207ms
+ ✓ Compiled in 846ms (445 modules)
+ GET /admin/saas 200 in 178ms
+ ✓ Compiled in 707ms (449 modules)
+ GET /admin/saas 200 in 94ms
+ ✓ Compiled in 289ms (449 modules)
+ GET /admin/saas 200 in 69ms
+ ✓ Compiled in 325ms (449 modules)
+ GET /admin/saas 200 in 80ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 736ms (612 modules)
+ GET /login 200 in 1284ms
+ ✓ Compiled /api/observability/metrics in 233ms (625 modules)
+ ✓ Compiled (692 modules)
+ GET /api/tenant 200 in 778ms
+ POST /api/observability/metrics 200 in 2531ms
+ ○ Compiling /signup ...
+ ✓ Compiled /signup in 1175ms (689 modules)
+ GET /signup 200 in 1763ms
+ GET /api/tenant 200 in 64ms
+ POST /api/observability/metrics 200 in 1652ms
+ GET /login 200 in 81ms
+ POST /api/observability/metrics 200 in 1530ms
+ ○ Compiling / ...
+ ✓ Compiled / in 514ms (690 modules)
+ GET / 200 in 798ms
+ POST /api/observability/metrics 200 in 1100ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 740ms (1130 modules)
+ GET /setup-bank 404 in 966ms
+ GET /setup-bank 404 in 227ms
+ ✓ Compiled /api/tenant in 278ms (635 modules)
+ GET /api/tenant 200 in 656ms
+ POST /api/observability/metrics 200 in 1733ms
+ GET / 200 in 364ms
+ GET /api/tenant 200 in 42ms
+ POST /api/observability/metrics 200 in 930ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 839ms (700 modules)
+ GET /dashboard 200 in 1058ms
+ ✓ Compiled /api/accounts in 337ms (705 modules)
+ GET /api/accounts 200 in 1263ms
+ POST /api/observability/metrics 200 in 1234ms
+ POST /api/observability/metrics 200 in 641ms
+ GET /setup-bank 404 in 70ms
+ GET /setup-bank 404 in 149ms
+ GET /api/tenant 200 in 33ms
+ POST /api/observability/metrics 200 in 590ms
+ ○ Compiling /setup-bank ...
+ ✓ Compiled /setup-bank in 1866ms (1163 modules)
+ GET /setup-bank 200 in 1558ms
+ GET /setup-bank 200 in 42ms
+ GET /setup-bank 200 in 44ms
+ GET /setup-bank 200 in 277ms
+ ✓ Compiled /api/observability/metrics in 224ms (624 modules)
+ ✓ Compiled (691 modules)
+ GET /api/tenant 200 in 1498ms
+ POST /api/observability/metrics 200 in 2835ms
+ GET / 200 in 413ms
+ GET /api/tenant 200 in 41ms
+ GET /setup-bank 200 in 63ms
+ POST /api/observability/metrics 200 in 1878ms
+ POST /api/observability/metrics 200 in 1155ms
+ ✓ Compiled in 672ms (449 modules)
+ GET /setup-bank 200 in 102ms
+ ⨯ ./app/(auth)/login/page.tsx
+Error:   [31mx[0m Return statement is not allowed here
+     ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/app/(auth)/login/page.tsx[0m:10:1]
+ [2m  7[0m |     export default function LoginPage() {
+ [2m  8[0m |       return <LoginWorkspace />;
+ [2m  9[0m |     }
+ [2m 10[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m   return (
+ [2m 11[0m | [35;1m|[0m       <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
+ [2m 12[0m | [35;1m|[0m         {/* Abstract Background Elements */}
+ [2m 13[0m | [35;1m|[0m         <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/20 rounded-full blur-[128px] pointer-events-none" />
+ [2m 14[0m | [35;1m|[0m         <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[128px] pointer-events-none" />
+ [2m 15[0m | [35;1m|[0m   
+ [2m 16[0m | [35;1m|[0m         <div className="relative z-10 w-full max-w-5xl px-6 py-12 grid lg:grid-cols-2 gap-12 items-center">
+ [2m 17[0m | [35;1m|[0m           {/* Left Side: Branding/Marketing */}
+ [2m 18[0m | [35;1m|[0m           <div className="hidden lg:block space-y-8">
+ [2m 19[0m | [35;1m|[0m             <Link href="/" className="inline-flex items-center gap-2 group text-sm font-medium text-slate-400 hover:text-primary mb-4">
+ [2m 20[0m | [35;1m|[0m               <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+ [2m 21[0m | [35;1m|[0m               Back to website
+ [2m 22[0m | [35;1m|[0m             </Link>
+ [2m 23[0m | [35;1m|[0m             <div className="space-y-4">
+ [2m 24[0m | [35;1m|[0m               <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+ [2m 25[0m | [35;1m|[0m                 <span className="text-2xl font-bold text-black font-display">B</span>
+ [2m 26[0m | [35;1m|[0m               </div>
+ [2m 27[0m | [35;1m|[0m               <h1 className="font-display text-6xl font-bold tracking-tight">
+ [2m 28[0m | [35;1m|[0m                 Access the <br />
+ [2m 29[0m | [35;1m|[0m                 <span className="text-primary italic">future</span> of banking.
+ [2m 30[0m | [35;1m|[0m               </h1>
+ [2m 31[0m | [35;1m|[0m               <p className="text-lg text-slate-400 max-w-md leading-relaxed">
+ [2m 32[0m | [35;1m|[0m                 Your institutional gateway to sub-second settlements, AI-driven risk management, and multi-rail liquidity.
+ [2m 33[0m | [35;1m|[0m               </p>
+ [2m 34[0m | [35;1m|[0m             </div>
+ [2m 35[0m | [35;1m|[0m   
+ [2m 36[0m | [35;1m|[0m             <div className="grid grid-cols-2 gap-6 pt-8">
+ [2m 37[0m | [35;1m|[0m               <div className="space-y-1 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+ [2m 38[0m | [35;1m|[0m                 <p className="text-2xl font-bold font-display text-white">99.9%</p>
+ [2m 39[0m | [35;1m|[0m                 <p className="text-xs text-slate-500 uppercase tracking-widest">Uptime SLA</p>
+ [2m 40[0m | [35;1m|[0m               </div>
+ [2m 41[0m | [35;1m|[0m               <div className="space-y-1 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+ [2m 42[0m | [35;1m|[0m                 <p className="text-2xl font-bold font-display text-white">Bank-Grade</p>
+ [2m 43[0m | [35;1m|[0m                 <p className="text-xs text-slate-500 uppercase tracking-widest">AES-256 Security</p>
+ [2m 44[0m | [35;1m|[0m               </div>
+ [2m 45[0m | [35;1m|[0m             </div>
+ [2m 46[0m | [35;1m|[0m           </div>
+ [2m 47[0m | [35;1m|[0m   
+ [2m 48[0m | [35;1m|[0m           {/* Right Side: Auth Card */}
+ [2m 49[0m | [35;1m|[0m           <div className="flex flex-col items-center justify-center">
+ [2m 50[0m | [35;1m|[0m             <Card className="w-full max-w-md p-8 lg:p-10 space-y-8 bg-black/40 border-white/10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+ [2m 51[0m | [35;1m|[0m               {/* Inner Glow */}
+ [2m 52[0m | [35;1m|[0m               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+ [2m 53[0m | [35;1m|[0m               
+ [2m 54[0m | [35;1m|[0m               <div className="space-y-2">
+ [2m 55[0m | [35;1m|[0m                 <p className="text-sm uppercase tracking-[0.4em] text-primary font-semibold">Sign In</p>
+ [2m 56[0m | [35;1m|[0m                 <h2 className="font-display text-3xl font-bold text-white">Welcome Back</h2>
+ [2m 57[0m | [35;1m|[0m                 <p className="text-sm text-slate-400">Enter your credentials to access your dashboard.</p>
+ [2m 58[0m | [35;1m|[0m               </div>
+ [2m 59[0m | [35;1m|[0m   
+ [2m 60[0m | [35;1m|[0m               <form className="space-y-5">
+ [2m 61[0m | [35;1m|[0m                 <div className="space-y-4">
+ [2m 62[0m | [35;1m|[0m                   <div className="relative group/input">
+ [2m 63[0m | [35;1m|[0m                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within/input:text-primary transition-colors" />
+ [2m 64[0m | [35;1m|[0m                     <input
+ [2m 65[0m | [35;1m|[0m                       className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all"
+ [2m 66[0m | [35;1m|[0m                       placeholder="Email Address"
+ [2m 67[0m | [35;1m|[0m                       type="email"
+ [2m 68[0m | [35;1m|[0m                     />
+ [2m 69[0m | [35;1m|[0m                   </div>
+ [2m 70[0m | [35;1m|[0m                   <div className="relative group/input">
+ [2m 71[0m | [35;1m|[0m                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within/input:text-primary transition-colors" />
+ [2m 72[0m | [35;1m|[0m                     <input
+ [2m 73[0m | [35;1m|[0m                       className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all"
+ [2m 74[0m | [35;1m|[0m                       placeholder="Password"
+ [2m 75[0m | [35;1m|[0m                       type="password"
+ [2m 76[0m | [35;1m|[0m                     />
+ [2m 77[0m | [35;1m|[0m                   </div>
+ [2m 78[0m | [35;1m|[0m                 </div>
+ [2m 79[0m | [35;1m|[0m   
+ [2m 80[0m | [35;1m|[0m                 <div className="flex items-center justify-between px-1">
+ [2m 81[0m | [35;1m|[0m                   <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer">
+ [2m 82[0m | [35;1m|[0m                     <input
+ [2m 83[0m | [35;1m|[0m                       type="checkbox"
+ [2m 84[0m | [35;1m|[0m                       className="w-4 h-4 rounded border-white/10 bg-white/5 accent-primary"
+ [2m 85[0m | [35;1m|[0m                     />
+ [2m 86[0m | [35;1m|[0m                     <span>Remember me</span>
+ [2m 87[0m | [35;1m|[0m                   </label>
+ [2m 88[0m | [35;1m|[0m                   <Link href="#" className="text-sm text-primary hover:underline">Forgot password?</Link>
+ [2m 89[0m | [35;1m|[0m                 </div>
+ [2m 90[0m | [35;1m|[0m   
+ [2m 91[0m | [35;1m|[0m                 <Button className="w-full bg-primary hover:bg-primary/90 text-black font-bold h-14 rounded-2xl shadow-lg shadow-primary/20 group/btn">
+ [2m 92[0m | [35;1m|[0m                   <span>Sign In to Console</span>
+ [2m 93[0m | [35;1m|[0m                   <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+ [2m 94[0m | [35;1m|[0m                 </Button>
+ [2m 95[0m | [35;1m|[0m               </form>
+ [2m 96[0m | [35;1m|[0m   
+ [2m 97[0m | [35;1m|[0m               <div className="relative">
+ [2m 98[0m | [35;1m|[0m                 <div className="absolute inset-0 flex items-center">
+ [2m 99[0m | [35;1m|[0m                   <div className="w-full border-t border-white/5"></div>
+ [2m100[0m | [35;1m|[0m                 </div>
+ [2m101[0m | [35;1m|[0m                 <div className="relative flex justify-center text-xs uppercase">
+ [2m102[0m | [35;1m|[0m                   <span className="bg-[#0f0f0f] px-2 text-slate-500 tracking-widest">Or continue with</span>
+ [2m103[0m | [35;1m|[0m                 </div>
+ [2m104[0m | [35;1m|[0m               </div>
+ [2m105[0m | [35;1m|[0m   
+ [2m106[0m | [35;1m|[0m               <div className="grid grid-cols-2 gap-4">
+ [2m107[0m | [35;1m|[0m                 <Button variant="secondary" className="h-12 border-white/10 bg-transparent hover:bg-white/5 rounded-xl font-medium">Google</Button>
+ [2m108[0m | [35;1m|[0m                 <Button variant="secondary" className="h-12 border-white/10 bg-transparent hover:bg-white/5 rounded-xl font-medium">SSO</Button>
+ [2m109[0m | [35;1m|[0m               </div>
+ [2m110[0m | [35;1m|[0m   
+ [2m111[0m | [35;1m|[0m               <p className="text-center text-sm text-slate-400">
+ [2m112[0m | [35;1m|[0m                 Don't have an account?{" "}
+ [2m113[0m | [35;1m|[0m                 <Link href="/signup" className="text-primary font-bold hover:underline">Start onboarding</Link>
+ [2m114[0m | [35;1m|[0m               </p>
+ [2m115[0m | [35;1m|[0m             </Card>
+ [2m116[0m | [35;1m|[0m             
+ [2m117[0m | [35;1m|[0m             <p className="mt-8 text-xs text-slate-600 uppercase tracking-widest">
+ [2m118[0m | [35;1m|[0m               Protected by Bank AI Guardian &bull; v1.2.0
+ [2m119[0m | [35;1m|[0m             </p>
+ [2m120[0m | [35;1m|[0m           </div>
+ [2m121[0m | [35;1m|[0m         </div>
+ [2m122[0m | [35;1m|[0m       </main>
+ [2m123[0m | [35;1m`[0m[35;1m-[0m[35;1m>[0m   );
+ [2m124[0m |     }
+     `----
+  [31mx[0m Expression expected
+     ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/app/(auth)/login/page.tsx[0m:124:1]
+ [2m121[0m |       </div>
+ [2m122[0m |     </main>
+ [2m123[0m |   );
+ [2m124[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/(auth)/login/page.tsx
+ ○ Compiling /_error ...
+ ⨯ ./app/(auth)/login/page.tsx
+Error:   [31mx[0m Return statement is not allowed here
+     ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/app/(auth)/login/page.tsx[0m:10:1]
+ [2m  7[0m |     export default function LoginPage() {
+ [2m  8[0m |       return <LoginWorkspace />;
+ [2m  9[0m |     }
+ [2m 10[0m | [35;1m,[0m[35;1m-[0m[35;1m>[0m   return (
+ [2m 11[0m | [35;1m|[0m       <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
+ [2m 12[0m | [35;1m|[0m         {/* Abstract Background Elements */}
+ [2m 13[0m | [35;1m|[0m         <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/20 rounded-full blur-[128px] pointer-events-none" />
+ [2m 14[0m | [35;1m|[0m         <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-[128px] pointer-events-none" />
+ [2m 15[0m | [35;1m|[0m   
+ [2m 16[0m | [35;1m|[0m         <div className="relative z-10 w-full max-w-5xl px-6 py-12 grid lg:grid-cols-2 gap-12 items-center">
+ [2m 17[0m | [35;1m|[0m           {/* Left Side: Branding/Marketing */}
+ [2m 18[0m | [35;1m|[0m           <div className="hidden lg:block space-y-8">
+ [2m 19[0m | [35;1m|[0m             <Link href="/" className="inline-flex items-center gap-2 group text-sm font-medium text-slate-400 hover:text-primary mb-4">
+ [2m 20[0m | [35;1m|[0m               <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+ [2m 21[0m | [35;1m|[0m               Back to website
+ [2m 22[0m | [35;1m|[0m             </Link>
+ [2m 23[0m | [35;1m|[0m             <div className="space-y-4">
+ [2m 24[0m | [35;1m|[0m               <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+ [2m 25[0m | [35;1m|[0m                 <span className="text-2xl font-bold text-black font-display">B</span>
+ [2m 26[0m | [35;1m|[0m               </div>
+ [2m 27[0m | [35;1m|[0m               <h1 className="font-display text-6xl font-bold tracking-tight">
+ [2m 28[0m | [35;1m|[0m                 Access the <br />
+ [2m 29[0m | [35;1m|[0m                 <span className="text-primary italic">future</span> of banking.
+ [2m 30[0m | [35;1m|[0m               </h1>
+ [2m 31[0m | [35;1m|[0m               <p className="text-lg text-slate-400 max-w-md leading-relaxed">
+ [2m 32[0m | [35;1m|[0m                 Your institutional gateway to sub-second settlements, AI-driven risk management, and multi-rail liquidity.
+ [2m 33[0m | [35;1m|[0m               </p>
+ [2m 34[0m | [35;1m|[0m             </div>
+ [2m 35[0m | [35;1m|[0m   
+ [2m 36[0m | [35;1m|[0m             <div className="grid grid-cols-2 gap-6 pt-8">
+ [2m 37[0m | [35;1m|[0m               <div className="space-y-1 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+ [2m 38[0m | [35;1m|[0m                 <p className="text-2xl font-bold font-display text-white">99.9%</p>
+ [2m 39[0m | [35;1m|[0m                 <p className="text-xs text-slate-500 uppercase tracking-widest">Uptime SLA</p>
+ [2m 40[0m | [35;1m|[0m               </div>
+ [2m 41[0m | [35;1m|[0m               <div className="space-y-1 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+ [2m 42[0m | [35;1m|[0m                 <p className="text-2xl font-bold font-display text-white">Bank-Grade</p>
+ [2m 43[0m | [35;1m|[0m                 <p className="text-xs text-slate-500 uppercase tracking-widest">AES-256 Security</p>
+ [2m 44[0m | [35;1m|[0m               </div>
+ [2m 45[0m | [35;1m|[0m             </div>
+ [2m 46[0m | [35;1m|[0m           </div>
+ [2m 47[0m | [35;1m|[0m   
+ [2m 48[0m | [35;1m|[0m           {/* Right Side: Auth Card */}
+ [2m 49[0m | [35;1m|[0m           <div className="flex flex-col items-center justify-center">
+ [2m 50[0m | [35;1m|[0m             <Card className="w-full max-w-md p-8 lg:p-10 space-y-8 bg-black/40 border-white/10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+ [2m 51[0m | [35;1m|[0m               {/* Inner Glow */}
+ [2m 52[0m | [35;1m|[0m               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+ [2m 53[0m | [35;1m|[0m               
+ [2m 54[0m | [35;1m|[0m               <div className="space-y-2">
+ [2m 55[0m | [35;1m|[0m                 <p className="text-sm uppercase tracking-[0.4em] text-primary font-semibold">Sign In</p>
+ [2m 56[0m | [35;1m|[0m                 <h2 className="font-display text-3xl font-bold text-white">Welcome Back</h2>
+ [2m 57[0m | [35;1m|[0m                 <p className="text-sm text-slate-400">Enter your credentials to access your dashboard.</p>
+ [2m 58[0m | [35;1m|[0m               </div>
+ [2m 59[0m | [35;1m|[0m   
+ [2m 60[0m | [35;1m|[0m               <form className="space-y-5">
+ [2m 61[0m | [35;1m|[0m                 <div className="space-y-4">
+ [2m 62[0m | [35;1m|[0m                   <div className="relative group/input">
+ [2m 63[0m | [35;1m|[0m                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within/input:text-primary transition-colors" />
+ [2m 64[0m | [35;1m|[0m                     <input
+ [2m 65[0m | [35;1m|[0m                       className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all"
+ [2m 66[0m | [35;1m|[0m                       placeholder="Email Address"
+ [2m 67[0m | [35;1m|[0m                       type="email"
+ [2m 68[0m | [35;1m|[0m                     />
+ [2m 69[0m | [35;1m|[0m                   </div>
+ [2m 70[0m | [35;1m|[0m                   <div className="relative group/input">
+ [2m 71[0m | [35;1m|[0m                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 group-focus-within/input:text-primary transition-colors" />
+ [2m 72[0m | [35;1m|[0m                     <input
+ [2m 73[0m | [35;1m|[0m                       className="w-full bg-white/5 border border-white/10 rounded-2xl pl-12 pr-4 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all"
+ [2m 74[0m | [35;1m|[0m                       placeholder="Password"
+ [2m 75[0m | [35;1m|[0m                       type="password"
+ [2m 76[0m | [35;1m|[0m                     />
+ [2m 77[0m | [35;1m|[0m                   </div>
+ [2m 78[0m | [35;1m|[0m                 </div>
+ [2m 79[0m | [35;1m|[0m   
+ [2m 80[0m | [35;1m|[0m                 <div className="flex items-center justify-between px-1">
+ [2m 81[0m | [35;1m|[0m                   <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer">
+ [2m 82[0m | [35;1m|[0m                     <input
+ [2m 83[0m | [35;1m|[0m                       type="checkbox"
+ [2m 84[0m | [35;1m|[0m                       className="w-4 h-4 rounded border-white/10 bg-white/5 accent-primary"
+ [2m 85[0m | [35;1m|[0m                     />
+ [2m 86[0m | [35;1m|[0m                     <span>Remember me</span>
+ [2m 87[0m | [35;1m|[0m                   </label>
+ [2m 88[0m | [35;1m|[0m                   <Link href="#" className="text-sm text-primary hover:underline">Forgot password?</Link>
+ [2m 89[0m | [35;1m|[0m                 </div>
+ [2m 90[0m | [35;1m|[0m   
+ [2m 91[0m | [35;1m|[0m                 <Button className="w-full bg-primary hover:bg-primary/90 text-black font-bold h-14 rounded-2xl shadow-lg shadow-primary/20 group/btn">
+ [2m 92[0m | [35;1m|[0m                   <span>Sign In to Console</span>
+ [2m 93[0m | [35;1m|[0m                   <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+ [2m 94[0m | [35;1m|[0m                 </Button>
+ [2m 95[0m | [35;1m|[0m               </form>
+ [2m 96[0m | [35;1m|[0m   
+ [2m 97[0m | [35;1m|[0m               <div className="relative">
+ [2m 98[0m | [35;1m|[0m                 <div className="absolute inset-0 flex items-center">
+ [2m 99[0m | [35;1m|[0m                   <div className="w-full border-t border-white/5"></div>
+ [2m100[0m | [35;1m|[0m                 </div>
+ [2m101[0m | [35;1m|[0m                 <div className="relative flex justify-center text-xs uppercase">
+ [2m102[0m | [35;1m|[0m                   <span className="bg-[#0f0f0f] px-2 text-slate-500 tracking-widest">Or continue with</span>
+ [2m103[0m | [35;1m|[0m                 </div>
+ [2m104[0m | [35;1m|[0m               </div>
+ [2m105[0m | [35;1m|[0m   
+ [2m106[0m | [35;1m|[0m               <div className="grid grid-cols-2 gap-4">
+ [2m107[0m | [35;1m|[0m                 <Button variant="secondary" className="h-12 border-white/10 bg-transparent hover:bg-white/5 rounded-xl font-medium">Google</Button>
+ [2m108[0m | [35;1m|[0m                 <Button variant="secondary" className="h-12 border-white/10 bg-transparent hover:bg-white/5 rounded-xl font-medium">SSO</Button>
+ [2m109[0m | [35;1m|[0m               </div>
+ [2m110[0m | [35;1m|[0m   
+ [2m111[0m | [35;1m|[0m               <p className="text-center text-sm text-slate-400">
+ [2m112[0m | [35;1m|[0m                 Don't have an account?{" "}
+ [2m113[0m | [35;1m|[0m                 <Link href="/signup" className="text-primary font-bold hover:underline">Start onboarding</Link>
+ [2m114[0m | [35;1m|[0m               </p>
+ [2m115[0m | [35;1m|[0m             </Card>
+ [2m116[0m | [35;1m|[0m             
+ [2m117[0m | [35;1m|[0m             <p className="mt-8 text-xs text-slate-600 uppercase tracking-widest">
+ [2m118[0m | [35;1m|[0m               Protected by Bank AI Guardian &bull; v1.2.0
+ [2m119[0m | [35;1m|[0m             </p>
+ [2m120[0m | [35;1m|[0m           </div>
+ [2m121[0m | [35;1m|[0m         </div>
+ [2m122[0m | [35;1m|[0m       </main>
+ [2m123[0m | [35;1m`[0m[35;1m-[0m[35;1m>[0m   );
+ [2m124[0m |     }
+     `----
+  [31mx[0m Expression expected
+     ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/app/(auth)/login/page.tsx[0m:124:1]
+ [2m121[0m |       </div>
+ [2m122[0m |     </main>
+ [2m123[0m |   );
+ [2m124[0m | }
+     : [35;1m^[0m
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/(auth)/login/page.tsx
+ GET /setup-bank 500 in 5544ms
+ GET /setup-bank 500 in 331ms
+ GET /setup-bank 500 in 79ms
+ GET /setup-bank 500 in 44ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /setup-bank 500 in 332ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled /_error in 2.8s (1388 modules)
+ GET /setup-bank 200 in 398ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /setup-bank 200 in 70ms
+ ✓ Compiled /api/observability/metrics in 451ms (811 modules)
+ ✓ Compiled (878 modules)
+ GET /api/tenant 200 in 1388ms
+ POST /api/observability/metrics 200 in 3241ms
+ ✓ Compiled in 708ms (1482 modules)
+ GET /setup-bank 200 in 292ms
+ GET / 200 in 295ms
+ GET / 200 in 89ms
+ GET /signup 200 in 140ms
+ ⚠ Cross origin request detected from 127.0.0.1 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /api/tenant 200 in 50ms
+ ○ Compiling /api/auth ...
+ ✓ Compiled /api/auth in 1559ms (1473 modules)
+ POST /api/observability/metrics 200 in 2149ms
+ POST /api/auth 201 in 3701ms
+ ✓ Compiled /api/accounts in 429ms (885 modules)
+ GET /api/accounts 200 in 1276ms
+ GET /login 200 in 417ms
+ GET /api/tenant 200 in 45ms
+ POST /api/observability/metrics 200 in 738ms
+ GET /login 200 in 89ms
+ GET /api/tenant 200 in 48ms
+ POST /api/observability/metrics 200 in 191ms
+ GET /login 200 in 133ms
+ GET /api/tenant 200 in 66ms
+ POST /api/observability/metrics 200 in 546ms
+ GET /api/accounts 200 in 652ms
+ GET /api/accounts 200 in 500ms
+ GET /api/accounts 200 in 488ms
+ GET / 200 in 139ms
+ GET / 200 in 83ms
+ GET /signup 200 in 89ms
+ GET /api/tenant 200 in 44ms
+ POST /api/observability/metrics 200 in 871ms
+ POST /api/auth 201 in 1207ms
+ GET /api/accounts 200 in 465ms
+ GET /login 200 in 84ms
+ GET /api/tenant 200 in 35ms
+ POST /api/observability/metrics 200 in 504ms
+ GET /login 200 in 64ms
+ GET /api/tenant 200 in 51ms
+ POST /api/observability/metrics 200 in 149ms
+ GET /login 200 in 70ms
+ GET /api/tenant 200 in 46ms
+ POST /api/observability/metrics 200 in 481ms
+ GET /api/accounts 200 in 1005ms
+ GET /api/accounts 200 in 701ms
+ GET /api/accounts 200 in 691ms
+ GET / 200 in 78ms
+ GET / 200 in 84ms
+ GET /login 200 in 79ms
+ GET /api/tenant 200 in 40ms
+ POST /api/observability/metrics 200 in 1066ms
+ GET /login 200 in 77ms
+ GET /api/tenant 200 in 56ms
+ POST /api/observability/metrics 200 in 796ms
+ GET /login 200 in 201ms
+ GET /api/tenant 200 in 60ms
+ POST /api/observability/metrics 200 in 1146ms
+ POST /api/auth 201 in 889ms
+ GET /dashboard 200 in 150ms
+ GET /api/accounts 200 in 594ms
+ POST /api/observability/metrics 200 in 1069ms
+ ✓ Compiled in 4.7s (1604 modules)
+ GET /setup-bank 200 in 603ms
+ GET /dashboard 200 in 609ms
+ GET / 200 in 484ms
+ GET / 200 in 140ms
+ GET /signup 200 in 220ms
+ ○ Compiling /api/observability/metrics ...
+ ✓ Compiled /api/auth in 612ms (811 modules)
+ ✓ Compiled in 2ms (883 modules)
+ ✓ Compiled in 1ms (883 modules)
+ ✓ Compiled in 0ms (883 modules)
+ GET /api/tenant 200 in 3530ms
+ GET /signup 200 in 4338ms
+ GET /dashboard 200 in 4406ms
+ GET /setup-bank 200 in 4411ms
+ POST /api/observability/metrics 200 in 5582ms
+ POST /api/auth 200 in 5206ms
+ ○ Compiling /api/accounts ...
+ ✓ Compiled /api/accounts in 1087ms (885 modules)
+ GET /api/accounts 200 in 1933ms
+ GET /login 200 in 688ms
+ GET /api/tenant 200 in 80ms
+ POST /api/observability/metrics 200 in 1147ms
+ GET /login 200 in 189ms
+ GET /api/tenant 200 in 80ms
+ POST /api/observability/metrics 200 in 263ms
+ GET /login 200 in 194ms
+ GET /api/tenant 200 in 93ms
+ POST /api/observability/metrics 200 in 703ms
+ GET /api/accounts 200 in 836ms
+ GET /api/accounts 200 in 551ms
+ GET /api/accounts 200 in 492ms
+ GET /signup 200 in 190ms
+ GET /api/tenant 200 in 53ms
+ POST /api/observability/metrics 200 in 1068ms
+ POST /api/auth 201 in 989ms
+ GET / 200 in 144ms
+ GET / 200 in 113ms
+ GET /signup 200 in 130ms
+ GET /api/tenant 200 in 50ms
+ POST /api/observability/metrics 200 in 1083ms
+ POST /api/auth 201 in 1074ms
+ GET /api/accounts 200 in 520ms
+ GET /login 200 in 100ms
+ GET /api/tenant 200 in 67ms
+ POST /api/observability/metrics 200 in 570ms
+ GET /login 200 in 115ms
+ GET /api/tenant 200 in 70ms
+ POST /api/observability/metrics 200 in 230ms
+ GET /login 200 in 143ms
+ GET /api/tenant 200 in 59ms
+ POST /api/observability/metrics 200 in 1000ms
+ GET /api/accounts 200 in 759ms
+ GET /api/accounts 200 in 492ms
+ GET /api/accounts 200 in 571ms
+ ✓ Compiled in 286ms (117 modules)
+[Middleware] Path: / | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET / 200 in 141ms
+[Middleware] Path: / | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET / 200 in 102ms
+[Middleware] Path: /signup | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /signup 200 in 137ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 66ms
+[Middleware] Path: /api/auth | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ POST /api/auth 201 in 858ms
+ POST /api/observability/metrics 200 in 1116ms
+[Middleware] Path: /api/accounts | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/accounts 200 in 568ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 114ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 64ms
+ POST /api/observability/metrics 200 in 561ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 97ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 58ms
+ POST /api/observability/metrics 200 in 200ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 116ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 54ms
+ POST /api/observability/metrics 200 in 548ms
+[Middleware] Path: /api/accounts | Tenant: gujarat-cu | Conflict: false | Sub: undefined | Session: gujarat-cu
+ GET /api/accounts 200 in 880ms
+[Middleware] Path: /api/accounts | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: quantum-bank
+ GET /api/accounts 200 in 570ms
+[Middleware] Path: /api/accounts | Tenant: gujarat-cu | Conflict: false | Sub: undefined | Session: gujarat-cu
+ GET /api/accounts 200 in 600ms
+[Middleware] Path: / | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET / 200 in 81ms
+[Middleware] Path: / | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET / 200 in 73ms
+[Middleware] Path: /signup | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /signup 200 in 80ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 33ms
+[Middleware] Path: /api/auth | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ POST /api/observability/metrics 200 in 2090ms
+ POST /api/auth 201 in 2002ms
+[Middleware] Path: /api/accounts | Tenant: quantum-bank | Conflict: false | Sub: quantum-bank | Session: undefined
+ GET /api/accounts 200 in 739ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 86ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 45ms
+ POST /api/observability/metrics 200 in 584ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 74ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 52ms
+ POST /api/observability/metrics 200 in 179ms
+[Middleware] Path: /login | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /login 200 in 105ms
+[Middleware] Path: /api/tenant | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+[Middleware] Path: /api/observability/metrics | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: undefined
+ GET /api/tenant 200 in 91ms
+ POST /api/observability/metrics 200 in 651ms
+[Middleware] Path: /api/accounts | Tenant: undefined | Conflict: true | Sub: quantum-bank | Session: gujarat-cu
+[Middleware] API 400: /api/accounts | Conflict: true
+[Middleware] Path: /api/accounts | Tenant: quantum-bank | Conflict: false | Sub: undefined | Session: quantum-bank
+ ✓ Compiled in 86ms (117 modules)
+ GET /api/accounts 200 in 591ms
+ GET /api/accounts 200 in 744ms
+ ✓ Compiled in 42ms (117 modules)
+ ✓ Compiled in 2s (1489 modules)
+ GET /signup 200 in 320ms
+ GET /setup-bank 200 in 323ms
+ GET / 200 in 260ms
+ GET / 200 in 76ms
+ GET /signup 200 in 134ms
+ GET /api/tenant 200 in 62ms
+ POST /api/observability/metrics 200 in 1232ms
+ POST /api/auth 201 in 1352ms
+ GET /api/accounts 200 in 592ms
+ GET /login 200 in 87ms
+ GET /api/tenant 200 in 60ms
+ POST /api/observability/metrics 200 in 693ms
+ GET /login 200 in 105ms
+ GET /api/tenant 200 in 49ms
+ POST /api/observability/metrics 200 in 179ms
+ GET /login 200 in 102ms
+ GET /api/tenant 200 in 47ms
+ POST /api/observability/metrics 200 in 668ms
+ ✓ Compiled in 2.2s (1606 modules)
+ GET /signup 200 in 499ms
+ GET /setup-bank 200 in 505ms
+Error: Tenant context missing
+    at withTenantRoute (lib/services/api.ts:34:11)
+  32 |   const tenant = await resolveTenantFromHeaders(request.headers);
+  33 |   if (!tenant) {
+> 34 |     throw new ApiError(400, "Tenant context missing");
+     |           ^
+  35 |   }
+  36 |   const url = new URL(request.url);
+  37 |   const action = `${request.method} ${url.pathname}`; {
+  status: 400
+}
+ GET /api/accounts 500 in 266ms
+ GET /api/accounts 200 in 671ms
+ GET /api/accounts 200 in 565ms
+ GET / 200 in 232ms
+ GET / 200 in 89ms
+ GET /signup 200 in 131ms
+ GET /api/tenant 200 in 42ms
+ POST /api/observability/metrics 200 in 989ms
+ POST /api/auth 201 in 1075ms
+ GET /api/accounts 200 in 633ms
+ GET /login 200 in 96ms
+ GET /api/tenant 200 in 33ms
+ POST /api/observability/metrics 200 in 467ms
+ POST /api/auth 201 in 889ms
+ GET /dashboard 200 in 62ms
+ GET /api/accounts 200 in 38ms
+ GET /login 200 in 68ms
+ GET /api/tenant 200 in 45ms
+ POST /api/observability/metrics 200 in 113ms
+ GET /login 200 in 66ms
+ GET /api/tenant 200 in 37ms
+ POST /api/observability/metrics 200 in 517ms
+Error: Tenant context missing
+    at withTenantRoute (lib/services/api.ts:34:11)
+  32 |   const tenant = await resolveTenantFromHeaders(request.headers);
+  33 |   if (!tenant) {
+> 34 |     throw new ApiError(400, "Tenant context missing");
+     |           ^
+  35 |   }
+  36 |   const url = new URL(request.url);
+  37 |   const action = `${request.method} ${url.pathname}`; {
+  status: 400
+}
+ GET /api/accounts 500 in 31ms
+ GET /api/accounts 200 in 760ms
+ GET /api/accounts 200 in 599ms
+ ✓ Compiled in 1885ms (1489 modules)
+ GET /signup 200 in 265ms
+ GET /setup-bank 200 in 269ms
+ ✓ Compiled in 574ms (1489 modules)
+ GET /signup 200 in 260ms
+ GET /setup-bank 200 in 268ms
+ GET / 200 in 284ms
+ GET / 200 in 90ms
+ GET /signup 200 in 122ms
+ GET /api/tenant 200 in 53ms
+ POST /api/auth 201 in 1094ms
+ POST /api/observability/metrics 200 in 1293ms
+ GET /api/accounts 200 in 553ms
+ GET /login 200 in 105ms
+ GET /api/tenant 200 in 42ms
+ POST /api/observability/metrics 200 in 495ms
+ GET /login 200 in 106ms
+ GET /api/tenant 200 in 50ms
+ POST /api/observability/metrics 200 in 199ms
+ GET /login 200 in 113ms
+ GET /api/tenant 200 in 64ms
+ POST /api/observability/metrics 200 in 1108ms
+Error: Tenant context missing
+    at withTenantRoute (lib/services/api.ts:34:11)
+  32 |   const tenant = await resolveTenantFromHeaders(request.headers);
+  33 |   if (!tenant) {
+> 34 |     throw new ApiError(400, "Tenant context missing");
+     |           ^
+  35 |   }
+  36 |   const url = new URL(request.url);
+  37 |   const action = `${request.method} ${url.pathname}`; {
+  status: 400
+}
+ GET /api/accounts 500 in 29ms
+ GET /api/accounts 200 in 1135ms
+ GET /api/accounts 200 in 1143ms
+ ✓ Compiled in 1813ms (1487 modules)
+ GET /signup 200 in 284ms
+ GET /setup-bank 200 in 287ms
+ GET / 200 in 260ms
+ GET / 200 in 73ms
+ GET /signup 200 in 133ms
+ GET /api/tenant 200 in 57ms
+ ✓ Compiled /api/auth in 271ms (885 modules)
+ GET /signup 200 in 208ms
+ GET /signup 200 in 209ms
+ GET /setup-bank 200 in 213ms
+ POST /api/observability/metrics 200 in 1330ms
+ POST /api/auth 201 in 1720ms
+ GET /api/accounts 200 in 598ms
+ GET /login 200 in 222ms
+ GET /api/tenant 200 in 56ms
+ POST /api/observability/metrics 200 in 673ms
+ GET /login 200 in 97ms
+ GET /api/tenant 200 in 50ms
+ POST /api/observability/metrics 200 in 166ms
+ GET /login 200 in 111ms
+ GET /api/tenant 200 in 57ms
+ POST /api/observability/metrics 200 in 598ms
+ GET /api/accounts 400 in 25ms
+ GET /api/accounts 200 in 592ms
+ GET /api/accounts 200 in 601ms
+ GET / 200 in 108ms
+ GET / 200 in 75ms
+ GET /signup 200 in 88ms
+ GET /api/tenant 200 in 40ms
+ POST /api/observability/metrics 200 in 873ms
+ POST /api/auth 201 in 935ms
+ GET /api/accounts 200 in 541ms
+ GET /login 200 in 83ms
+ GET /api/tenant 200 in 51ms
+ POST /api/observability/metrics 200 in 711ms
+ GET /login 200 in 106ms
+ GET /api/tenant 200 in 62ms
+ POST /api/observability/metrics 200 in 221ms
+ GET /login 200 in 115ms
+ GET /api/tenant 200 in 84ms
+ POST /api/observability/metrics 200 in 621ms
+ GET /api/accounts 400 in 17ms
+ GET /api/accounts 200 in 670ms
+ GET /api/accounts 200 in 468ms
+ GET / 200 in 87ms
+ GET / 200 in 88ms
+ POST /api/accounts 500 in 1564ms
+ GET /api/accounts 200 in 630ms
+ GET /api/accounts 200 in 585ms
+ GET /api/accounts?id=301 404 in 967ms
+ ○ Compiling /api/transactions ...
+ ✓ Compiled /api/transactions in 1079ms (1470 modules)
+ POST /api/transactions 500 in 1906ms
+ GET /api/transactions?startDate=2026-01-01 200 in 565ms
+ POST /api/transactions 500 in 531ms
+ GET / 200 in 254ms
+ GET / 200 in 92ms
+ POST /api/accounts 500 in 1024ms
+ GET /api/accounts 200 in 454ms
+ GET /api/accounts 200 in 501ms
+ GET /api/accounts?id=301 404 in 985ms
+ POST /api/transactions 500 in 576ms
+ GET /api/transactions?startDate=2026-01-01 200 in 606ms
+ POST /api/transactions 500 in 447ms
+ GET / 200 in 101ms
+ GET / 200 in 97ms
+ POST /api/accounts 500 in 651ms
+ GET / 200 in 89ms
+ GET / 200 in 83ms
+ POST /api/accounts 201 in 1878ms
+ GET /api/accounts 200 in 640ms
+ GET /api/accounts 200 in 692ms
+ GET /api/accounts?id=301 404 in 994ms
+ POST /api/transactions 500 in 594ms
+ GET /api/transactions?startDate=2026-01-01 200 in 682ms
+ POST /api/transactions 500 in 562ms
+ GET / 200 in 91ms
+ GET / 200 in 83ms
+ POST /api/accounts 201 in 1114ms
+ GET /api/accounts 200 in 507ms
+ GET /api/accounts 200 in 674ms
+ GET /api/accounts?id=301 404 in 941ms
+ GET /api/accounts 200 in 596ms
+ POST /api/transactions 201 in 541ms
+ GET /api/transactions?startDate=2026-01-01 200 in 507ms
+ POST /api/transactions 500 in 592ms
+ GET / 200 in 94ms
+ GET / 200 in 78ms
+ GET /api/accounts 200 in 2345ms
+ POST /api/accounts 201 in 1378ms
+ GET /api/accounts 200 in 643ms
+ GET /api/accounts 200 in 604ms
+ POST /api/accounts 400 in 375ms
+ GET / 200 in 83ms
+ GET / 200 in 77ms
+ GET /api/accounts 200 in 952ms
+ POST /api/accounts 201 in 888ms
+ GET /api/accounts 200 in 566ms
+ GET /api/accounts 200 in 504ms
+ POST /api/accounts 400 in 222ms
+ ✓ Compiled in 3s (1599 modules)
+ GET /signup 200 in 2346ms
+ GET /setup-bank 200 in 2349ms
+ GET /signup 200 in 96ms
+ GET /setup-bank 200 in 89ms
+ GET / 200 in 242ms
+ GET / 200 in 78ms
+ GET /api/accounts 200 in 1575ms
+ ✓ Compiled /api/transactions in 225ms (880 modules)
+ POST /api/transactions 201 in 1112ms
+ GET /api/transactions 200 in 882ms
+ GET /api/transactions?startDate=2026-03-15 200 in 678ms
+ ✓ Compiled /api/transactions/export in 385ms (1472 modules)
+ GET /api/transactions/export 200 in 1006ms
+ GET / 200 in 224ms
+ GET / 200 in 91ms
+ GET /api/transactions?startDate=2026-03-15 200 in 1091ms
+ ✓ Compiled in 1454ms (1486 modules)
+ GET /signup 200 in 155ms
+ GET /setup-bank 200 in 158ms
+ GET / 200 in 179ms
+ GET / 200 in 93ms
+ GET /api/accounts 200 in 862ms
+ POST /api/transactions 201 in 519ms
+ GET /api/transactions 200 in 554ms
+ GET /api/transactions?startDate=2026-03-15 200 in 575ms
+ GET /api/transactions/export 200 in 277ms
+ GET / 200 in 84ms
+ GET / 200 in 77ms
+ GET /api/accounts 200 in 1266ms
+ ○ Compiling /api/transfers ...
+ ✓ Compiled /api/transfers in 577ms (880 modules)
+ GET /signup 200 in 159ms
+ GET /setup-bank 200 in 163ms
+ POST /api/transfers 201 in 3507ms
+ GET /api/accounts?id=101 200 in 563ms
+ GET /api/accounts?id=102 200 in 602ms
+ GET /api/accounts 200 in 568ms
+ GET /api/accounts 200 in 558ms
+ POST /api/transfers 404 in 1220ms
+ GET /api/accounts 200 in 575ms
+ POST /api/transfers 400 in 808ms
+ GET /signup 200 in 733ms
+ ✓ Compiled in 2.8s (1519 modules)
+ GET /setup-bank 200 in 2629ms
+ GET /signup 200 in 80ms
+ GET /setup-bank 200 in 59ms
+ GET / 200 in 207ms
+ GET / 200 in 83ms
+ ○ Compiling /api/payees ...
+ ✓ Compiled /api/payees in 693ms (1465 modules)
+ POST /api/payees 201 in 1834ms
+ POST /api/payees 201 in 301ms
+ ✓ Compiled /api/bills in 357ms (1470 modules)
+ POST /api/bills 500 in 1148ms
+ ✓ Compiled in 1956ms (1402 modules)
+ GET /signup 200 in 291ms
+ GET /setup-bank 200 in 295ms
+ ✓ Compiled in 645ms (604 modules)
+ GET /signup 200 in 193ms
+ GET /setup-bank 200 in 192ms
+ ✓ Compiled in 788ms (604 modules)
+ GET /signup 200 in 125ms
+ GET /setup-bank 200 in 130ms
+ ✓ Compiled in 298ms (604 modules)
+ GET /signup 200 in 166ms
+ GET /setup-bank 200 in 169ms
+ ✓ Compiled in 322ms (604 modules)
+ GET /signup 200 in 197ms
+ GET /setup-bank 200 in 200ms
+ GET / 200 in 215ms
+ GET / 200 in 74ms
+ ○ Compiling /api/payees ...
+ ✓ Compiled /api/payees in 883ms (875 modules)
+ GET /signup 200 in 152ms
+ GET /setup-bank 200 in 158ms
+ POST /api/payees 500 in 2190ms
+ POST /api/payees 500 in 282ms
+ ✓ Compiled in 1569ms (1479 modules)
+ GET /signup 200 in 201ms
+ GET /setup-bank 200 in 209ms
+ ✓ Compiled in 704ms (1402 modules)
+ GET /signup 200 in 281ms
+ GET /setup-bank 200 in 284ms
+ ✓ Compiled in 646ms (604 modules)
+ GET /signup 200 in 150ms
+ GET /setup-bank 200 in 155ms
+ GET / 200 in 215ms
+ GET / 200 in 79ms
+ ✓ Compiled /api/payees in 266ms (875 modules)
+ GET /signup 200 in 171ms
+ GET /setup-bank 200 in 174ms
+ POST /api/payees 500 in 1821ms
+ POST /api/payees 500 in 273ms
+ GET / 200 in 211ms
+ GET / 200 in 80ms
+ POST /api/payees 500 in 418ms
+ POST /api/payees 500 in 272ms
+ ✓ Compiled in 621ms (1479 modules)
+ GET /signup 200 in 162ms
+ GET /setup-bank 200 in 164ms
+ ✓ Compiled in 495ms (1479 modules)
+ GET /signup 200 in 165ms
+ GET /setup-bank 200 in 169ms
+ GET / 200 in 196ms
+ GET / 200 in 91ms
+ POST /api/payees 201 in 784ms
+ POST /api/payees 201 in 250ms
+ ○ Compiling /api/bills ...
+ ✓ Compiled /api/bills in 816ms (880 modules)
+ GET /signup 200 in 129ms
+ GET /setup-bank 200 in 131ms
+ POST /api/bills 500 in 1681ms
+ GET / 200 in 175ms
+ GET / 200 in 88ms
+ GET / 200 in 91ms
+ GET / 200 in 86ms
+ POST /api/payees 201 in 772ms
+ POST /api/payees 201 in 340ms
+ POST /api/bills 500 in 552ms
+ ✓ Compiled in 5.1s (1484 modules)
+ GET /signup 200 in 312ms
+ GET /setup-bank 200 in 327ms
+ ✓ Compiled in 1297ms (1484 modules)
+ GET /signup 200 in 242ms
+ GET /setup-bank 200 in 245ms
+ ✓ Compiled in 648ms (1484 modules)
+ GET /signup 200 in 183ms
+ GET /setup-bank 200 in 186ms
+ ✓ Compiled in 1103ms (1484 modules)
+ GET /signup 200 in 171ms
+ GET /setup-bank 200 in 174ms
+ GET / 200 in 193ms
+ GET / 200 in 76ms
+ POST /api/payees 500 in 1637ms
+ POST /api/payees 500 in 895ms
+ GET / 200 in 81ms
+ GET / 200 in 96ms
+ POST /api/payees 500 in 1289ms
+ POST /api/payees 500 in 790ms
+ ✓ Compiled in 1891ms (1481 modules)
+ GET /signup 200 in 329ms
+ GET /setup-bank 200 in 332ms
+ ✓ Compiled in 797ms (1481 modules)
+ GET /signup 200 in 179ms
+ GET /setup-bank 200 in 182ms
+ GET / 200 in 152ms
+ GET / 200 in 89ms
+ POST /api/payees 500 in 1703ms
+ POST /api/payees 500 in 773ms
+ ✓ Compiled in 1092ms (1481 modules)
+ GET /signup 200 in 205ms
+ GET /setup-bank 200 in 211ms
+ ✓ Compiled in 1363ms (1481 modules)
+ GET /signup 200 in 225ms
+ GET /setup-bank 200 in 232ms
+ GET / 200 in 170ms
+ GET / 200 in 75ms
+ POST /api/payees 500 in 1385ms
+ POST /api/payees 500 in 977ms
+ ✓ Compiled in 2.4s (1481 modules)
+ GET /signup 200 in 273ms
+ GET /setup-bank 200 in 282ms
+ GET / 200 in 153ms
+ GET / 200 in 75ms
+ POST /api/payees 500 in 1076ms
+ POST /api/payees 500 in 822ms
+ ✓ Compiled in 2.1s (1481 modules)
+ GET /signup 200 in 183ms
+ GET /setup-bank 200 in 186ms
+ GET / 200 in 167ms
+ GET / 200 in 78ms
+ POST /api/payees 201 in 795ms
+ POST /api/payees 201 in 343ms
+ ○ Compiling /api/bills ...
+ ✓ Compiled /api/bills in 634ms (880 modules)
+ GET /signup 200 in 218ms
+ GET /setup-bank 200 in 221ms
+ POST /api/bills 201 in 1098ms
+ ✓ Compiled in 2.7s (1402 modules)
+ GET /signup 200 in 656ms
+ GET /setup-bank 200 in 662ms
+ ✓ Compiled in 950ms (604 modules)
+ GET /signup 200 in 155ms
+ GET /setup-bank 200 in 159ms
+ ✓ Compiled in 229ms (604 modules)
+ GET /signup 200 in 107ms
+ GET /setup-bank 200 in 123ms
+ ✓ Compiled in 1484ms (604 modules)
+ GET /signup 200 in 111ms
+ GET /setup-bank 200 in 119ms
+ GET / 200 in 219ms
+ GET / 200 in 81ms
+ ○ Compiling /api/beneficiaries ...
+ ✓ Compiled /api/beneficiaries in 1676ms (1467 modules)
+ POST /api/beneficiaries 201 in 3337ms
+ GET /api/beneficiaries 200 in 595ms
+ ✓ Compiled /api/cards in 379ms (1470 modules)
+ GET /api/cards 200 in 935ms
+ ✓ Compiled /api/loans in 460ms (1472 modules)
+ GET /api/loans 200 in 927ms
+ GET /api/loans?id=1 200 in 354ms
+ GET / 200 in 258ms
+ GET / 200 in 91ms
+ ○ Compiling /api/compliance ...
+ ✓ Compiled /api/compliance in 749ms (1474 modules)
+ GET /api/compliance 200 in 1388ms
+ ✓ Compiled /api/locations in 385ms (1476 modules)
+ GET /api/locations 200 in 897ms
+ ○ Compiling /api/admin ...
+ ✓ Compiled /api/admin in 807ms (1478 modules)
+ POST /api/admin 201 in 1388ms
+ GET /api/admin 200 in 316ms
+ ○ Compiling /api/support ...
+ ✓ Compiled /api/support in 784ms (1480 modules)
+ POST /api/support 400 in 1289ms
+ GET / 200 in 245ms
+ GET / 200 in 74ms
+ GET /api/compliance 200 in 797ms
+ GET /api/locations 200 in 261ms
+ POST /api/admin 201 in 267ms
+ GET /api/admin 200 in 298ms
+ ✓ Compiled /api/accounts in 493ms (886 modules)
+ GET /signup 200 in 132ms
+ GET /setup-bank 200 in 134ms
+ GET /api/accounts 200 in 935ms
+ POST /api/support 201 in 264ms
+ GET / 200 in 221ms
+ GET / 200 in 80ms
+ ○ Compiling /api/notifications ...
+ ✓ Compiled /api/notifications in 885ms (1468 modules)
+ POST /api/notifications 201 in 1890ms
+ GET /api/notifications 200 in 310ms
+ ○ Compiling /api/insights ...
+ ✓ Compiled /api/insights in 873ms (1470 modules)
+ GET /api/insights 200 in 1511ms
+ ✓ Compiled /api/open in 399ms (1472 modules)
+ GET /api/open 200 in 741ms
+ ✓ Compiled /api/fraud in 427ms (1474 modules)
+ GET /api/fraud 200 in 782ms
+ ✓ Compiled /api/devices in 494ms (886 modules)
+ GET /signup 200 in 175ms
+ GET /setup-bank 200 in 178ms
+ GET /api/devices 200 in 924ms
+ ✓ Compiled /api/webhooks in 442ms (1478 modules)
+ GET /api/webhooks 200 in 808ms
+ GET / 200 in 200ms
+ GET / 200 in 76ms
+ ○ Compiling /api/beneficiaries ...
+ POST /api/notifications 201 in 863ms
+ ✓ Compiled /api/beneficiaries in 806ms (890 modules)
+ ✓ Compiled in 1ms (894 modules)
+ ✓ Compiled in 0ms (894 modules)
+ ✓ Compiled in 0ms (894 modules)
+ GET /api/accounts 200 in 2622ms
+ ✓ Compiled in 0ms (894 modules)
+ GET /api/notifications 200 in 2081ms
+ ✓ Compiled in 0ms (894 modules)
+ POST /api/beneficiaries 201 in 3187ms
+ GET /signup 200 in 1678ms
+ GET /setup-bank 200 in 1716ms
+ POST /api/payees 201 in 3489ms
+ ✓ Compiled in 0ms (894 modules)
+ ✓ Compiled in 1ms (894 modules)
+ ✓ Compiled in 0ms (894 modules)
+ POST /api/accounts 201 in 1979ms
+ GET /api/insights 200 in 1726ms
+ GET /api/beneficiaries 200 in 1720ms
+ GET /api/accounts 200 in 259ms
+ ○ Compiling /api/cards ...
+ GET /api/accounts 200 in 576ms
+ POST /api/payees 201 in 1931ms
+ GET /api/open 200 in 633ms
+ ✓ Compiled /api/bills in 875ms (896 modules)
+ ✓ Compiled (898 modules)
+ GET /signup 200 in 117ms
+ GET /setup-bank 200 in 120ms
+ POST /api/accounts 400 in 1276ms
+ GET /api/cards 200 in 2067ms
+ GET /api/fraud 200 in 1309ms
+ POST /api/bills 201 in 1417ms
+ ✓ Compiled /api/loans in 388ms (900 modules)
+ ✓ Compiled (902 modules)
+ GET /api/accounts 200 in 1221ms
+ GET /api/loans 200 in 1266ms
+ GET /api/devices 200 in 1268ms
+ GET /api/compliance 200 in 1313ms
+ ✓ Compiled /api/locations in 407ms (904 modules)
+ ✓ Compiled in 0ms (906 modules)
+ ✓ Compiled in 0ms (906 modules)
+ ✓ Compiled in 1ms (906 modules)
+ GET /api/webhooks 200 in 1799ms
+ GET /api/loans?id=1 200 in 1813ms
+ POST /api/transactions 201 in 1880ms
+ GET /signup 200 in 1810ms
+ GET /setup-bank 200 in 1811ms
+ GET /api/locations 200 in 2266ms
+ ○ Compiling /api/admin ...
+ GET /api/accounts 200 in 727ms
+ GET /api/transactions 200 in 730ms
+ ✓ Compiled /api/transfers in 974ms (908 modules)
+ ✓ Compiled (910 modules)
+ GET /signup 200 in 121ms
+ GET /setup-bank 200 in 124ms
+ POST /api/admin 201 in 2148ms
+ GET /api/transactions?startDate=2026-03-15 200 in 1539ms
+ POST /api/transfers 201 in 1549ms
+ GET /api/admin 200 in 302ms
+ GET /api/accounts?id=1 200 in 322ms
+ ○ Compiling /api/transactions/export ...
+ ✓ Compiled /api/transactions/export in 961ms (912 modules)
+ ✓ Compiled in 0ms (912 modules)
+ ✓ Compiled in 0ms (912 modules)
+ ✓ Compiled in 1ms (912 modules)
+ GET /api/transactions/export 200 in 2345ms
+ GET /api/accounts 200 in 2035ms
+ GET /api/accounts?id=2 200 in 2037ms
+ GET /signup 200 in 2056ms
+ ○ Compiling /api/support ...
+ GET /setup-bank 200 in 2845ms
+ ✓ Compiled /api/support in 1446ms (914 modules)
+ POST /api/support 201 in 2464ms
+ GET /api/accounts 200 in 2302ms
+ GET /api/accounts 200 in 233ms
+ POST /api/transfers 201 in 247ms
+ GET /api/accounts 200 in 291ms
+ POST /api/transfers 400 in 242ms
+ ✓ Compiled in 4.1s (1402 modules)
+ GET /signup 200 in 317ms
+ GET /setup-bank 200 in 319ms
+ GET / 200 in 215ms
+ GET / 200 in 84ms
+ ○ Compiling /api/payees ...
+ ✓ Compiled /api/payees in 1235ms (878 modules)
+ ✓ Compiled in 0ms (884 modules)
+ ✓ Compiled in 1ms (884 modules)
+ ✓ Compiled in 1ms (884 modules)
+ GET /signup 200 in 1756ms
+ GET /setup-bank 200 in 1758ms
+ POST /api/notifications 201 in 3163ms
+ GET /signup 200 in 121ms
+ GET /setup-bank 200 in 138ms
+ GET /api/notifications 200 in 383ms
+ POST /api/payees 201 in 3343ms
+ POST /api/beneficiaries 201 in 3938ms
+ ○ Compiling /api/insights ...
+ GET /api/accounts 200 in 4007ms
+ ✓ Compiled /api/insights in 1256ms (886 modules)
+ ✓ Compiled in 0ms (886 modules)
+ ✓ Compiled in 0ms (886 modules)
+ ✓ Compiled in 0ms (886 modules)
+ GET /api/beneficiaries 200 in 2043ms
+ GET /api/insights 200 in 2679ms
+ POST /api/accounts 201 in 2016ms
+ POST /api/payees 201 in 2651ms
+ GET /signup 200 in 1740ms
+ GET /setup-bank 200 in 1754ms
+ ✓ Compiled /api/open in 494ms (888 modules)
+ ✓ Compiled in 1ms (892 modules)
+ ✓ Compiled in 1ms (892 modules)
+ ✓ Compiled in 0ms (892 modules)
+ GET /api/accounts 200 in 2987ms
+ POST /api/bills 201 in 3008ms
+ ✓ Compiled in 0ms (892 modules)
+ GET /signup 200 in 2446ms
+ GET /setup-bank 200 in 2485ms
+ GET /api/open 200 in 3657ms
+ GET /api/cards 200 in 3660ms
+ ✓ Compiled /api/fraud in 1ms (892 modules)
+ ✓ Compiled /api/loans in 3ms (896 modules)
+ ✓ Compiled in 0ms (898 modules)
+ ✓ Compiled in 0ms (898 modules)
+ GET /signup 200 in 1953ms
+ GET /setup-bank 200 in 1870ms
+ GET /api/accounts 200 in 2509ms
+ ✓ Compiled in 0ms (898 modules)
+ GET /api/compliance 200 in 2785ms
+ GET /api/fraud 200 in 2351ms
+ GET /signup 200 in 1197ms
+ GET /setup-bank 200 in 1129ms
+ GET /api/loans 200 in 2864ms
+ POST /api/accounts 400 in 976ms
+ ○ Compiling /api/devices ...
+ ✓ Compiled /api/devices in 576ms (900 modules)
+ ✓ Compiled (902 modules)
+ GET /api/loans?id=1 200 in 1813ms
+ GET /signup 200 in 2063ms
+ GET /setup-bank 200 in 2040ms
+ GET /api/locations 200 in 2350ms
+ GET /signup 200 in 150ms
+ GET /api/devices 200 in 2517ms
+ ○ Compiling /api/admin ...
+ GET /api/accounts 200 in 813ms
+ GET /api/accounts 200 in 2709ms
+ GET /setup-bank 200 in 1048ms
+ ✓ Compiled /api/transactions in 1432ms (904 modules)
+ ✓ Compiled (910 modules)
+ GET /signup 200 in 2928ms
+ GET /setup-bank 200 in 2024ms
+ GET /api/webhooks 200 in 2105ms
+ POST /api/transfers 201 in 2113ms
+ POST /api/transactions 201 in 2157ms
+ POST /api/admin 201 in 3124ms
+ GET /signup 200 in 200ms
+ GET /setup-bank 200 in 270ms
+ GET /signup 200 in 101ms
+ GET /setup-bank 200 in 65ms
+ GET /api/accounts?id=1 200 in 303ms
+ GET /api/admin 200 in 277ms
+ GET /api/transactions 200 in 283ms
+ GET /api/accounts?id=2 200 in 227ms
+ GET /api/accounts 200 in 1472ms
+ GET /api/transactions?startDate=2026-03-15 200 in 1491ms
+ GET /api/accounts 200 in 977ms
+ ○ Compiling /api/transactions/export ...
+ ✓ Compiled /api/transactions/export in 3.4s (912 modules)
+ ✓ Compiled in 1ms (914 modules)
+ ✓ Compiled in 0ms (914 modules)
+ ✓ Compiled in 1ms (914 modules)
+ POST /api/support 201 in 7943ms
+ GET /api/transactions/export 200 in 8458ms
+ GET /api/accounts 200 in 7516ms
+ GET /signup 200 in 4275ms
+ GET /setup-bank 200 in 4295ms
+ GET /signup 200 in 91ms
+ GET /setup-bank 200 in 95ms
+ POST /api/transfers 404 in 276ms
+ GET /api/accounts 200 in 313ms
+ POST /api/transfers 400 in 294ms
+ ⨯ ./lib/data/banking-data.ts
+Error:   [31mx[0m Return statement is not allowed here
+    ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/lib/data/banking-data.ts[0m:23:1]
+ [2m20[0m |     if (process.env.NODE_ENV === "production") {
+ [2m21[0m |       throw new Error("SUPABASE_SERVICE_ROLE_KEY is required for live data access in production.");
+ [2m22[0m |     }
+ [2m23[0m |     return true;
+    : [35;1m    ^^^^^^^^^^^^[0m
+ [2m24[0m |   }
+ [2m25[0m | 
+ [2m26[0m |   return false;
+    `----
+  [31mx[0m Return statement is not allowed here
+    ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/lib/data/banking-data.ts[0m:26:1]
+ [2m23[0m |     return true;
+ [2m24[0m |   }
+ [2m25[0m | 
+ [2m26[0m |   return false;
+    : [35;1m  ^^^^^^^^^^^^^[0m
+ [2m27[0m | }
+ [2m28[0m | 
+ [2m29[0m | export async function listUsers(tenantId: string) {
+    `----
+  [31mx[0m Expression expected
+    ,-[[36;1;4m/home/bacancy/Desktop/projects/bank-ai-copilot/lib/data/banking-data.ts[0m:27:1]
+ [2m24[0m |   }
+ [2m25[0m | 
+ [2m26[0m |   return false;
+ [2m27[0m | }
+    : [35;1m^[0m
+ [2m28[0m | 
+ [2m29[0m | export async function listUsers(tenantId: string) {
+ [2m30[0m |   return shouldUseMockBankStore() ? mock.listRecords(tenantId, "users") : live.listUsers(tenantId);
+    `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./lib/data/banking-data.ts
+./app/api/notifications/route.ts
+ GET /signup 500 in 84ms
+ GET /setup-bank 500 in 85ms
+ GET /signup 500 in 60ms
+ GET /setup-bank 500 in 60ms
+ ✓ Compiled in 249ms (604 modules)
+ GET /signup 500 in 59ms
+ GET /setup-bank 500 in 56ms
+ ✓ Compiled in 205ms (604 modules)
+ GET /signup 500 in 47ms
+ GET /setup-bank 500 in 52ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /setup-bank 200 in 189ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /signup 500 in 254ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 3.5s (1490 modules)
+ GET /setup-bank 200 in 527ms
+ GET /signup 200 in 445ms
+ GET /signup 200 in 178ms
+ GET /setup-bank 200 in 194ms
+ ○ Compiling /api/observability/metrics ...
+ ✓ Compiled /api/observability/metrics in 1744ms (902 modules)
+ ✓ Compiled (905 modules)
+ GET /api/tenant 200 in 2570ms
+ GET /api/tenant 200 in 73ms
+ GET /signup 200 in 272ms
+ GET /setup-bank 200 in 280ms
+ POST /api/observability/metrics 200 in 4289ms
+ POST /api/observability/metrics 200 in 4349ms
+ ✓ Compiled in 528ms (1482 modules)
+ GET /signup 200 in 186ms
+ GET /setup-bank 200 in 191ms
+ ✓ Compiled in 215ms (604 modules)
+ GET /signup 200 in 145ms
+ GET /setup-bank 200 in 152ms
+ GET / 200 in 240ms
+ GET / 200 in 87ms
+ ○ Compiling /api/beneficiaries ...
+ ✓ Compiled /api/beneficiaries in 1439ms (877 modules)
+ GET /signup 200 in 172ms
+ GET /setup-bank 200 in 174ms
+ POST /api/beneficiaries 201 in 2314ms
+ GET /api/beneficiaries 200 in 362ms
+ ○ Compiling /api/cards ...
+ ✓ Compiled /api/cards in 680ms (880 modules)
+ GET /signup 200 in 131ms
+ GET /setup-bank 200 in 133ms
+ GET /api/cards 200 in 1038ms
+ ✓ Compiled /api/loans in 284ms (882 modules)
+ GET /signup 200 in 126ms
+ GET /setup-bank 200 in 129ms
+ GET /api/loans 200 in 630ms
+ GET /api/loans?id=1 200 in 254ms
+ GET /api/loans 200 in 327ms
+ POST /api/loans?action=pay 200 in 300ms
+ GET / 200 in 161ms
+ GET / 200 in 78ms
+ ○ Compiling /api/documents ...
+ ✓ Compiled /api/documents in 1945ms (1469 modules)
+ POST /api/documents 201 in 4791ms
+ GET /api/documents 200 in 399ms
+ GET / 200 in 211ms
+ GET / 200 in 73ms
+ ○ Compiling /api/accounts ...
+ ✓ Compiled /api/accounts in 984ms (878 modules)
+ GET /signup 200 in 147ms
+ GET /setup-bank 200 in 150ms
+ GET /api/accounts 200 in 2179ms
+ ○ Compiling /api/checkdeposit ...
+ ✓ Compiled /api/checkdeposit in 878ms (1473 modules)
+ POST /api/checkdeposit 201 in 2049ms
+ ○ Compiling /api/chatbot ...
+ ✓ Compiled /api/chatbot in 1278ms (1475 modules)
+ POST /api/chatbot 201 in 1688ms
+ ○ Compiling /api/payments ...
+ ✓ Compiled /api/payments in 1450ms (1477 modules)
+ POST /api/payments 201 in 1913ms
+ POST /api/payments 201 in 291ms
+ ✓ Compiled /api/savings in 439ms (1479 modules)
+ POST /api/savings 201 in 884ms
+ ✓ Compiled /api/appointments in 442ms (1481 modules)
+ POST /api/appointments 201 in 886ms
+ GET /api/accounts 200 in 379ms
+ ✓ Compiled /api/account-members in 425ms (1483 modules)
+ POST /api/account-members 201 in 802ms
+ ○ Compiling /api/investments ...
+ ✓ Compiled /api/investments in 553ms (1485 modules)
+ POST /api/investments 201 in 1001ms
+ GET /api/investments 200 in 299ms
+ ✓ Compiled in 6.4s (1402 modules)
+ GET /signup 200 in 701ms
+ GET /setup-bank 200 in 706ms
+ GET / 200 in 218ms
+ GET / 200 in 76ms
+ ○ Compiling /api/insights ...
+ ✓ Compiled /api/insights in 1315ms (878 modules)
+ GET /signup 200 in 169ms
+ GET /setup-bank 200 in 171ms
+ GET /api/insights 200 in 2632ms
+ ✓ Compiled /api/open in 256ms (880 modules)
+ GET /signup 200 in 161ms
+ GET /setup-bank 200 in 164ms
+ GET /api/open 200 in 674ms
+ ○ Compiling /api/users ...
+ ✓ Compiled /api/users in 1329ms (882 modules)
+ GET /signup 200 in 131ms
+ GET /setup-bank 200 in 133ms
+ GET /api/users 200 in 1680ms
+ PUT /api/users?id=11111111-1111-1111-1111-111111111111-user 200 in 318ms
+ ○ Compiling /api/marketing ...
+ ✓ Compiled /api/marketing in 551ms (1474 modules)
+ GET /api/marketing 200 in 983ms
+ ○ Compiling /api/fraud ...
+ ✓ Compiled /api/fraud in 765ms (886 modules)
+ GET /signup 200 in 132ms
+ GET /setup-bank 200 in 135ms
+ GET /api/fraud 200 in 1100ms
+ ○ Compiling /api/voice ...
+ ✓ Compiled /api/voice in 980ms (1478 modules)
+ POST /api/voice 201 in 1524ms
+ ✓ Compiled /api/crypto in 463ms (1480 modules)
+ GET /api/crypto 200 in 859ms
+ ○ Compiling /api/savings ...
+ ✓ Compiled /api/savings in 783ms (892 modules)
+ GET /signup 200 in 132ms
+ GET /setup-bank 200 in 134ms
+ POST /api/savings 201 in 1127ms
+ ✓ Compiled /api/wallet in 465ms (1484 modules)
+ POST /api/wallet 201 in 872ms
+ ✓ Compiled /api/credit-scores in 453ms (1486 modules)
+ GET /api/credit-scores 200 in 793ms
+ ○ Compiling /api/admin ...
+ ✓ Compiled /api/admin in 758ms (898 modules)
+ GET /signup 200 in 146ms
+ GET /setup-bank 200 in 148ms
+ GET /api/admin 200 in 1081ms
+ ✓ Compiled /api/compliance in 363ms (900 modules)
+ GET /signup 200 in 131ms
+ GET /setup-bank 200 in 134ms
+ GET /api/compliance 200 in 665ms
+ ○ Compiling /api/chatbot ...
+ ✓ Compiled /api/chatbot in 911ms (902 modules)
+ GET /signup 200 in 131ms
+ GET /setup-bank 200 in 132ms
+ POST /api/chatbot 201 in 1210ms
+ ✓ Compiled /api/payments in 390ms (904 modules)
+ GET /signup 200 in 141ms
+ GET /setup-bank 200 in 144ms
+ POST /api/payments 201 in 697ms
+ ✓ Compiled in 2.8s (604 modules)
+ GET /signup 200 in 95ms
+ GET /setup-bank 200 in 98ms
+ GET / 200 in 239ms
+ GET / 200 in 87ms
+ ○ Compiling /api/tenant ...
+ ✓ Compiled /api/tenant in 802ms (811 modules)
+ POST /api/tenant 201 in 938ms
+ GET /signup 200 in 242ms
+ PUT /api/tenant 200 in 38ms
+ GET /setup-bank 200 in 271ms
+ PUT /api/tenant 200 in 27ms
+ GET /api/tenant 200 in 24ms
+ PUT /api/tenant 200 in 23ms
+ ○ Compiling /api/admin ...
+ ✓ Compiled /api/admin in 775ms (880 modules)
+ GET /api/admin 200 in 2598ms
+ GET / 200 in 257ms
+ GET / 200 in 75ms
+ ○ Compiling /api/accounts ...
+ ✓ Compiled /api/accounts in 1238ms (878 modules)
+ GET /signup 200 in 162ms
+ GET /setup-bank 200 in 165ms
+ GET /api/accounts?id=1%20OR%201=1-- 404 in 2632ms
+ GET /api/accounts 200 in 515ms
+ GET /api/accounts?id=1 200 in 445ms
+ ○ Compiling /api/auth ...
+ ✓ Compiled /api/auth in 726ms (880 modules)
+ GET /signup 200 in 137ms
+ GET /setup-bank 200 in 139ms
+ GET /api/auth?sessionId=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.invalid.signature 404 in 1261ms
+ POST /api/accounts 400 in 365ms
+ GET / 200 in 175ms
+ GET / 200 in 78ms
+ GET /api/accounts?id=1%20OR%201=1-- 404 in 1317ms
+ GET /api/accounts 200 in 504ms
+ GET /api/accounts?id=1 200 in 425ms
+ GET /api/auth?sessionId=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.invalid.signature 404 in 396ms
+ POST /api/accounts 400 in 423ms
+ GET / 200 in 86ms
+ GET / 200 in 76ms
+ GET /api/accounts?id=1%20OR%201=1-- 404 in 710ms
+ GET /api/accounts 200 in 345ms
+ GET /api/accounts?id=1 200 in 386ms
+ GET /api/auth?sessionId=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.invalid.signature 404 in 377ms
+ POST /api/accounts 400 in 366ms
+ GET / 200 in 87ms
+ GET / 200 in 88ms
+ GET /api/accounts?id=1%20OR%201=1-- 404 in 1112ms
+ POST /api/accounts 201 in 265ms
+ GET /api/accounts?id=5 404 in 254ms
+ GET /api/auth?sessionId=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.invalid.signature 404 in 254ms
+ POST /api/accounts 400 in 302ms
+ GET / 200 in 80ms
+ GET / 200 in 85ms
+ GET /api/accounts 200 in 953ms
+ ○ Compiling /api/transactions ...
+ ✓ Compiled /api/transactions in 2.1s (880 modules)
+ GET /signup 200 in 185ms
+ GET /setup-bank 200 in 188ms
+ POST /api/transactions 400 in 2675ms
+ POST /api/transactions 400 in 3184ms
+ POST /api/transactions 400 in 3254ms
+ POST /api/transactions 400 in 3497ms
+ POST /api/transactions 400 in 3636ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11689ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11711ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11714ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11716ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11717ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11722ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11749ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11751ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11753ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11755ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11758ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12042ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12044ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12046ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12048ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12049ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12143ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12144ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12147ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12149ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12150ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12190ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12192ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12193ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12195ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12198ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12238ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12239ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12242ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12244ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12246ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12288ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12289ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12290ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12293ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12294ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12345ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12348ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12350ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12352ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12354ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12412ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12414ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12416ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12418ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12421ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12515ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12517ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12519ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12521ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12522ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12549ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12550ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12553ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12555ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12556ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12771ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12773ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12775ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12777ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12779ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12970ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12972ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12974ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12975ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12977ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12979ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12982ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12984ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12985ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12987ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12988ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12991ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12993ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12995ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12996ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 12998ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13000ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13002ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13004ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13006ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13008ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13009ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13011ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13012ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13014ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13015ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13018ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13020ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13022ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13024ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 13795ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11851ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11853ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 11853ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10509ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10513ms
+ POST /api/transactions 400 in 8425ms
+ POST /api/transactions 400 in 8216ms
+ POST /api/transactions 400 in 8293ms
+ POST /api/transactions 400 in 8295ms
+ POST /api/transactions 400 in 8298ms
+ POST /api/transactions 400 in 8456ms
+ POST /api/transactions 400 in 8460ms
+ POST /api/transactions 400 in 8461ms
+ POST /api/transactions 400 in 8480ms
+ POST /api/transactions 400 in 8519ms
+ POST /api/transactions 400 in 8566ms
+ POST /api/transactions 400 in 8585ms
+ POST /api/transactions 400 in 8590ms
+ POST /api/transactions 400 in 8595ms
+ POST /api/transactions 400 in 8607ms
+ POST /api/transactions 400 in 8612ms
+ POST /api/transactions 400 in 8626ms
+ POST /api/transactions 400 in 8628ms
+ POST /api/transactions 400 in 8636ms
+ POST /api/transactions 400 in 8657ms
+ POST /api/transactions 400 in 8701ms
+ POST /api/transactions 400 in 8705ms
+ POST /api/transactions 400 in 8709ms
+ POST /api/transactions 400 in 8732ms
+ POST /api/transactions 400 in 8747ms
+ POST /api/transactions 400 in 8851ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10377ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10382ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10384ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10386ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10387ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10389ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10391ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10392ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10394ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10395ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10397ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10400ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10402ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10403ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10405ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10407ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10408ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10410ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10411ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10413ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10415ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10417ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10419ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10421ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10422ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10424ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10426ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10427ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10429ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10430ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10432ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10434ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10437ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10438ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10440ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10442ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10443ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10445ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10447ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10449ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10451ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10454ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10455ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10457ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10459ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10461ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10462ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10464ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10466ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10461ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10462ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10464ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10466ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10468ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10472ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10473ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10475ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10476ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10478ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10480ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10481ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10483ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10485ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10486ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10487ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10488ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10490ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10492ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10493ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10497ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10499ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10501ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10503ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 400 in 10505ms
+ GET /api/transactions 200 in 261ms
+ PUT /api/transactions?id=1 200 in 300ms
+ ✓ Compiled /api/transactions/export in 298ms (882 modules)
+ GET /api/transactions/export 200 in 400ms
+ GET /signup 200 in 187ms
+ GET /setup-bank 200 in 190ms
+ GET / 200 in 213ms
+ GET / 200 in 80ms
+ GET /api/accounts 200 in 581ms
+ POST /api/transactions 201 in 336ms
+ POST /api/transactions 201 in 679ms
+ POST /api/transactions 201 in 768ms
+ POST /api/transactions 201 in 784ms
+ POST /api/transactions 201 in 810ms
+ POST /api/transactions 201 in 825ms
+ POST /api/transactions 201 in 845ms
+ POST /api/transactions 201 in 859ms
+ POST /api/transactions 201 in 871ms
+ POST /api/transactions 201 in 875ms
+ POST /api/transactions 201 in 1114ms
+ POST /api/transactions 201 in 1116ms
+ POST /api/transactions 201 in 1118ms
+ POST /api/transactions 201 in 1119ms
+ POST /api/transactions 201 in 1123ms
+ POST /api/transactions 201 in 1125ms
+ POST /api/transactions 201 in 1125ms
+ POST /api/transactions 201 in 1220ms
+ POST /api/transactions 201 in 1327ms
+ POST /api/transactions 201 in 1346ms
+ POST /api/transactions 201 in 1352ms
+ POST /api/transactions 201 in 6022ms
+ POST /api/transactions 201 in 6031ms
+ POST /api/transactions 201 in 6034ms
+ POST /api/transactions 201 in 6040ms
+ POST /api/transactions 201 in 6050ms
+ POST /api/transactions 201 in 6054ms
+ POST /api/transactions 201 in 6060ms
+ POST /api/transactions 201 in 6066ms
+ POST /api/transactions 201 in 6086ms
+ POST /api/transactions 201 in 6089ms
+ POST /api/transactions 201 in 6097ms
+ POST /api/transactions 201 in 6106ms
+ POST /api/transactions 201 in 6122ms
+ POST /api/transactions 201 in 6235ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10592ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10598ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10600ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10601ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10603ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10604ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10606ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10607ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10609ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10610ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10613ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10614ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10616ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10617ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10618ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10620ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10621ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10623ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10624ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10625ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10628ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10629ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10631ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10632ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10633ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10635ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10636ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10637ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10639ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10640ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10639ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10640ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10641ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10643ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10643ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10645ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10646ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10647ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10649ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10650ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10652ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10655ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10656ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10657ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10657ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10657ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10658ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10661ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10662ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10664ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10665ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10667ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10668ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10672ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10674ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10674ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10676ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10677ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10678ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10680ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10681ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10683ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10684ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10687ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10688ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 11124ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10511ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10576ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10354ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10356ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10359ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10361ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10364ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10365ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10367ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10368ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10370ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10371ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10373ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10374ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10376ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10378ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10380ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10382ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10384ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10385ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10387ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10388ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10390ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10391ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10393ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10395ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10396ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10398ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10400ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10402ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10403ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10405ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10406ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10408ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10409ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10411ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10413ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10414ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10416ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10419ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10420ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10422ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10423ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10425ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10427ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10429ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10431ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10433ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10434ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10437ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10439ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10440ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10442ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10444ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10445ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10447ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10449ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10450ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10452ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10455ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10456ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10458ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10459ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10461ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10462ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10464ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10466ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10468ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10469ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10471ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10473ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10474ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10476ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10477ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10479ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10480ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10482ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10484ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10485ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10487ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10490ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10491ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10493ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10495ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10496ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10498ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10499ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10501ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10504ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10505ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10508ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10509ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10511ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10512ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10515ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10516ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10518ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10520ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10522ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10524ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10526ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10507ms
+audit_logs insert failed TypeError: fetch failed
+ PUT /api/transactions?id=1 200 in 10510ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10516ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10616ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10353ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10355ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10357ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10359ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10360ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10362ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10364ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10366ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10368ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10370ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10373ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10376ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10377ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10379ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10381ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10382ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10385ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10387ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10388ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10390ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10393ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10394ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10396ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10398ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10400ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10401ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10403ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10406ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10407ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10408ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10410ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10411ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10413ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10414ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10416ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10417ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10419ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10422ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10424ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10425ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10426ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10428ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10429ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10431ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10433ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10434ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10436ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10438ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10440ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10442ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10443ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10445ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10446ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10448ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10449ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10451ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10453ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10455ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10457ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10458ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10460ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10461ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10463ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10465ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10466ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10469ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10470ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10472ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10475ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10477ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10478ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10480ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10482ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10483ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10486ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10487ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10488ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10490ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10492ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10493ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10495ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10498ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10500ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10501ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10504ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10506ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10507ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10509ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10511ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10513ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10514ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10516ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10517ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10519ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10521ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10522ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10523ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10525ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10527ms
+ GET /api/transactions/export 200 in 20ms
+ GET / 200 in 95ms
+ GET / 200 in 92ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10510ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10511ms
+ POST /api/transactions 200 in 8953ms
+audit_logs insert failed TypeError: fetch failed
+ GET / 200 in 78ms
+ GET / 200 in 94ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10516ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10528ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10430ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10436ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10441ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10448ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10472ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10475ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10478ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10480ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10482ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10485ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10502ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10504ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10505ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10508ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10509ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10511ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10523ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10525ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10526ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10527ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10529ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10532ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10534ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10536ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10512ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/accounts 200 in 10504ms
+ POST /api/transactions 201 in 7124ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10414ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10416ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10436ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10438ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10440ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10442ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10444ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10446ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10472ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10474ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10477ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10480ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10482ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10484ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10486ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10488ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10490ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10492ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10495ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10496ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10499ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10503ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10504ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/transactions 201 in 10506ms
+ GET /api/transactions 200 in 314ms
+ PUT /api/transactions?id=1 200 in 296ms
+ GET /api/transactions/export 200 in 19ms
+ GET / 200 in 86ms
+ GET / 200 in 75ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10525ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10513ms
+audit_logs insert failed TypeError: fetch failed
+ PUT /api/transactions?id=1 200 in 10507ms
+ GET /api/transactions/export 200 in 18ms
+ GET / 200 in 82ms
+ GET / 200 in 75ms
+audit_logs insert failed TypeError: fetch failed
+ GET /api/transactions 200 in 10513ms
+ GET /api/transactions/export 200 in 21ms
+ GET /api/transactions 200 in 5494ms
+ GET /api/transactions 200 in 356ms
+ GET /api/transactions/export 200 in 24ms
+ GET /api/transactions 200 in 262ms
+ PUT /api/transactions?id=1 200 in 283ms
+ GET /api/transactions/export 200 in 18ms
+ GET / 200 in 80ms
+ GET / 200 in 77ms
+ GET /api/transactions 200 in 1075ms
+ GET /api/transactions/export 200 in 17ms
+ GET /api/transactions 200 in 369ms
+ GET /api/transactions 200 in 456ms
+ PUT /api/transactions?id=1 200 in 292ms
+ GET /api/transactions/export 200 in 19ms
+ GET / 200 in 83ms
+ GET / 200 in 79ms
+ GET / 200 in 78ms
+ GET / 200 in 79ms
+ ○ Compiling /api/auth ...
+ ✓ Compiled /api/auth in 1042ms (878 modules)
+ POST /api/auth 201 in 2053ms
+ POST /api/auth 201 in 392ms
+ ✓ Compiled /api/accounts in 229ms (880 modules)
+ POST /api/accounts 201 in 669ms
+ ✓ Compiled /api/transactions in 260ms (882 modules)
+ POST /api/transactions 201 in 745ms
+ PUT /api/accounts?id=6 200 in 397ms
+ POST /api/accounts 201 in 402ms
+ ○ Compiling /api/transfers ...
+ ✓ Compiled /api/transfers in 1278ms (884 modules)
+ GET /signup 200 in 180ms
+ GET /setup-bank 200 in 182ms
+ POST /api/transfers 400 in 1694ms
+ GET / 200 in 210ms
+ GET / 200 in 71ms
+ POST /api/auth 201 in 797ms
+ POST /api/auth 201 in 381ms
+ POST /api/accounts 201 in 260ms
+ POST /api/transactions 201 in 314ms
+ PUT /api/accounts?id=8 200 in 290ms
+ POST /api/accounts 201 in 226ms
+ POST /api/transfers 400 in 247ms
+ GET / 200 in 93ms
+ GET / 200 in 80ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/auth 201 in 10510ms
+audit_logs insert failed TypeError: fetch failed
+ POST /api/auth 201 in 10504ms
+ POST /api/accounts 201 in 5600ms
+ POST /api/transactions 201 in 518ms
+ PUT /api/accounts?id=10 200 in 588ms
+ POST /api/accounts 201 in 503ms
+ POST /api/transfers 201 in 500ms
+ ○ Compiling /api/bills ...
+ ✓ Compiled /api/bills in 1496ms (886 modules)
+ GET /signup 200 in 181ms
+ GET /setup-bank 200 in 184ms
+ GET / 200 in 179ms
+ GET / 200 in 74ms
+ POST /api/auth 201 in 1164ms
+ POST /api/auth 201 in 361ms
+ POST /api/accounts 201 in 338ms
+ POST /api/transactions 201 in 350ms
+ PUT /api/accounts?id=12 200 in 498ms
+ POST /api/accounts 201 in 501ms
+ POST /api/transfers 201 in 439ms
+ POST /api/bills 201 in 347ms
+ GET /api/transactions 200 in 405ms
+ ○ Compiling /api/documents ...
+ ✓ Compiled /api/documents in 846ms (889 modules)
+ GET /signup 200 in 145ms
+ GET /setup-bank 200 in 148ms
+ POST /api/documents 400 in 1271ms
+ GET / 200 in 146ms
+ GET / 200 in 77ms
+ POST /api/auth 201 in 875ms
+ POST /api/auth 201 in 367ms
+ POST /api/accounts 201 in 1090ms
+ POST /api/transactions 201 in 400ms
+ PUT /api/accounts?id=14 200 in 473ms
+ POST /api/accounts 201 in 296ms
+ POST /api/transfers 201 in 298ms
+ POST /api/bills 201 in 397ms
+ GET /api/transactions 200 in 382ms
+ POST /api/documents 201 in 1468ms
+ GET /api/documents 200 in 350ms
+ GET / 200 in 80ms
+ GET / 200 in 74ms
+ POST /api/auth 201 in 595ms
+ POST /api/auth 201 in 293ms
+ POST /api/accounts 201 in 275ms
+ POST /api/transactions 201 in 303ms
+ PUT /api/accounts?id=16 200 in 270ms
+ POST /api/accounts 201 in 273ms
+ POST /api/transfers 201 in 300ms
+ POST /api/bills 201 in 302ms
+ GET /api/transactions 200 in 270ms
+ POST /api/documents 201 in 826ms
+ GET /api/documents 200 in 219ms
+ GET / 200 in 77ms
+ GET / 200 in 70ms
+ ○ Compiling /api/tenant ...
+ ✓ Compiled /api/tenant in 1642ms (811 modules)
+ POST /api/tenant 201 in 1786ms
+ PUT /api/tenant 200 in 23ms
+ ○ Compiling /api/users ...
+ ✓ Compiled /api/users in 1365ms (880 modules)
+ POST /api/users 201 in 2882ms
+ ✓ Compiled /api/auth in 252ms (882 modules)
+ POST /api/auth 201 in 901ms
+ POST /api/auth 201 in 1412ms
+ POST /api/auth 201 in 1403ms
+ GET /api/users 200 in 384ms
+ GET /api/tenant 200 in 19ms

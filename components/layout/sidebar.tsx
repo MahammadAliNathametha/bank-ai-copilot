@@ -10,7 +10,7 @@ import {
   Receipt, FileText, MapPin, Mic, Bitcoin, WalletCards,
   Bell, Calendar, FileBarChart, TrendingUp, ChevronLeft,
   ChevronRight, Users, Settings, Zap, Target, Search,
-  Banknote, PiggyBank, UserPlus, Gavel, Megaphone
+  Banknote, PiggyBank, UserPlus, Gavel, Megaphone, LogOut
 } from "lucide-react";
 
 interface NavGroup {
@@ -165,6 +165,7 @@ export function Sidebar() {
         <NavItem href={"/chatbot" as Route} icon={<Mic className="h-[18px] w-[18px]" />} tooltip="Voice & Chat" active={pathname === "/chatbot"} expanded={expanded} />
         <NavItem href={"/support" as Route} icon={<HelpCircle className="h-[18px] w-[18px]" />} tooltip="Support" active={pathname === "/support"} expanded={expanded} />
         <NavItem href={"/admin" as Route} icon={<Settings className="h-[18px] w-[18px]" />} tooltip="Admin" active={pathname.startsWith("/admin")} expanded={expanded} />
+        <NavItem href={"/" as Route} icon={<LogOut className="h-[18px] w-[18px] text-red-400" />} tooltip="Logout" expanded={expanded} />
       </div>
     </aside>
   );

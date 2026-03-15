@@ -1,49 +1,26 @@
-# PRD
+# Product Requirements Document - Bank AI Copilot
 
-## Executive Summary
+## 1. Overview
 
-White-label banking SaaS for mid-size banks and credit unions built with Next.js, Tailwind, Supabase, and Vercel. Each bank is a tenant with isolated data, customizable branding, onboarding, and SaaS monetization controls.
+Bank AI Copilot is a white-label SaaS digital banking platform designed for rapid deployment by financial institutions. It provides a premium, themeable UX with deep multi-tenant isolation.
 
-## Core Features
+## 2. Target Audience
 
-| #   | Feature                          | MVP Status |
-| --- | -------------------------------- | ---------- |
-| 1   | Dashboard and account management | **LIVE**   |
-| 2   | Real-time balances               | **LIVE**   |
-| 3   | Transfers                        | **LIVE**   |
-| 4   | Bills and payees                 | **LIVE**   |
-| 5   | Check deposit                    | **LIVE**   |
-| 6   | Transactions and CSV export      | **LIVE**   |
-| 7   | Statements and PDF generation    | **LIVE**   |
-| 8   | Security controls                | **LIVE**   |
-| 9   | Support chat                     | **LIVE**   |
-| 10  | Loans                            | **LIVE**   |
-| 11  | Cards                            | **LIVE**   |
-| 12  | Finance insights                 | **LIVE**   |
-| 13  | Locations                        | **LIVE**   |
-| 14  | Alerts                           | **LIVE**   |
-| 15  | P2P payments                     | **LIVE**   |
-| 16  | Budgeting                        | **LIVE**   |
-| 17  | Wire transfers                   | **LIVE**   |
-| 18  | Documents                        | **LIVE**   |
-| 19  | Appointments                     | **LIVE**   |
-| 20  | Business banking                 | **LIVE**   |
-| 21  | Tax docs                         | **LIVE**   |
-| 22  | Onboarding                       | **LIVE**   |
-| 23  | Investing                        | **LIVE**   |
+- Neobanks and Fintech startups.
+- Credit Unions and regional banks upgrading their digital presence.
+- Enterprise SaaS providers offering embedded finance.
 
-## Advanced Features
+## 3. Core Features
 
-Implemented via high-fidelity simulations: AI behavior-based insights, open banking connection stubs, biometric trust metrics, contextual marketing campaigns, ML-based fraud scoring, interactive voice command stubs, crypto-posture charts, automated savings momentum, digital wallet provisioning stubs, credit score monitoring, admin analytics dashboards, regulatory compliance records, AI digital assistant (chatbot), and real-time transaction rails.
+- **Multi-tenancy**: Subdomain-based branding, RLS-backed data isolation.
+- **Banking Ledger**: Real-time account balances, transaction history, and funds movement.
+- **Service Journeys**: Bill pay, transfers, card management, and loan servicing.
+- **Advanced Fintech**: Crypto wallets, AI spending insights, and voice-activated banking.
+- **Admin Console**: SaaS metrics, tenant onboarding, and system observability.
 
-## Innovative Ideas (Picked 3)
+## 4. Technical Requirements
 
-1. **AI Health Scoring**: Live metric in Finance and Insights workspaces.
-2. **Gamified Savings**: Community leaderboards and progress challenges in Savings.
-3. **Carbon Footprint Tracking**: Storytelling-based insights into spending impact.
-
-## Monetization and GTM
-
-- **SaaS Pricing**: Tiered model (Starter/Growth/Enterprise) based on MAU and module toggles.
-- **Onboarding Tools**: Admin setup-bank workspace for rapid white-label branding.
-- **Competitive Edge**: 100% architectural adherence to the "Think beyond, build better" philosophy—surpassing Alkami and Q2 in deployment speed and developer experience.
+- Next.js 15+ with App Router.
+- Tailwind CSS for dynamic themeable styling.
+- Supabase for Auth, Database (PostgreSQL), and Real-time signals.
+- Playwright for E2E testing and Titest for unit testing.

@@ -1,136 +1,69 @@
 "use client";
 
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { startTransition, useMemo } from "react";
-
+import { Briefcase } from "lucide-react";
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Card } from "@/components/ui/card";
-import { apiRequest } from "@/lib/services/http";
-import { accountMemberCreateSchema } from "@/lib/validations/banking";
-import { formatCurrency } from "@/lib/utils";
-import type { AccountMemberRecord, AccountRecord, SupportTicketRecord, UserProfile } from "@/lib/data/mock-bank-store";
+import { Button } from "@/components/ui/button";
 
 export function BusinessWorkspace() {
-  const queryClient = useQueryClient();
-  const { data: users } = useSuspenseQuery({
-    queryKey: ["users", "business"],
-    queryFn: () => apiRequest<UserProfile[]>("/api/users")
-  });
-  const { data: accounts } = useSuspenseQuery({
-    queryKey: ["accounts", "business"],
-    queryFn: () => apiRequest<AccountRecord[]>("/api/accounts")
-  });
-  const { data: members } = useSuspenseQuery({
-    queryKey: ["account-members"],
-    queryFn: () => apiRequest<AccountMemberRecord[]>("/api/account-members")
-  });
-  const { data: tickets } = useSuspenseQuery({
-    queryKey: ["support", "business"],
-    queryFn: () => apiRequest<SupportTicketRecord[]>("/api/support")
-  });
-
-  const membershipRows = useMemo(() => {
-    return members.map((member) => {
-      const user = users.find((entry) => entry.id === member.userId);
-      const account = accounts.find((entry) => entry.id === member.accountId);
-      return {
-        id: member.id,
-        userName: user?.fullName ?? member.userId,
-        role: member.role,
-        accountName: account?.name ?? `Account ${member.accountId}`
-      };
-    });
-  }, [members, users, accounts]);
-
-  const mutation = useMutation({
-    mutationFn: (payload: { accountId: number; userId: string; role: "owner" | "editor" | "viewer" }) =>
-      apiRequest<AccountMemberRecord>("/api/account-members", {
-        method: "POST",
-        body: JSON.stringify(payload)
-      }),
-    onSuccess: () => {
-      startTransition(() => {
-        void queryClient.invalidateQueries({ queryKey: ["account-members"] });
-      });
-    }
-  });
-
-  const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
-
   return (
-    <SectionShell
-      eyebrow="Business"
-      title="Shared-account visibility and service operations for business banking teams"
-      description="This workspace uses the live users, accounts, and support APIs to turn the business shell into a practical team operations surface."
+    <SectionShell 
+      eyebrow="Services" 
+      title="Business Banking Suite" 
+      description="Manage your enterprise treasury, payroll, and corporate credit within a single unified workspace."
     >
-      <div className="grid gap-4 md:grid-cols-4">
-        <MetricCard label="Team members" value={String(users.length)} note="Profiles visible under the current tenant." />
-        <MetricCard label="Shared accounts" value={String(accounts.length)} note="Accounts available to the business team." />
-        <MetricCard label="Portfolio" value={formatCurrency(totalBalance)} note="Combined visible business balance base." />
-        <MetricCard label="Open requests" value={String(tickets.filter((ticket) => ticket.status !== "closed").length)} note="Support items that may require operator action." />
+      <div className="grid gap-6 md:grid-cols-4">
+        <MetricCard label="Operating Capital" value="$452,000" note="Across 4 business accounts." />
+        <MetricCard label="Pending Payroll" value="$82,450" note="Due in 3 days (12 employees)." />
+        <MetricCard label="Credit Line" value="$250,000" note="$120k utilized (Fixed 8.2%)." />
+        <MetricCard label="Tax Provision" value="$42,000" note="Q1 estimated payment ready." />
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card className="space-y-4">
-          <h2 className="font-display text-3xl">Team roster</h2>
-          {users.map((user) => (
-            <div key={user.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
-              <div className="flex items-center justify-between gap-4">
-                <p className="font-medium">{user.fullName}</p>
-                <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{user.role}</span>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Card className="p-6 lg:col-span-2">
+          <h3 className="text-lg font-bold text-white mb-6">Treasury Overview</h3>
+          <div className="space-y-4">
+            {[
+              { name: "Main Operating", balance: "$284,500.00", change: "+12.5%" },
+              { name: "Payroll Reserve", balance: "$120,450.00", change: "+0.0%" },
+              { name: "Merchant Settlement", balance: "$47,050.22", change: "+4.2%" },
+            ].map(acct => (
+              <div key={acct.name} className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div className="flex items-center gap-4">
+                  <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Briefcase className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-white">{acct.name}</p>
+                    <p className="text-[10px] text-slate-500">Active Account</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-white">{acct.balance}</p>
+                  <p className="text-[10px] text-emerald-400">{acct.change}</p>
+                </div>
               </div>
-              <p className="mt-2 text-sm text-slate-400">{user.email}</p>
-            </div>
-          ))}
-        </Card>
-        <Card className="space-y-4">
-          <h2 className="font-display text-3xl">Account access</h2>
-          {membershipRows.map((member) => (
-            <div key={member.id} className="rounded-2xl bg-white/5 border border-white/10 px-4 py-4">
-              <div className="flex items-center justify-between gap-4">
-                <p className="font-medium">{member.userName}</p>
-                <span className="rounded-full bg-[#0a0a0a] px-3 py-1 text-xs font-semibold">{member.role}</span>
-              </div>
-              <p className="mt-2 text-sm text-slate-400">{member.accountName}</p>
-            </div>
-          ))}
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <h3 className="text-sm font-semibold text-slate-300">Grant access</h3>
-            <form
-              className="mt-3 grid gap-3 md:grid-cols-3"
-              onSubmit={(event) => {
-                event.preventDefault();
-                const form = event.currentTarget as HTMLFormElement;
-                const formData = new FormData(form);
-                const payload = accountMemberCreateSchema.parse({
-                  accountId: Number(formData.get("accountId")),
-                  userId: String(formData.get("userId")),
-                  role: String(formData.get("role"))
-                });
-                mutation.mutate(payload);
-                form.reset();
-              }}
-            >
-              <select name="accountId" className="rounded-2xl border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white">
-                {accounts.map((account) => (
-                  <option key={account.id} value={account.id}>{account.name}</option>
-                ))}
-              </select>
-              <select name="userId" className="rounded-2xl border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white">
-                {users.map((user) => (
-                  <option key={user.id} value={user.id}>{user.fullName}</option>
-                ))}
-              </select>
-              <select name="role" className="rounded-2xl border border-white/10 bg-[#0a0a0a] px-3 py-2 text-sm text-white">
-                <option value="viewer">Viewer</option>
-                <option value="editor">Editor</option>
-                <option value="owner">Owner</option>
-              </select>
-              <button className="md:col-span-3 rounded-2xl bg-primary px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black" type="submit">
-                Add member
-              </button>
-            </form>
+            ))}
           </div>
         </Card>
+        
+        <div className="space-y-6">
+          <Card className="p-6">
+            <h4 className="font-bold text-white mb-4">Merchant Services</h4>
+            <div className="space-y-4">
+              <div className="text-center p-4 rounded-xl bg-[#0a0a0a] border border-white/5">
+                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Today&apos;s Sales</p>
+                <p className="text-2xl font-bold text-white font-display">$4,285.90</p>
+              </div>
+              <Button className="w-full h-10 text-xs font-bold">Launch Merchant Portal</Button>
+            </div>
+          </Card>
+          <Card className="p-6">
+            <h4 className="font-bold text-white mb-2">Corporate Cards</h4>
+            <p className="text-[10px] text-slate-500 mb-4">5 cards active for employees.</p>
+            <Button variant="secondary" className="w-full h-10 text-xs font-bold border-white/10 uppercase tracking-wider">Manage Cards</Button>
+          </Card>
+        </div>
       </div>
     </SectionShell>
   );

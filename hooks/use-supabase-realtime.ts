@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
+import { useTenant } from "@/components/providers/tenant-provider";
 
 type RealtimeResource = "accounts" | "transactions" | "transfers" | "insights";
 
@@ -33,13 +34,53 @@ export function useSupabaseRealtime(resources: RealtimeResource[]) {
   const invalidateRef = useRef(invalidateForResource);
   invalidateRef.current = invalidateForResource;
 
-  useEffect(() => {
-    const supabase = getSupabaseBrowserClient();
-    const uniqueResources = [...new Set(resources)];
-    const channel = supabase.channel(`tenant-live:${uniqueResources.join("-")}`);
+  const { tenant } = useTenant();
 
-    for (const resource of uniqueResources) {
-      channel.on(
+  const tenantId = tenant?.id;
+  const filteredResources = useMemo(() => [...new Set(resources)], [resources]);
+
+  useEffect(() => {
+    if (!tenantId || !filteredResources.length) {
+      return;
+    }
+
+    const supabase = getSupabaseBrowserClient();
+    let reconnectAttempts = 0;
+    let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+    let isActive = true;
+    let activeChannel = supabase.channel(`tenant-${tenantId}:${filteredResources.join("-")}`);
+
+    const subscribeChannel = () => {
+      if (!isActive) {
+        return;
+      }
+
+      activeChannel.subscribe((status) => {
+        if (status === "SUBSCRIBED") {
+          reconnectAttempts = 0;
+          if (reconnectTimer) {
+            clearTimeout(reconnectTimer);
+            reconnectTimer = null;
+          }
+        }
+
+        if (status === "CLOSED" || status === "TIMED_OUT" || status === "CHANNEL_ERROR") {
+          reconnectAttempts += 1;
+          const delay = Math.min(4000, 500 * reconnectAttempts);
+          reconnectTimer = setTimeout(() => {
+            if (!isActive) {
+              return;
+            }
+            void supabase.removeChannel(activeChannel);
+            activeChannel = supabase.channel(`tenant-${tenantId}:${filteredResources.join("-")}`);
+            subscribeChannel();
+          }, delay);
+        }
+      });
+    };
+
+    for (const resource of filteredResources) {
+      activeChannel.on(
         "postgres_changes",
         {
           event: "*",
@@ -52,10 +93,14 @@ export function useSupabaseRealtime(resources: RealtimeResource[]) {
       );
     }
 
-    channel.subscribe();
+    subscribeChannel();
 
     return () => {
-      void supabase.removeChannel(channel);
+      isActive = false;
+      if (reconnectTimer) {
+        clearTimeout(reconnectTimer);
+      }
+      void supabase.removeChannel(activeChannel);
     };
-  }, [resources]);
+  }, [filteredResources, tenantId]);
 }

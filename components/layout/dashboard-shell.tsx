@@ -27,7 +27,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <header className="flex h-16 items-center justify-between border-b border-white/5 bg-[#0a0a0a]/80 px-6 backdrop-blur-xl z-40">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold tracking-tight text-white font-display">BTC/USDT</span>
+              <h1 className="text-xl font-bold tracking-tight text-white font-display">BTC/USDT</h1>
               <span className="text-xs font-mono font-medium text-slate-500 bg-white/5 px-2 py-0.5 rounded border border-white/5">BYBIT: $91,302</span>
             </div>
             <div className="hidden items-center gap-8 md:flex">

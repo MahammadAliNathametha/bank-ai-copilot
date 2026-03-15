@@ -1,13 +1,27 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-export function updateSession(request: NextRequest) {
+type TenantHeaders = {
+  id: string;
+  slug: string;
+};
+
+export function updateSession(request: NextRequest, tenant?: TenantHeaders) {
+  const requestHeaders = new Headers(request.headers);
+  if (tenant) {
+    requestHeaders.set("x-tenant-id", tenant.id);
+    requestHeaders.set("x-tenant-slug", tenant.slug);
+  }
+
   const response = NextResponse.next({
-    request
+    request: {
+      headers: requestHeaders
+    }
   });
 
-  const host = request.headers.get("host") ?? "";
-  const tenantSlug = host.split(".")[0];
-  response.headers.set("x-tenant-slug", tenantSlug);
+  if (tenant) {
+    response.headers.set("x-tenant-id", tenant.id);
+    response.headers.set("x-tenant-slug", tenant.slug);
+  }
 
   return response;
 }

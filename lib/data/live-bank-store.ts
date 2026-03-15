@@ -1587,6 +1587,196 @@ export async function listLoans(tenantId: string) {
   return ((result.data ?? []) as LoanRow[]).map(mapLoan);
 }
 
+export async function listPayees(tenantId: string) {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("payees")
+    .select("*")
+    .eq("tenant_id", tenantId)
+    .limit(1);
+
+  if (result.data && result.data.length > 0) {
+    console.log("DEBUG: Payees columns:", Object.keys(result.data[0]));
+  }
+
+  const all = await supabase
+    .from("payees")
+    .select("*")
+    .eq("tenant_id", tenantId)
+    .order("name", { ascending: true });
+
+  if (all.error) {
+    throw new ApiError(500, all.error.message);
+  }
+
+  return (all.data ?? []).map((row: any) => ({
+    id: Number(row.id),
+    name: row.name,
+    accountNumber: row.account_number || row.accountNumber,
+    routingNumber: row.routing_number || row.routingNumber,
+    userId: row.user_id || row.userId,
+    tenantId: row.tenant_id || row.tenantId
+  }));
+}
+
+export async function createPayee(tenantId: string, payload: { name: string; accountNumber?: string; routingNumber?: string; userId: string }) {
+  const supabase = getSupabaseAdminClient();
+  const insertData: any = {
+    name: payload.name,
+    user_id: payload.userId,
+    tenant_id: tenantId
+  };
+
+  if (payload.accountNumber) insertData.account_number = payload.accountNumber;
+  if (payload.routingNumber) insertData.routing_number = payload.routingNumber;
+
+  const result = await supabase
+    .from("payees")
+    .insert(insertData)
+    .select()
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  const row = result.data;
+  return {
+    id: Number(row.id),
+    name: row.name,
+    accountNumber: row.account_number,
+    routingNumber: row.routing_number,
+    userId: row.user_id,
+    tenantId: row.tenant_id
+  };
+}
+
+export async function listBeneficiaries(tenantId: string) {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("beneficiaries")
+    .select("id,user_id,name,account_number,routing_number,type,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .order("name", { ascending: true });
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  return (result.data ?? []).map((row: any) => ({
+    id: Number(row.id),
+    userId: row.user_id,
+    name: row.name,
+    accountNumber: row.account_number,
+    routingNumber: row.routing_number,
+    type: row.type,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  }));
+}
+
+export async function createBeneficiary(tenantId: string, payload: { userId: string; name: string; accountNumber: string; routingNumber: string; type: "individual" | "business"; createdAt?: string }) {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("beneficiaries")
+    .insert({
+      user_id: payload.userId,
+      name: payload.name,
+      account_number: payload.accountNumber,
+      routing_number: payload.routingNumber,
+      type: payload.type,
+      tenant_id: tenantId,
+      created_at: payload.createdAt || new Date().toISOString()
+    })
+    .select()
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  const row = result.data;
+  return {
+    id: Number(row.id),
+    userId: row.user_id,
+    name: row.name,
+    accountNumber: row.account_number,
+    routingNumber: row.routing_number,
+    type: row.type,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+export async function deleteBeneficiary(tenantId: string, id: number) {
+  const supabase = getSupabaseAdminClient();
+  const existing = await listBeneficiaries(tenantId).then(list => list.find(b => b.id === id));
+  if (!existing) throw new ApiError(404, "Beneficiary not found");
+
+  const result = await supabase.from("beneficiaries").delete().eq("tenant_id", tenantId).eq("id", id);
+  if (result.error) throw new ApiError(500, result.error.message);
+  return existing;
+}
+
+export async function getBeneficiaryById(tenantId: string, id: number) {
+  const supabase = getSupabaseAdminClient();
+  const result = await supabase
+    .from("beneficiaries")
+    .select("id,user_id,name,account_number,routing_number,type,tenant_id,created_at")
+    .eq("tenant_id", tenantId)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  const row = ensureData(result.data, "Beneficiary not found");
+  return {
+    id: Number(row.id),
+    userId: row.user_id,
+    name: row.name,
+    accountNumber: row.account_number,
+    routingNumber: row.routing_number,
+    type: row.type,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
+export async function updateBeneficiary(tenantId: string, id: number, payload: { name?: string; accountNumber?: string; routingNumber?: string; type?: "individual" | "business" }) {
+  const supabase = getSupabaseAdminClient();
+  const updateData: any = {};
+  if (payload.name) updateData.name = payload.name;
+  if (payload.accountNumber) updateData.account_number = payload.accountNumber;
+  if (payload.routingNumber) updateData.routing_number = payload.routingNumber;
+  if (payload.type) updateData.type = payload.type;
+
+  const result = await supabase
+    .from("beneficiaries")
+    .update(updateData)
+    .eq("tenant_id", tenantId)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (result.error) {
+    throw new ApiError(500, result.error.message);
+  }
+
+  const row = result.data;
+  return {
+    id: Number(row.id),
+    userId: row.user_id,
+    name: row.name,
+    accountNumber: row.account_number,
+    routingNumber: row.routing_number,
+    type: row.type,
+    tenantId: row.tenant_id,
+    createdAt: row.created_at
+  };
+}
+
 export async function getLoanById(tenantId: string, id: number) {
   const supabase = getSupabaseAdminClient();
   const result = await supabase

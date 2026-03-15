@@ -9,6 +9,7 @@ import { z } from "zod";
 import { SectionShell, MetricCard } from "@/components/dashboard/section-shell";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/components/ui/toast";
 import { apiRequest } from "@/lib/services/http";
 import type { AdminMetricRecord, SupportTicketRecord, UserProfile } from "@/lib/data/mock-bank-store";
 
@@ -48,6 +49,8 @@ export function SetupBankWorkspace() {
     background: `hsl(${form.watch("primaryColor") || "210 80% 45%"})`
   }), [form]);
 
+  const { success, error } = useToast();
+
   const mutation = useMutation({
     mutationFn: (values: SetupBankValues) =>
       apiRequest<SupportTicketRecord>("/api/support", {
@@ -60,9 +63,14 @@ export function SetupBankWorkspace() {
         })
       }),
     onSuccess: () => {
+      success("Provisioning request submitted to support. We'll keep you posted.");
       startTransition(() => {
         void queryClient.invalidateQueries({ queryKey: ["support"] });
       });
+    },
+    onError: (err) => {
+      const message = err instanceof Error ? err.message : "Unable to submit the request.";
+      error(message);
     }
   });
 
